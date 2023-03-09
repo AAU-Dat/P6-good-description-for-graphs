@@ -24,16 +24,17 @@ gantt
     dateFormat  YYYY-MM-DD
     excludes weekends
     
-    section Project
+    section Project Paper
     Introduction: active, 2023-03-01, 2023-03-15
-    Related Works : 2023-03-09, 2023-03-17
-    Method : crit, 2023-03-13, 2023-04-21
+    Related Works : active, 2023-03-09, 2023-03-17
+    Method : 2023-03-13, 2023-04-21
     Results : 2023-04-03, 2023-04-21
-    Discussion : crit, 2023-04-17, 2023-05-05
+    Discussion : 2023-04-17, 2023-05-05
     Conclusion : 2023-04-24, 2023-05-05
-	Final adjustments : crit, 2023-05-02, 2023-05-12
-	Abstract: 2023-05-02, 2023-05-06
-	Deadline: crit, milestone, 2023-05-19, 0d
+    Final adjustments : 2023-05-02, 2023-05-12
+    Abstract: 2023-05-02, 2023-05-06
+    Deadline: crit, milestone, 2023-05-19, 0d
+    Handin: crit, milestone, 2023-05-25, 0d
 ```
 
 # WIP from below
