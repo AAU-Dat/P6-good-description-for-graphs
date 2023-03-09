@@ -17,11 +17,31 @@ Overview
 6. Run the setup scripts for P6 and VSCode ([scripts](https://github.com/AAU-Dat/scripts "WSL setup scripts")).
 7. Clone the repo to your WSL and get to work :smile:
 
+# Project Plan
+```mermaid
+gantt
+    title Bachelor Project Timeline
+    dateFormat  YYYY-MM-DD
+    excludes weekends
+    
+    section Project
+    Introduction: active, 2023-03-01, 2023-03-15
+    Related Works : 2023-03-09, 2023-03-17
+    Method : crit, 2023-03-13, 2023-04-21
+    Results : 2023-04-03, 2023-04-21
+    Discussion : crit, 2023-04-17, 2023-05-05
+    Conclusion : 2023-04-24, 2023-05-05
+	Final adjustments : crit, 2023-05-02, 2023-05-12
+	Abstract: 2023-05-02, 2023-05-06
+	Deadline: crit, milestone, 2023-05-19, 0d
+```
+
 # WIP from below
 ### Detailed setup
 
 ```bash
 ```
+
 
 >**Note**
 > test
@@ -36,3 +56,4 @@ flowchart LR
     C -->|Two| E[Result two]
 
 ```
+
