@@ -1,11 +1,28 @@
 \section{Introduction}\label{sec:introduction1}
 \emph{Graph as summary of graphs (Hierarchical data summarization)}
 
-RDF is a fundamental technology for the Semantic Web, providing a standardized approach for representing data as graph-based structures [web-of-data-chap-3]. However, optimizing RDF data in the Semantic Web can be challenging due to the data's distributed nature and heterogeneity. To address these challenges, the Vocabulary of Interlinked Datasets (VoID) [https://www.w3.org/TR/void/9] provides a valuable framework for describing the metadata of RDF datasets, including their structure, content, and interrelationships. Furthermore, with its ability to facilitate federated queries, VoID attempts to integrate a more efficient data exchange into the Semantic Web. The motivation of this project is to enhance the efficiency and effectiveness of federated queries in the Semantic Web by utilizing hierarchical data summaries and graphs described by other graphs. It is achieved by creating meta RDF data summarizing the structure and content of the datasets being queried. 
+RDF is a fundamental technology for the Semantic Web, providing a standardized approach for representing data as graph-based structures~\cite{the-web-of-data}. However, optimizing RDF data in the Semantic Web can be challenging due to the data's distributed nature and heterogeneity. To address these challenges, the Vocabulary of Interlinked Datasets (VoID)~\cite{documentation-void} provides a valuable framework for describing the metadata of RDF datasets, including their structure, content, and interrelationships. 
+VoID is a vocabulary for describing RDF datasets. It provides a framework for describing the structure, content, and interrelationships of RDF datasets. VoID describes the metadata of RDF datasets, including their structure, content, and interrelationships. The advantages of VoID over other approaches to describe RDF datasets are that it is a standard vocabulary that is easy to use and is extensible~\cite{documentation-void}. 
+Furthermore, with its ability to facilitate federated queries, VoID attempts to integrate a more efficient data exchange into the Semantic Web. 
 
-By representing complex relationships between RDF datasets through graphs described by other graphs, our approach provides a different view of the data being queried.
+The motivation of this project is to enhance the efficiency and effectiveness of federated queries 
+%TODO: have you identified an existing gap in what VoID provides?
+in the Semantic Web by utilizing hierarchical data summaries and graphs described by other graphs.
 
-This paper presents an approach to improving federated queries using hierarchical data summaries and graphs described by other graphs. Our approach involves the creation of meta RDF data that summarizes the structure and content of the RDF datasets being queried. This metadata can be used to optimize federated queries by enabling more efficient routing of queries and reducing the amount of data transmitted between data sources. 
+By representing complex relationships between RDF datasets through graphs described by other graphs, our approach provides a different view of the data being queried. %TODO: an example that motivates your approach would be quite helpful here
 
-By representing graphs describing other graphs, our technique captures a better way to describe the datasets without losing the relations in the data. 
-The proposed approach has implications for improving querying and integrating federated RDF data in the Semantic Web. The ability to optimize federated queries using meta RDF data can enhance the effectiveness of the Semantic Web in a range of domains. Furthermore, our approach might accelerate innovation and enable new insights into the Semantic Web by enabling efficient integration and data exchange across multiple domains and organizations.
+This paper presents an approach to creating meta RDF data that summarizes the structure and content of the queried datasets. 
+This metadata can be used to optimize federated queries by enabling more efficient routing of queries and reducing the amount of data transmitted between data sources.
+By representing graphs describing other graphs, our technique captures a better way to describe the datasets without losing the relations in the data.
+The proposed approach has implications for improving querying and integrating federated RDF data in the Semantic Web. 
+Some implications of our approach include the ability to optimize federated queries using meta RDF data, which can enhance the effectiveness of the Semantic Web in a range of domains. Furthermore, our approach might accelerate innovation and enable new insights into the Semantic Web by enabling efficient integration and data exchange across multiple domains and organizations.
+
+Furthermore, our approach might accelerate innovation and enable new insights into the Semantic Web by enabling efficient integration and data exchange across multiple domains and organizations.
+%Citations
+% @book{documentation-void,
+% author = {Curé, Olivier, author.},
+% booktitle = {Describing Linked Datasets with the VoID Vocabulary},
+% publisher = {W3C},
+% title = {Describing Linked Datasets with the VoID Vocabulary},
+% year = {2011}
+% }
