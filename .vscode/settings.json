@@ -1,4 +1,5 @@
 {
+    "editor.wordWrap": "on",
     "latex-workshop.view.pdf.viewer": "browser",
     "latex-workshop.latex.outDir": "out",
     "latex-workshop.latex.autoClean.run": "onBuilt",
