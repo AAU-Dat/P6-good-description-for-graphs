@@ -1,12 +1,18 @@
 {
     "editor.wordWrap": "on",
+    "editor.formatOnSave": true,
     "latex-workshop.view.pdf.viewer": "browser",
     "latex-workshop.latex.outDir": "out",
     "latex-workshop.latex.autoClean.run": "onBuilt",
     "latex-workshop.latex.clean.fileTypes": [
-        "chapters*/",
         "setup*/",
-        "specials*/"
+        "sections*/"
+    ],
+    "latex-workshop.latexindent.args": [
+        "-g",
+        "/dev/null",
+        "%TMPFILE%",
+        "-y=defaultIndent: '%INDENT%'"
     ],
     "latex-workshop.latex.tools": [
         {
