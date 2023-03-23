@@ -1,0 +1,21 @@
+@PREFIX testdb: <pokeball.org> .
+@PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+
+<http://pokeball.org/id/1> a testdb:Pokemon ;
+    testdb:name "Bulbasaur" ;
+    rdfs:label "Bulbasaur" ;
+    testdb:Poketype testdb:Grass, testdb:Poison ;
+    testdb:evolvesTo <http://pokeball.org/id/2> .
+
+<http://pokeball.org/id/2> a testdb:Pokemon ;
+    testdb:name "Ivysaur" ;
+    rdfs:label "Ivysaur" ;
+    testdb:Poketype testdb:Grass, testdb:Poison ;
+    testdb:evolvesTo <http://pokeball.org/id/3> .
+
+<http://pokeball.org/id/3> a testdb:Pokemon ;
+    testdb:name "Venusaur" ;
+    rdfs:label "Venusaur" ;
+    testdb:Poketype testdb:Grass, testdb:Poison .
