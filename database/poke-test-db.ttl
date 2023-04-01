@@ -1,844 +1,844 @@
-@PREFIX testdb: <pokeball.org> .
-@PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix pokeball: <pokeball.org/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
 
-<http://pokeball.org/id/1> a testdb:Pokemon ;
-    testdb:name "Bulbasaur" ;
+<http://pokeball.org/id/1> a pokeball:Pokemon ;
+    pokeball:name "Bulbasaur" ;
     rdfs:label "Bulbasaur" ;
-    testdb:Poketype testdb:Grass, testdb:Poison ;
-    testdb:evolvesTo <http://pokeball.org/id/2> .
+    pokeball:Poketype pokeball:Grass, pokeball:Poison ;
+    pokeball:evolvesTo <http://pokeball.org/id/2> .
 
-<http://pokeball.org/id/2> a testdb:Pokemon ;
-    testdb:name "Ivysaur" ;
+<http://pokeball.org/id/2> a pokeball:Pokemon ;
+    pokeball:name "Ivysaur" ;
     rdfs:label "Ivysaur" ;
-    testdb:Poketype testdb:Grass, testdb:Poison ;
-    testdb:evolvesTo <http://pokeball.org/id/3> .
+    pokeball:Poketype pokeball:Grass, pokeball:Poison ;
+    pokeball:evolvesTo <http://pokeball.org/id/3> .
 
-<http://pokeball.org/id/3> a testdb:Pokemon ;
-    testdb:name "Venusaur" ;
+<http://pokeball.org/id/3> a pokeball:Pokemon ;
+    pokeball:name "Venusaur" ;
     rdfs:label "Venusaur" ;
-    testdb:Poketype testdb:Grass, testdb:Poison .
+    pokeball:Poketype pokeball:Grass, pokeball:Poison .
 
-<http://pokeball.org/id/4> a testdb:Pokemon ;
-    testdb:name "Charmander" ;
+<http://pokeball.org/id/4> a pokeball:Pokemon ;
+    pokeball:name "Charmander" ;
     rdfs:label "Charmander" ;
-    testdb:Poketype testdb:Fire ;
-    testdb:evolvesTo <http://pokeball.org/id/5> .
+    pokeball:Poketype pokeball:Fire ;
+    pokeball:evolvesTo <http://pokeball.org/id/5> .
 
-<http://pokeball.org/id/5> a testdb:Pokemon ;
-    testdb:name "Charmeleon" ;
+<http://pokeball.org/id/5> a pokeball:Pokemon ;
+    pokeball:name "Charmeleon" ;
     rdfs:label "Charmeleon" ;
-    testdb:Poketype testdb:Fire ;
-    testdb:evolvesTo <http://pokeball.org/id/6> .
+    pokeball:Poketype pokeball:Fire ;
+    pokeball:evolvesTo <http://pokeball.org/id/6> .
 
-<http://pokeball.org/id/6> a testdb:Pokemon ;
-    testdb:name "Charizard" ;
+<http://pokeball.org/id/6> a pokeball:Pokemon ;
+    pokeball:name "Charizard" ;
     rdfs:label "Charizard" ;
-    testdb:Poketype testdb:Fire, testdb:Flying .
+    pokeball:Poketype pokeball:Fire, pokeball:Flying .
 
-<http://pokeball.org/id/7> a testdb:Pokemon ;
-    testdb:name "Squirtle" ;
+<http://pokeball.org/id/7> a pokeball:Pokemon ;
+    pokeball:name "Squirtle" ;
     rdfs:label "Squirtle" ;
-    testdb:Poketype testdb:Water ;
-    testdb:evolvesTo <http://pokeball.org/id/8> .
+    pokeball:Poketype pokeball:Water ;
+    pokeball:evolvesTo <http://pokeball.org/id/8> .
 
-<http://pokeball.org/id/8> a testdb:Pokemon ;
-    testdb:name "Wartortle" ;
+<http://pokeball.org/id/8> a pokeball:Pokemon ;
+    pokeball:name "Wartortle" ;
     rdfs:label "Wartortle" ;
-    testdb:Poketype testdb:Water ;
-    testdb:evolvesTo <http://pokeball.org/id/9> .
+    pokeball:Poketype pokeball:Water ;
+    pokeball:evolvesTo <http://pokeball.org/id/9> .
 
-<http://pokeball.org/id/9> a testdb:Pokemon ;
-    testdb:name "Blastoise" ;
+<http://pokeball.org/id/9> a pokeball:Pokemon ;
+    pokeball:name "Blastoise" ;
     rdfs:label "Blastoise" ;
-    testdb:Poketype testdb:Water .
+    pokeball:Poketype pokeball:Water .
 
-<http://pokeball.org/id/10> a testdb:Pokemon ;
-    testdb:name "Caterpie" ;
+<http://pokeball.org/id/10> a pokeball:Pokemon ;
+    pokeball:name "Caterpie" ;
     rdfs:label "Caterpie" ;
-    testdb:Poketype testdb:Bug ;
-    testdb:evolvesTo <http://pokeball.org/id/11> .
+    pokeball:Poketype pokeball:Bug ;
+    pokeball:evolvesTo <http://pokeball.org/id/11> .
 
-<http://pokeball.org/id/11> a testdb:Pokemon ;
-    testdb:name "Metapod" ;
+<http://pokeball.org/id/11> a pokeball:Pokemon ;
+    pokeball:name "Metapod" ;
     rdfs:label "Metapod" ;
-    testdb:Poketype testdb:Bug ;
-    testdb:evolvesTo <http://pokeball.org/id/12> .
+    pokeball:Poketype pokeball:Bug ;
+    pokeball:evolvesTo <http://pokeball.org/id/12> .
 
-<http://pokeball.org/id/12> a testdb:Pokemon ;
-    testdb:name "Butterfree" ;
+<http://pokeball.org/id/12> a pokeball:Pokemon ;
+    pokeball:name "Butterfree" ;
     rdfs:label "Butterfree" ;
-    testdb:Poketype testdb:Bug, testdb:Flying .
+    pokeball:Poketype pokeball:Bug, pokeball:Flying .
 
-<http://pokeball.org/id/13> a testdb:Pokemon ;
-    testdb:name "Weedle" ;
+<http://pokeball.org/id/13> a pokeball:Pokemon ;
+    pokeball:name "Weedle" ;
     rdfs:label "Weedle" ;
-    testdb:Poketype testdb:Bug, testdb:Poison ;
-    testdb:evolvesTo <http://pokeball.org/id/14> .
+    pokeball:Poketype pokeball:Bug, pokeball:Poison ;
+    pokeball:evolvesTo <http://pokeball.org/id/14> .
 
-<http://pokeball.org/id/14> a testdb:Pokemon ;
-    testdb:name "Kakuna" ;
+<http://pokeball.org/id/14> a pokeball:Pokemon ;
+    pokeball:name "Kakuna" ;
     rdfs:label "Kakuna" ;
-    testdb:Poketype testdb:Bug, testdb:Poison ;
-    testdb:evolvesTo <http://pokeball.org/id/15> .
+    pokeball:Poketype pokeball:Bug, pokeball:Poison ;
+    pokeball:evolvesTo <http://pokeball.org/id/15> .
 
-<http://pokeball.org/id/15> a testdb:Pokemon ;
-    testdb:name "Beedrill" ;
+<http://pokeball.org/id/15> a pokeball:Pokemon ;
+    pokeball:name "Beedrill" ;
     rdfs:label "Beedrill" ;
-    testdb:Poketype testdb:Bug, testdb:Poison .
+    pokeball:Poketype pokeball:Bug, pokeball:Poison .
 
-<http://pokeball.org/id/16> a testdb:Pokemon ;
-    testdb:name "Pidgey" ;
+<http://pokeball.org/id/16> a pokeball:Pokemon ;
+    pokeball:name "Pidgey" ;
     rdfs:label "Pidgey" ;
-    testdb:Poketype testdb:Normal, testdb:Flying ;
-    testdb:evolvesTo <http://pokeball.org/id/17> .
+    pokeball:Poketype pokeball:Normal, pokeball:Flying ;
+    pokeball:evolvesTo <http://pokeball.org/id/17> .
 
-<http://pokeball.org/id/17> a testdb:Pokemon ;
-    testdb:name "Pidgeotto" ;
+<http://pokeball.org/id/17> a pokeball:Pokemon ;
+    pokeball:name "Pidgeotto" ;
     rdfs:label "Pidgeotto" ;
-    testdb:Poketype testdb:Normal, testdb:Flying ;
-    testdb:evolvesTo <http://pokeball.org/id/18> .
+    pokeball:Poketype pokeball:Normal, pokeball:Flying ;
+    pokeball:evolvesTo <http://pokeball.org/id/18> .
 
-<http://pokeball.org/id/18> a testdb:Pokemon ;
-    testdb:name "Pidgeot" ;
+<http://pokeball.org/id/18> a pokeball:Pokemon ;
+    pokeball:name "Pidgeot" ;
     rdfs:label "Pidgeot" ;
-    testdb:Poketype testdb:Normal, testdb:Flying .
+    pokeball:Poketype pokeball:Normal, pokeball:Flying .
 
-<http://pokeball.org/id/19> a testdb:Pokemon ;
-    testdb:name "Rattata" ;
+<http://pokeball.org/id/19> a pokeball:Pokemon ;
+    pokeball:name "Rattata" ;
     rdfs:label "Rattata" ;
-    testdb:Poketype testdb:Normal ;
-    testdb:evolvesTo <http://pokeball.org/id/20> .
+    pokeball:Poketype pokeball:Normal ;
+    pokeball:evolvesTo <http://pokeball.org/id/20> .
 
-<http://pokeball.org/id/20> a testdb:Pokemon ;
-    testdb:name "Raticate" ;
+<http://pokeball.org/id/20> a pokeball:Pokemon ;
+    pokeball:name "Raticate" ;
     rdfs:label "Raticate" ;
-    testdb:Poketype testdb:Normal .
+    pokeball:Poketype pokeball:Normal .
 
-<http://pokeball.org/id/21> a testdb:Pokemon ;
-    testdb:name "Spearow" ;
+<http://pokeball.org/id/21> a pokeball:Pokemon ;
+    pokeball:name "Spearow" ;
     rdfs:label "Spearow" ;
-    testdb:Poketype testdb:Normal, testdb:Flying ;
-    testdb:evolvesTo <http://pokeball.org/id/22> .
+    pokeball:Poketype pokeball:Normal, pokeball:Flying ;
+    pokeball:evolvesTo <http://pokeball.org/id/22> .
 
-<http://pokeball.org/id/22> a testdb:Pokemon ;
-    testdb:name "Fearow" ;
+<http://pokeball.org/id/22> a pokeball:Pokemon ;
+    pokeball:name "Fearow" ;
     rdfs:label "Fearow" ;
-    testdb:Poketype testdb:Normal, testdb:Flying .
+    pokeball:Poketype pokeball:Normal, pokeball:Flying .
 
-<http://pokeball.org/id/23> a testdb:Pokemon ;
-    testdb:name "Ekans" ;
+<http://pokeball.org/id/23> a pokeball:Pokemon ;
+    pokeball:name "Ekans" ;
     rdfs:label "Ekans" ;
-    testdb:Poketype testdb:Poison ;
-    testdb:evolvesTo <http://pokeball.org/id/24> .
+    pokeball:Poketype pokeball:Poison ;
+    pokeball:evolvesTo <http://pokeball.org/id/24> .
 
-<http://pokeball.org/id/24> a testdb:Pokemon ;
-    testdb:name "Arbok" ;
+<http://pokeball.org/id/24> a pokeball:Pokemon ;
+    pokeball:name "Arbok" ;
     rdfs:label "Arbok" ;
-    testdb:Poketype testdb:Poison .
+    pokeball:Poketype pokeball:Poison .
 
-<http://pokeball.org/id/25> a testdb:Pokemon ;
-    testdb:name "Pikachu" ;
+<http://pokeball.org/id/25> a pokeball:Pokemon ;
+    pokeball:name "Pikachu" ;
     rdfs:label "Pikachu" ;
-    testdb:Poketype testdb:Electric ;
-    testdb:evolvesTo <http://pokeball.org/id/26> .
+    pokeball:Poketype pokeball:Electric ;
+    pokeball:evolvesTo <http://pokeball.org/id/26> .
 
-<http://pokeball.org/id/26> a testdb:Pokemon ;
-    testdb:name "Raichu" ;
+<http://pokeball.org/id/26> a pokeball:Pokemon ;
+    pokeball:name "Raichu" ;
     rdfs:label "Raichu" ;
-    testdb:Poketype testdb:Electric .
+    pokeball:Poketype pokeball:Electric .
 
-<http://pokeball.org/id/27> a testdb:Pokemon ;
-    testdb:name "Sandshrew" ;
+<http://pokeball.org/id/27> a pokeball:Pokemon ;
+    pokeball:name "Sandshrew" ;
     rdfs:label "Sandshrew" ;
-    testdb:Poketype testdb:Ground ;
-    testdb:evolvesTo <http://pokeball.org/id/28> .
+    pokeball:Poketype pokeball:Ground ;
+    pokeball:evolvesTo <http://pokeball.org/id/28> .
 
-<http://pokeball.org/id/28> a testdb:Pokemon ;
-    testdb:name "Sandslash" ;
+<http://pokeball.org/id/28> a pokeball:Pokemon ;
+    pokeball:name "Sandslash" ;
     rdfs:label "Sandslash" ;
-    testdb:Poketype testdb:Ground .
+    pokeball:Poketype pokeball:Ground .
 
-<http://pokeball.org/id/29> a testdb:Pokemon ;
-    testdb:name "Nidoran" ;
+<http://pokeball.org/id/29> a pokeball:Pokemon ;
+    pokeball:name "Nidoran" ;
     rdfs:label "Nidoran" ;
-    testdb:Poketype testdb:Poison ;
-    testdb:evolvesTo <http://pokeball.org/id/30> .
+    pokeball:Poketype pokeball:Poison ;
+    pokeball:evolvesTo <http://pokeball.org/id/30> .
 
-<http://pokeball.org/id/30> a testdb:Pokemon ;
-    testdb:name "Nidorina" ;
+<http://pokeball.org/id/30> a pokeball:Pokemon ;
+    pokeball:name "Nidorina" ;
     rdfs:label "Nidorina" ;
-    testdb:Poketype testdb:Poison ;
-    testdb:evolvesTo <http://pokeball.org/id/31> .
+    pokeball:Poketype pokeball:Poison ;
+    pokeball:evolvesTo <http://pokeball.org/id/31> .
 
-<http://pokeball.org/id/31> a testdb:Pokemon ;
-    testdb:name "Nidoqueen" ;
+<http://pokeball.org/id/31> a pokeball:Pokemon ;
+    pokeball:name "Nidoqueen" ;
     rdfs:label "Nidoqueen" ;
-    testdb:Poketype testdb:Poison, testdb:Ground .
+    pokeball:Poketype pokeball:Poison, pokeball:Ground .
 
-<http://pokeball.org/id/32> a testdb:Pokemon ;
-    testdb:name "Nidoran" ;
+<http://pokeball.org/id/32> a pokeball:Pokemon ;
+    pokeball:name "Nidoran" ;
     rdfs:label "Nidoran" ;
-    testdb:Poketype testdb:Poison ;
-    testdb:evolvesTo <http://pokeball.org/id/33> .
+    pokeball:Poketype pokeball:Poison ;
+    pokeball:evolvesTo <http://pokeball.org/id/33> .
 
-<http://pokeball.org/id/33> a testdb:Pokemon ;
-    testdb:name "Nidorino" ;
+<http://pokeball.org/id/33> a pokeball:Pokemon ;
+    pokeball:name "Nidorino" ;
     rdfs:label "Nidorino" ;
-    testdb:Poketype testdb:Poison ;
-    testdb:evolvesTo <http://pokeball.org/id/34> .
+    pokeball:Poketype pokeball:Poison ;
+    pokeball:evolvesTo <http://pokeball.org/id/34> .
 
-<http://pokeball.org/id/34> a testdb:Pokemon ;
-    testdb:name "Nidoking" ;
+<http://pokeball.org/id/34> a pokeball:Pokemon ;
+    pokeball:name "Nidoking" ;
     rdfs:label "Nidoking" ;
-    testdb:Poketype testdb:Poison, testdb:Ground .
+    pokeball:Poketype pokeball:Poison, pokeball:Ground .
 
-<http://pokeball.org/id/35> a testdb:Pokemon ;
-    testdb:name "Clefairy" ;
+<http://pokeball.org/id/35> a pokeball:Pokemon ;
+    pokeball:name "Clefairy" ;
     rdfs:label "Clefairy" ;
-    testdb:Poketype testdb:Fairy ;
-    testdb:evolvesTo <http://pokeball.org/id/36> .
+    pokeball:Poketype pokeball:Fairy ;
+    pokeball:evolvesTo <http://pokeball.org/id/36> .
 
-<http://pokeball.org/id/36> a testdb:Pokemon ;
-    testdb:name "Clefable" ;
+<http://pokeball.org/id/36> a pokeball:Pokemon ;
+    pokeball:name "Clefable" ;
     rdfs:label "Clefable" ;
-    testdb:Poketype testdb:Fairy .
+    pokeball:Poketype pokeball:Fairy .
 
-<http://pokeball.org/id/37> a testdb:Pokemon ;
-    testdb:name "Vulpix" ;
+<http://pokeball.org/id/37> a pokeball:Pokemon ;
+    pokeball:name "Vulpix" ;
     rdfs:label "Vulpix" ;
-    testdb:Poketype testdb:Fire ;
-    testdb:evolvesTo <http://pokeball.org/id/38> .
+    pokeball:Poketype pokeball:Fire ;
+    pokeball:evolvesTo <http://pokeball.org/id/38> .
 
-<http://pokeball.org/id/38> a testdb:Pokemon ;
-    testdb:name "Ninetales" ;
+<http://pokeball.org/id/38> a pokeball:Pokemon ;
+    pokeball:name "Ninetales" ;
     rdfs:label "Ninetales" ;
-    testdb:Poketype testdb:Fire .
+    pokeball:Poketype pokeball:Fire .
 
-<http://pokeball.org/id/39> a testdb:Pokemon ;
-    testdb:name "Jigglypuff" ;
+<http://pokeball.org/id/39> a pokeball:Pokemon ;
+    pokeball:name "Jigglypuff" ;
     rdfs:label "Jigglypuff" ;
-    testdb:Poketype testdb:Normal, testdb:Fairy ;
-    testdb:evolvesTo <http://pokeball.org/id/40> .
+    pokeball:Poketype pokeball:Normal, pokeball:Fairy ;
+    pokeball:evolvesTo <http://pokeball.org/id/40> .
 
-<http://pokeball.org/id/40> a testdb:Pokemon ;
-    testdb:name "Wigglytuff" ;
+<http://pokeball.org/id/40> a pokeball:Pokemon ;
+    pokeball:name "Wigglytuff" ;
     rdfs:label "Wigglytuff" ;
-    testdb:Poketype testdb:Normal, testdb:Fairy .
+    pokeball:Poketype pokeball:Normal, pokeball:Fairy .
 
-<http://pokeball.org/id/41> a testdb:Pokemon ;
-    testdb:name "Zubat" ;
+<http://pokeball.org/id/41> a pokeball:Pokemon ;
+    pokeball:name "Zubat" ;
     rdfs:label "Zubat" ;
-    testdb:Poketype testdb:Poison, testdb:Flying ;
-    testdb:evolvesTo <http://pokeball.org/id/42> .
+    pokeball:Poketype pokeball:Poison, pokeball:Flying ;
+    pokeball:evolvesTo <http://pokeball.org/id/42> .
 
-<http://pokeball.org/id/42> a testdb:Pokemon ;
-    testdb:name "Golbat" ;
+<http://pokeball.org/id/42> a pokeball:Pokemon ;
+    pokeball:name "Golbat" ;
     rdfs:label "Golbat" ;
-    testdb:Poketype testdb:Poison, testdb:Flying ;
-    testdb:evolvesTo <http://pokeball.org/id/43> .
+    pokeball:Poketype pokeball:Poison, pokeball:Flying ;
+    pokeball:evolvesTo <http://pokeball.org/id/43> .
 
-<http://pokeball.org/id/43> a testdb:Pokemon ;
-    testdb:name "Crobat" ;
+<http://pokeball.org/id/43> a pokeball:Pokemon ;
+    pokeball:name "Crobat" ;
     rdfs:label "Crobat" ;
-    testdb:Poketype testdb:Poison, testdb:Flying .
+    pokeball:Poketype pokeball:Poison, pokeball:Flying .
 
-<http://pokeball.org/id/44> a testdb:Pokemon ;
-    testdb:name "Oddish" ;
+<http://pokeball.org/id/44> a pokeball:Pokemon ;
+    pokeball:name "Oddish" ;
     rdfs:label "Oddish" ;
-    testdb:Poketype testdb:Grass, testdb:Poison ;
-    testdb:evolvesTo <http://pokeball.org/id/45> .
+    pokeball:Poketype pokeball:Grass, pokeball:Poison ;
+    pokeball:evolvesTo <http://pokeball.org/id/45> .
 
-<http://pokeball.org/id/45> a testdb:Pokemon ;
-    testdb:name "Gloom" ;
+<http://pokeball.org/id/45> a pokeball:Pokemon ;
+    pokeball:name "Gloom" ;
     rdfs:label "Gloom" ;
-    testdb:Poketype testdb:Grass, testdb:Poison ;
-    testdb:evolvesTo <http://pokeball.org/id/46> .
+    pokeball:Poketype pokeball:Grass, pokeball:Poison ;
+    pokeball:evolvesTo <http://pokeball.org/id/46> .
 
-<http://pokeball.org/id/46> a testdb:Pokemon ;
-    testdb:name "Vileplume" ;
+<http://pokeball.org/id/46> a pokeball:Pokemon ;
+    pokeball:name "Vileplume" ;
     rdfs:label "Vileplume" ;
-    testdb:Poketype testdb:Grass, testdb:Poison .
+    pokeball:Poketype pokeball:Grass, pokeball:Poison .
 
-<http://pokeball.org/id/47> a testdb:Pokemon ;
-    testdb:name "Paras" ;
+<http://pokeball.org/id/47> a pokeball:Pokemon ;
+    pokeball:name "Paras" ;
     rdfs:label "Paras" ;
-    testdb:Poketype testdb:Bug, testdb:Grass ;
-    testdb:evolvesTo <http://pokeball.org/id/48> .
+    pokeball:Poketype pokeball:Bug, pokeball:Grass ;
+    pokeball:evolvesTo <http://pokeball.org/id/48> .
 
-<http://pokeball.org/id/48> a testdb:Pokemon ;
-    testdb:name "Parasect" ;
+<http://pokeball.org/id/48> a pokeball:Pokemon ;
+    pokeball:name "Parasect" ;
     rdfs:label "Parasect" ;
-    testdb:Poketype testdb:Bug, testdb:Grass .
+    pokeball:Poketype pokeball:Bug, pokeball:Grass .
 
-<http://pokeball.org/id/49> a testdb:Pokemon ;
-    testdb:name "Venonat" ;
+<http://pokeball.org/id/49> a pokeball:Pokemon ;
+    pokeball:name "Venonat" ;
     rdfs:label "Venonat" ;
-    testdb:Poketype testdb:Bug, testdb:Poison ;
-    testdb:evolvesTo <http://pokeball.org/id/50> .
+    pokeball:Poketype pokeball:Bug, pokeball:Poison ;
+    pokeball:evolvesTo <http://pokeball.org/id/50> .
 
-<http://pokeball.org/id/50> a testdb:Pokemon ;
-    testdb:name "Venomoth" ;
+<http://pokeball.org/id/50> a pokeball:Pokemon ;
+    pokeball:name "Venomoth" ;
     rdfs:label "Venomoth" ;
-    testdb:Poketype testdb:Bug, testdb:Poison .
+    pokeball:Poketype pokeball:Bug, pokeball:Poison .
 
-<http://pokeball.org/id/51> a testdb:Pokemon ;
-    testdb:name "Diglett" ;
+<http://pokeball.org/id/51> a pokeball:Pokemon ;
+    pokeball:name "Diglett" ;
     rdfs:label "Diglett" ;
-    testdb:Poketype testdb:Ground ;
-    testdb:evolvesTo <http://pokeball.org/id/52> .
+    pokeball:Poketype pokeball:Ground ;
+    pokeball:evolvesTo <http://pokeball.org/id/52> .
 
-<http://pokeball.org/id/52> a testdb:Pokemon ;
-    testdb:name "Dugtrio" ;
+<http://pokeball.org/id/52> a pokeball:Pokemon ;
+    pokeball:name "Dugtrio" ;
     rdfs:label "Dugtrio" ;
-    testdb:Poketype testdb:Ground .
+    pokeball:Poketype pokeball:Ground .
 
-<http://pokeball.org/id/53> a testdb:Pokemon ;
-    testdb:name "Meowth" ;
+<http://pokeball.org/id/53> a pokeball:Pokemon ;
+    pokeball:name "Meowth" ;
     rdfs:label "Meowth" ;
-    testdb:Poketype testdb:Normal ;
-    testdb:evolvesTo <http://pokeball.org/id/54> .
+    pokeball:Poketype pokeball:Normal ;
+    pokeball:evolvesTo <http://pokeball.org/id/54> .
 
-<http://pokeball.org/id/54> a testdb:Pokemon ;
-    testdb:name "Persian" ;
+<http://pokeball.org/id/54> a pokeball:Pokemon ;
+    pokeball:name "Persian" ;
     rdfs:label "Persian" ;
-    testdb:Poketype testdb:Normal .
+    pokeball:Poketype pokeball:Normal .
 
-<http://pokeball.org/id/55> a testdb:Pokemon ;
-    testdb:name "Psyduck" ;
+<http://pokeball.org/id/55> a pokeball:Pokemon ;
+    pokeball:name "Psyduck" ;
     rdfs:label "Psyduck" ;
-    testdb:Poketype testdb:Water ;
-    testdb:evolvesTo <http://pokeball.org/id/56> .
+    pokeball:Poketype pokeball:Water ;
+    pokeball:evolvesTo <http://pokeball.org/id/56> .
 
-<http://pokeball.org/id/56> a testdb:Pokemon ;
-    testdb:name "Golduck" ;
+<http://pokeball.org/id/56> a pokeball:Pokemon ;
+    pokeball:name "Golduck" ;
     rdfs:label "Golduck" ;
-    testdb:Poketype testdb:Water .
+    pokeball:Poketype pokeball:Water .
 
-<http://pokeball.org/id/57> a testdb:Pokemon ;
-    testdb:name "Mankey" ;
+<http://pokeball.org/id/57> a pokeball:Pokemon ;
+    pokeball:name "Mankey" ;
     rdfs:label "Mankey" ;
-    testdb:Poketype testdb:Fighting ;
+    pokeball:Poketype pokeball:Fighting .
 
-<http://pokeball.org/id/58> a testdb:Pokemon ;
-    testdb:name "Primeape" ;
+<http://pokeball.org/id/58> a pokeball:Pokemon ;
+    pokeball:name "Primeape" ;
     rdfs:label "Primeape" ;
-    testdb:Poketype testdb:Fighting .
+    pokeball:Poketype pokeball:Fighting .
 
-<http://pokeball.org/id/59> a testdb:Pokemon ;
-    testdb:name "Growlithe" ;
+<http://pokeball.org/id/59> a pokeball:Pokemon ;
+    pokeball:name "Growlithe" ;
     rdfs:label "Growlithe" ;
-    testdb:Poketype testdb:Fire ;
-    testdb:evolvesTo <http://pokeball.org/id/60> .
+    pokeball:Poketype pokeball:Fire ;
+    pokeball:evolvesTo <http://pokeball.org/id/60> .
 
-<http://pokeball.org/id/60> a testdb:Pokemon ;
-    testdb:name "Arcanine" ;
+<http://pokeball.org/id/60> a pokeball:Pokemon ;
+    pokeball:name "Arcanine" ;
     rdfs:label "Arcanine" ;
-    testdb:Poketype testdb:Fire .
+    pokeball:Poketype pokeball:Fire .
 
-<http://pokeball.org/id/61> a testdb:Pokemon ;
-    testdb:name "Poliwag" ;
+<http://pokeball.org/id/61> a pokeball:Pokemon ;
+    pokeball:name "Poliwag" ;
     rdfs:label "Poliwag" ;
-    testdb:Poketype testdb:Water ;
-    testdb:evolvesTo <http://pokeball.org/id/62> .
+    pokeball:Poketype pokeball:Water ;
+    pokeball:evolvesTo <http://pokeball.org/id/62> .
 
-<http://pokeball.org/id/62> a testdb:Pokemon ;
-    testdb:name "Poliwhirl" ;
+<http://pokeball.org/id/62> a pokeball:Pokemon ;
+    pokeball:name "Poliwhirl" ;
     rdfs:label "Poliwhirl" ;
-    testdb:Poketype testdb:Water ;
-    testdb:evolvesTo <http://pokeball.org/id/63> .
+    pokeball:Poketype pokeball:Water ;
+    pokeball:evolvesTo <http://pokeball.org/id/63> .
 
-<http://pokeball.org/id/63> a testdb:Pokemon ;
-    testdb:name "Poliwrath" ;
+<http://pokeball.org/id/63> a pokeball:Pokemon ;
+    pokeball:name "Poliwrath" ;
     rdfs:label "Poliwrath" ;
-    testdb:Poketype testdb:Water, testdb:Fighting .
+    pokeball:Poketype pokeball:Water, pokeball:Fighting .
 
-<http://pokeball.org/id/64> a testdb:Pokemon ;
-    testdb:name "Abra" ;
+<http://pokeball.org/id/64> a pokeball:Pokemon ;
+    pokeball:name "Abra" ;
     rdfs:label "Abra" ;
-    testdb:Poketype testdb:Psychic ;
-    testdb:evolvesTo <http://pokeball.org/id/65> .
+    pokeball:Poketype pokeball:Psychic ;
+    pokeball:evolvesTo <http://pokeball.org/id/65> .
 
-<http://pokeball.org/id/65> a testdb:Pokemon ;
-    testdb:name "Kadabra" ;
+<http://pokeball.org/id/65> a pokeball:Pokemon ;
+    pokeball:name "Kadabra" ;
     rdfs:label "Kadabra" ;
-    testdb:Poketype testdb:Psychic ;
-    testdb:evolvesTo <http://pokeball.org/id/66> .
+    pokeball:Poketype pokeball:Psychic ;
+    pokeball:evolvesTo <http://pokeball.org/id/66> .
 
-<http://pokeball.org/id/66> a testdb:Pokemon ;
-    testdb:name "Alakazam" ;
+<http://pokeball.org/id/66> a pokeball:Pokemon ;
+    pokeball:name "Alakazam" ;
     rdfs:label "Alakazam" ;
-    testdb:Poketype testdb:Psychic .
+    pokeball:Poketype pokeball:Psychic .
 
-<http://pokeball.org/id/67> a testdb:Pokemon ;
-    testdb:name "Machop" ;
+<http://pokeball.org/id/67> a pokeball:Pokemon ;
+    pokeball:name "Machop" ;
     rdfs:label "Machop" ;
-    testdb:Poketype testdb:Fighting ;
-    testdb:evolvesTo <http://pokeball.org/id/68> .
+    pokeball:Poketype pokeball:Fighting ;
+    pokeball:evolvesTo <http://pokeball.org/id/68> .
 
-<http://pokeball.org/id/68> a testdb:Pokemon ;
-    testdb:name "Machoke" ;
+<http://pokeball.org/id/68> a pokeball:Pokemon ;
+    pokeball:name "Machoke" ;
     rdfs:label "Machoke" ;
-    testdb:Poketype testdb:Fighting ;
-    testdb:evolvesTo <http://pokeball.org/id/69> .
+    pokeball:Poketype pokeball:Fighting ;
+    pokeball:evolvesTo <http://pokeball.org/id/69> .
 
-<http://pokeball.org/id/69> a testdb:Pokemon ;
-    testdb:name "Machamp" ;
+<http://pokeball.org/id/69> a pokeball:Pokemon ;
+    pokeball:name "Machamp" ;
     rdfs:label "Machamp" ;
-    testdb:Poketype testdb:Fighting .
+    pokeball:Poketype pokeball:Fighting .
 
-<http://pokeball.org/id/70> a testdb:Pokemon ;
-    testdb:name "Bellsprout" ;
+<http://pokeball.org/id/70> a pokeball:Pokemon ;
+    pokeball:name "Bellsprout" ;
     rdfs:label "Bellsprout" ;
-    testdb:Poketype testdb:Grass, testdb:Poison ;
-    testdb:evolvesTo <http://pokeball.org/id/71> .
+    pokeball:Poketype pokeball:Grass, pokeball:Poison ;
+    pokeball:evolvesTo <http://pokeball.org/id/71> .
 
-<http://pokeball.org/id/71> a testdb:Pokemon ;
-    testdb:name "Weepinbell" ;
+<http://pokeball.org/id/71> a pokeball:Pokemon ;
+    pokeball:name "Weepinbell" ;
     rdfs:label "Weepinbell" ;
-    testdb:Poketype testdb:Grass, testdb:Poison ;
-    testdb:evolvesTo <http://pokeball.org/id/72> .
+    pokeball:Poketype pokeball:Grass, pokeball:Poison ;
+    pokeball:evolvesTo <http://pokeball.org/id/72> .
     
-<http://pokeball.org/id/72> a testdb:Pokemon ;
-    testdb:name "Victreebel" ;
+<http://pokeball.org/id/72> a pokeball:Pokemon ;
+    pokeball:name "Victreebel" ;
     rdfs:label "Victreebel" ;
-    testdb:Poketype testdb:Grass, testdb:Poison .
+    pokeball:Poketype pokeball:Grass, pokeball:Poison .
 
-<http://pokeball.org/id/73> a testdb:Pokemon ;
-    testdb:name "Tentacool" ;
+<http://pokeball.org/id/73> a pokeball:Pokemon ;
+    pokeball:name "Tentacool" ;
     rdfs:label "Tentacool" ;
-    testdb:Poketype testdb:Water, testdb:Poison ;
-    testdb:evolvesTo <http://pokeball.org/id/74> .
+    pokeball:Poketype pokeball:Water, pokeball:Poison ;
+    pokeball:evolvesTo <http://pokeball.org/id/74> .
 
-<http://pokeball.org/id/74> a testdb:Pokemon ;
-    testdb:name "Tentacruel" ;
+<http://pokeball.org/id/74> a pokeball:Pokemon ;
+    pokeball:name "Tentacruel" ;
     rdfs:label "Tentacruel" ;
-    testdb:Poketype testdb:Water, testdb:Poison .
+    pokeball:Poketype pokeball:Water, pokeball:Poison .
 
-<http://pokeball.org/id/75> a testdb:Pokemon ;
-    testdb:name "Geodude" ;
+<http://pokeball.org/id/75> a pokeball:Pokemon ;
+    pokeball:name "Geodude" ;
     rdfs:label "Geodude" ;
-    testdb:Poketype testdb:Rock, testdb:Ground ;
-    testdb:evolvesTo <http://pokeball.org/id/76> .
+    pokeball:Poketype pokeball:Rock, pokeball:Ground ;
+    pokeball:evolvesTo <http://pokeball.org/id/76> .
 
-<http://pokeball.org/id/76> a testdb:Pokemon ;
-    testdb:name "Graveler" ;
+<http://pokeball.org/id/76> a pokeball:Pokemon ;
+    pokeball:name "Graveler" ;
     rdfs:label "Graveler" ;
-    testdb:Poketype testdb:Rock, testdb:Ground ;
-    testdb:evolvesTo <http://pokeball.org/id/77> .
+    pokeball:Poketype pokeball:Rock, pokeball:Ground ;
+    pokeball:evolvesTo <http://pokeball.org/id/77> .
 
-<http://pokeball.org/id/77> a testdb:Pokemon ;
-    testdb:name "Golem" ;
+<http://pokeball.org/id/77> a pokeball:Pokemon ;
+    pokeball:name "Golem" ;
     rdfs:label "Golem" ;
-    testdb:Poketype testdb:Rock, testdb:Ground .
+    pokeball:Poketype pokeball:Rock, pokeball:Ground .
 
-<http://pokeball.org/id/78> a testdb:Pokemon ;
-    testdb:name "Ponyta" ;
+<http://pokeball.org/id/78> a pokeball:Pokemon ;
+    pokeball:name "Ponyta" ;
     rdfs:label "Ponyta" ;
-    testdb:Poketype testdb:Fire ;
-    testdb:evolvesTo <http://pokeball.org/id/79> .
+    pokeball:Poketype pokeball:Fire ;
+    pokeball:evolvesTo <http://pokeball.org/id/79> .
 
-<http://pokeball.org/id/79> a testdb:Pokemon ;
-    testdb:name "Rapidash" ;
+<http://pokeball.org/id/79> a pokeball:Pokemon ;
+    pokeball:name "Rapidash" ;
     rdfs:label "Rapidash" ;
-    testdb:Poketype testdb:Fire .
+    pokeball:Poketype pokeball:Fire .
 
-<http://pokeball.org/id/80> a testdb:Pokemon ;
-    testdb:name "Slowpoke" ;
+<http://pokeball.org/id/80> a pokeball:Pokemon ;
+    pokeball:name "Slowpoke" ;
     rdfs:label "Slowpoke" ;
-    testdb:Poketype testdb:Water, testdb:Psychic ;
-    testdb:evolvesTo <http://pokeball.org/id/81> .
+    pokeball:Poketype pokeball:Water, pokeball:Psychic ;
+    pokeball:evolvesTo <http://pokeball.org/id/81> .
 
-<http://pokeball.org/id/81> a testdb:Pokemon ;
-    testdb:name "Slowbro" ;
+<http://pokeball.org/id/81> a pokeball:Pokemon ;
+    pokeball:name "Slowbro" ;
     rdfs:label "Slowbro" ;
-    testdb:Poketype testdb:Water, testdb:Psychic .
+    pokeball:Poketype pokeball:Water, pokeball:Psychic .
 
-<http://pokeball.org/id/82> a testdb:Pokemon ;
-    testdb:name "Magnemite" ;
+<http://pokeball.org/id/82> a pokeball:Pokemon ;
+    pokeball:name "Magnemite" ;
     rdfs:label "Magnemite" ;
-    testdb:Poketype testdb:Electric, testdb:Steel ;
-    testdb:evolvesTo <http://pokeball.org/id/83> .
+    pokeball:Poketype pokeball:Electric, pokeball:Steel ;
+    pokeball:evolvesTo <http://pokeball.org/id/83> .
 
-<http://pokeball.org/id/83> a testdb:Pokemon ;
-    testdb:name "Magneton" ;
+<http://pokeball.org/id/83> a pokeball:Pokemon ;
+    pokeball:name "Magneton" ;
     rdfs:label "Magneton" ;
-    testdb:Poketype testdb:Electric, testdb:Steel .
+    pokeball:Poketype pokeball:Electric, pokeball:Steel .
 
-<http://pokeball.org/id/84> a testdb:Pokemon ;
-    testdb:name "Farfetch'd" ;
+<http://pokeball.org/id/84> a pokeball:Pokemon ;
+    pokeball:name "Farfetch'd" ;
     rdfs:label "Farfetch'd" ;
-    testdb:Poketype testdb:Normal, testdb:Flying .
+    pokeball:Poketype pokeball:Normal, pokeball:Flying .
 
-<http://pokeball.org/id/85> a testdb:Pokemon ;
-    testdb:name "Doduo" ;
+<http://pokeball.org/id/85> a pokeball:Pokemon ;
+    pokeball:name "Doduo" ;
     rdfs:label "Doduo" ;
-    testdb:Poketype testdb:Normal, testdb:Flying ;
-    testdb:evolvesTo <http://pokeball.org/id/86> .
+    pokeball:Poketype pokeball:Normal, pokeball:Flying ;
+    pokeball:evolvesTo <http://pokeball.org/id/86> .
 
-<http://pokeball.org/id/86> a testdb:Pokemon ;
-    testdb:name "Dodrio" ;
+<http://pokeball.org/id/86> a pokeball:Pokemon ;
+    pokeball:name "Dodrio" ;
     rdfs:label "Dodrio" ;
-    testdb:Poketype testdb:Normal, testdb:Flying .
+    pokeball:Poketype pokeball:Normal, pokeball:Flying .
 
-<http://pokeball.org/id/87> a testdb:Pokemon ;
-    testdb:name "Seel" ;
+<http://pokeball.org/id/87> a pokeball:Pokemon ;
+    pokeball:name "Seel" ;
     rdfs:label "Seel" ;
-    testdb:Poketype testdb:Water ;
-    testdb:evolvesTo <http://pokeball.org/id/88> .
+    pokeball:Poketype pokeball:Water ;
+    pokeball:evolvesTo <http://pokeball.org/id/88> .
 
-<http://pokeball.org/id/88> a testdb:Pokemon ;
-    testdb:name "Dewgong" ;
+<http://pokeball.org/id/88> a pokeball:Pokemon ;
+    pokeball:name "Dewgong" ;
     rdfs:label "Dewgong" ;
-    testdb:Poketype testdb:Water, testdb:Ice .
+    pokeball:Poketype pokeball:Water, pokeball:Ice .
 
-<http://pokeball.org/id/89> a testdb:Pokemon ;
-    testdb:name "Grimer" ;
+<http://pokeball.org/id/89> a pokeball:Pokemon ;
+    pokeball:name "Grimer" ;
     rdfs:label "Grimer" ;
-    testdb:Poketype testdb:Poison ;
-    testdb:evolvesTo <http://pokeball.org/id/90> .
+    pokeball:Poketype pokeball:Poison ;
+    pokeball:evolvesTo <http://pokeball.org/id/90> .
 
-<http://pokeball.org/id/90> a testdb:Pokemon ;
-    testdb:name "Muk" ;
+<http://pokeball.org/id/90> a pokeball:Pokemon ;
+    pokeball:name "Muk" ;
     rdfs:label "Muk" ;
-    testdb:Poketype testdb:Poison .
+    pokeball:Poketype pokeball:Poison .
 
-<http://pokeball.org/id/91> a testdb:Pokemon ;
-    testdb:name "Shellder" ;
+<http://pokeball.org/id/91> a pokeball:Pokemon ;
+    pokeball:name "Shellder" ;
     rdfs:label "Shellder" ;
-    testdb:Poketype testdb:Water ;
-    testdb:evolvesTo <http://pokeball.org/id/92> .
+    pokeball:Poketype pokeball:Water ;
+    pokeball:evolvesTo <http://pokeball.org/id/92> .
 
-<http://pokeball.org/id/92> a testdb:Pokemon ;
-    testdb:name "Cloyster" ;
+<http://pokeball.org/id/92> a pokeball:Pokemon ;
+    pokeball:name "Cloyster" ;
     rdfs:label "Cloyster" ;
-    testdb:Poketype testdb:Water, testdb:Ice .
+    pokeball:Poketype pokeball:Water, pokeball:Ice .
 
-<http://pokeball.org/id/93> a testdb:Pokemon ;
-    testdb:name "Gastly" ;
+<http://pokeball.org/id/93> a pokeball:Pokemon ;
+    pokeball:name "Gastly" ;
     rdfs:label "Gastly" ;
-    testdb:Poketype testdb:Ghost, testdb:Poison ;
-    testdb:evolvesTo <http://pokeball.org/id/94> .
+    pokeball:Poketype pokeball:Ghost, pokeball:Poison ;
+    pokeball:evolvesTo <http://pokeball.org/id/94> .
 
-<http://pokeball.org/id/94> a testdb:Pokemon ;
-    testdb:name "Haunter" ;
+<http://pokeball.org/id/94> a pokeball:Pokemon ;
+    pokeball:name "Haunter" ;
     rdfs:label "Haunter" ;
-    testdb:Poketype testdb:Ghost, testdb:Poison ;
-    testdb:evolvesTo <http://pokeball.org/id/95> .
+    pokeball:Poketype pokeball:Ghost, pokeball:Poison ;
+    pokeball:evolvesTo <http://pokeball.org/id/95> .
 
-<http://pokeball.org/id/95> a testdb:Pokemon ;
-    testdb:name "Gengar" ;
+<http://pokeball.org/id/95> a pokeball:Pokemon ;
+    pokeball:name "Gengar" ;
     rdfs:label "Gengar" ;
-    testdb:Poketype testdb:Ghost, testdb:Poison .
+    pokeball:Poketype pokeball:Ghost, pokeball:Poison .
 
-<http://pokeball.org/id/96> a testdb:Pokemon ;
-    testdb:name "Onix" ;
+<http://pokeball.org/id/96> a pokeball:Pokemon ;
+    pokeball:name "Onix" ;
     rdfs:label "Onix" ;
-    testdb:Poketype testdb:Rock, testdb:Ground .
+    pokeball:Poketype pokeball:Rock, pokeball:Ground .
 
-<http://pokeball.org/id/97> a testdb:Pokemon ;
-    testdb:name "Drowzee" ;
+<http://pokeball.org/id/97> a pokeball:Pokemon ;
+    pokeball:name "Drowzee" ;
     rdfs:label "Drowzee" ;
-    testdb:Poketype testdb:Psychic ;
-    testdb:evolvesTo <http://pokeball.org/id/98> .
+    pokeball:Poketype pokeball:Psychic ;
+    pokeball:evolvesTo <http://pokeball.org/id/98> .
 
-<http://pokeball.org/id/98> a testdb:Pokemon ;
-    testdb:name "Hypno" ;
+<http://pokeball.org/id/98> a pokeball:Pokemon ;
+    pokeball:name "Hypno" ;
     rdfs:label "Hypno" ;
-    testdb:Poketype testdb:Psychic .
+    pokeball:Poketype pokeball:Psychic .
 
-<http://pokeball.org/id/99> a testdb:Pokemon ;
-    testdb:name "Krabby" ;
+<http://pokeball.org/id/99> a pokeball:Pokemon ;
+    pokeball:name "Krabby" ;
     rdfs:label "Krabby" ;
-    testdb:Poketype testdb:Water ;
-    testdb:evolvesTo <http://pokeball.org/id/100> .
+    pokeball:Poketype pokeball:Water ;
+    pokeball:evolvesTo <http://pokeball.org/id/100> .
 
-<http://pokeball.org/id/100> a testdb:Pokemon ;
-    testdb:name "Kingler" ;
+<http://pokeball.org/id/100> a pokeball:Pokemon ;
+    pokeball:name "Kingler" ;
     rdfs:label "Kingler" ;
-    testdb:Poketype testdb:Water .
+    pokeball:Poketype pokeball:Water .
 
-<http://pokeball.org/id/101> a testdb:Pokemon ;
-    testdb:name "Voltorb" ;
+<http://pokeball.org/id/101> a pokeball:Pokemon ;
+    pokeball:name "Voltorb" ;
     rdfs:label "Voltorb" ;
-    testdb:Poketype testdb:Electric ;
-    testdb:evolvesTo <http://pokeball.org/id/102> .
+    pokeball:Poketype pokeball:Electric ;
+    pokeball:evolvesTo <http://pokeball.org/id/102> .
 
-<http://pokeball.org/id/102> a testdb:Pokemon ;
-    testdb:name "Electrode" ;
+<http://pokeball.org/id/102> a pokeball:Pokemon ;
+    pokeball:name "Electrode" ;
     rdfs:label "Electrode" ;
-    testdb:Poketype testdb:Electric .
+    pokeball:Poketype pokeball:Electric .
 
-<http://pokeball.org/id/103> a testdb:Pokemon ;
-    testdb:name "Exeggcute" ;
+<http://pokeball.org/id/103> a pokeball:Pokemon ;
+    pokeball:name "Exeggcute" ;
     rdfs:label "Exeggcute" ;
-    testdb:Poketype testdb:Grass, testdb:Psychic ;
-    testdb:evolvesTo <http://pokeball.org/id/104> .
+    pokeball:Poketype pokeball:Grass, pokeball:Psychic ;
+    pokeball:evolvesTo <http://pokeball.org/id/104> .
 
-<http://pokeball.org/id/104> a testdb:Pokemon ;
-    testdb:name "Exeggutor" ;
+<http://pokeball.org/id/104> a pokeball:Pokemon ;
+    pokeball:name "Exeggutor" ;
     rdfs:label "Exeggutor" ;
-    testdb:Poketype testdb:Grass, testdb:Psychic .
+    pokeball:Poketype pokeball:Grass, pokeball:Psychic .
 
-<http://pokeball.org/id/105> a testdb:Pokemon ;
-    testdb:name "Cubone" ;
+<http://pokeball.org/id/105> a pokeball:Pokemon ;
+    pokeball:name "Cubone" ;
     rdfs:label "Cubone" ;
-    testdb:Poketype testdb:Ground ;
-    testdb:evolvesTo <http://pokeball.org/id/106> .
+    pokeball:Poketype pokeball:Ground ;
+    pokeball:evolvesTo <http://pokeball.org/id/106> .
 
-<http://pokeball.org/id/106> a testdb:Pokemon ;
-    testdb:name "Marowak" ;
+<http://pokeball.org/id/106> a pokeball:Pokemon ;
+    pokeball:name "Marowak" ;
     rdfs:label "Marowak" ;
-    testdb:Poketype testdb:Ground .
+    pokeball:Poketype pokeball:Ground .
 
-<http://pokeball.org/id/107> a testdb:Pokemon ;
-    testdb:name "Hitmonlee" ;
+<http://pokeball.org/id/107> a pokeball:Pokemon ;
+    pokeball:name "Hitmonlee" ;
     rdfs:label "Hitmonlee" ;
-    testdb:Poketype testdb:Fighting .
+    pokeball:Poketype pokeball:Fighting .
 
-<http://pokeball.org/id/108> a testdb:Pokemon ;
-    testdb:name "Hitmonchan" ;
+<http://pokeball.org/id/108> a pokeball:Pokemon ;
+    pokeball:name "Hitmonchan" ;
     rdfs:label "Hitmonchan" ;
-    testdb:Poketype testdb:Fighting .
+    pokeball:Poketype pokeball:Fighting .
 
-<http://pokeball.org/id/109> a testdb:Pokemon ;
-    testdb:name "Lickitung" ;
+<http://pokeball.org/id/109> a pokeball:Pokemon ;
+    pokeball:name "Lickitung" ;
     rdfs:label "Lickitung" ;
-    testdb:Poketype testdb:Normal .
+    pokeball:Poketype pokeball:Normal .
 
-<http://pokeball.org/id/110> a testdb:Pokemon ;
-    testdb:name "Koffing" ;
+<http://pokeball.org/id/110> a pokeball:Pokemon ;
+    pokeball:name "Koffing" ;
     rdfs:label "Koffing" ;
-    testdb:Poketype testdb:Poison ;
-    testdb:evolvesTo <http://pokeball.org/id/111> .
+    pokeball:Poketype pokeball:Poison ;
+    pokeball:evolvesTo <http://pokeball.org/id/111> .
 
-<http://pokeball.org/id/111> a testdb:Pokemon ;
-    testdb:name "Weezing" ;
+<http://pokeball.org/id/111> a pokeball:Pokemon ;
+    pokeball:name "Weezing" ;
     rdfs:label "Weezing" ;
-    testdb:Poketype testdb:Poison .
+    pokeball:Poketype pokeball:Poison .
 
-<http://pokeball.org/id/112> a testdb:Pokemon ;
-    testdb:name "Rhyhorn" ;
+<http://pokeball.org/id/112> a pokeball:Pokemon ;
+    pokeball:name "Rhyhorn" ;
     rdfs:label "Rhyhorn" ;
-    testdb:Poketype testdb:Ground, testdb:Rock ;
-    testdb:evolvesTo <http://pokeball.org/id/113> .
+    pokeball:Poketype pokeball:Ground, pokeball:Rock ;
+    pokeball:evolvesTo <http://pokeball.org/id/113> .
 
-<http://pokeball.org/id/113> a testdb:Pokemon ;
-    testdb:name "Rhydon" ;
+<http://pokeball.org/id/113> a pokeball:Pokemon ;
+    pokeball:name "Rhydon" ;
     rdfs:label "Rhydon" ;
-    testdb:Poketype testdb:Ground, testdb:Rock .
+    pokeball:Poketype pokeball:Ground, pokeball:Rock .
 
-<http://pokeball.org/id/114> a testdb:Pokemon ;
-    testdb:name "Chansey" ;
+<http://pokeball.org/id/114> a pokeball:Pokemon ;
+    pokeball:name "Chansey" ;
     rdfs:label "Chansey" ;
-    testdb:Poketype testdb:Normal .
+    pokeball:Poketype pokeball:Normal .
 
-<http://pokeball.org/id/115> a testdb:Pokemon ;
-    testdb:name "Tangela" ;
+<http://pokeball.org/id/115> a pokeball:Pokemon ;
+    pokeball:name "Tangela" ;
     rdfs:label "Tangela" ;
-    testdb:Poketype testdb:Grass .
+    pokeball:Poketype pokeball:Grass .
 
-<http://pokeball.org/id/116> a testdb:Pokemon ;
-    testdb:name "Kangaskhan" ;
+<http://pokeball.org/id/116> a pokeball:Pokemon ;
+    pokeball:name "Kangaskhan" ;
     rdfs:label "Kangaskhan" ;
-    testdb:Poketype testdb:Normal .
+    pokeball:Poketype pokeball:Normal .
 
-<http://pokeball.org/id/117> a testdb:Pokemon ;
-    testdb:name "Horsea" ;
+<http://pokeball.org/id/117> a pokeball:Pokemon ;
+    pokeball:name "Horsea" ;
     rdfs:label "Horsea" ;
-    testdb:Poketype testdb:Water ;
-    testdb:evolvesTo <http://pokeball.org/id/118> .
+    pokeball:Poketype pokeball:Water ;
+    pokeball:evolvesTo <http://pokeball.org/id/118> .
 
-<http://pokeball.org/id/118> a testdb:Pokemon ;
-    testdb:name "Seadra" ;
+<http://pokeball.org/id/118> a pokeball:Pokemon ;
+    pokeball:name "Seadra" ;
     rdfs:label "Seadra" ;
-    testdb:Poketype testdb:Water .
+    pokeball:Poketype pokeball:Water .
 
-<http://pokeball.org/id/119> a testdb:Pokemon ;
-    testdb:name "Goldeen" ;
+<http://pokeball.org/id/119> a pokeball:Pokemon ;
+    pokeball:name "Goldeen" ;
     rdfs:label "Goldeen" ;
-    testdb:Poketype testdb:Water ;
-    testdb:evolvesTo <http://pokeball.org/id/120> .
+    pokeball:Poketype pokeball:Water ;
+    pokeball:evolvesTo <http://pokeball.org/id/120> .
 
-<http://pokeball.org/id/120> a testdb:Pokemon ;
-    testdb:name "Seaking" ;
+<http://pokeball.org/id/120> a pokeball:Pokemon ;
+    pokeball:name "Seaking" ;
     rdfs:label "Seaking" ;
-    testdb:Poketype testdb:Water .
+    pokeball:Poketype pokeball:Water .
 
-<http://pokeball.org/id/121> a testdb:Pokemon ;
-    testdb:name "Staryu" ;
+<http://pokeball.org/id/121> a pokeball:Pokemon ;
+    pokeball:name "Staryu" ;
     rdfs:label "Staryu" ;
-    testdb:Poketype testdb:Water ;
-    testdb:evolvesTo <http://pokeball.org/id/122> .
+    pokeball:Poketype pokeball:Water ;
+    pokeball:evolvesTo <http://pokeball.org/id/122> .
 
-<http://pokeball.org/id/122> a testdb:Pokemon ;
-    testdb:name "Starmie" ;
+<http://pokeball.org/id/122> a pokeball:Pokemon ;
+    pokeball:name "Starmie" ;
     rdfs:label "Starmie" ;
-    testdb:Poketype testdb:Water, testdb:Psychic .
+    pokeball:Poketype pokeball:Water, pokeball:Psychic .
 
-<http://pokeball.org/id/123> a testdb:Pokemon ;
-    testdb:name "Mr. Mime" ;
+<http://pokeball.org/id/123> a pokeball:Pokemon ;
+    pokeball:name "Mr. Mime" ;
     rdfs:label "Mr. Mime" ;
-    testdb:Poketype testdb:Psychic, testdb:Fairy .
+    pokeball:Poketype pokeball:Psychic, pokeball:Fairy .
 
-<http://pokeball.org/id/124> a testdb:Pokemon ;
-    testdb:name "Scyther" ;
+<http://pokeball.org/id/124> a pokeball:Pokemon ;
+    pokeball:name "Scyther" ;
     rdfs:label "Scyther" ;
-    testdb:Poketype testdb:Bug, testdb:Flying .
+    pokeball:Poketype pokeball:Bug, pokeball:Flying .
 
-<http://pokeball.org/id/125> a testdb:Pokemon ;
-    testdb:name "Jynx" ;
+<http://pokeball.org/id/125> a pokeball:Pokemon ;
+    pokeball:name "Jynx" ;
     rdfs:label "Jynx" ;
-    testdb:Poketype testdb:Ice, testdb:Psychic .
+    pokeball:Poketype pokeball:Ice, pokeball:Psychic .
 
-<http://pokeball.org/id/126> a testdb:Pokemon ;
-    testdb:name "Electabuzz" ;
+<http://pokeball.org/id/126> a pokeball:Pokemon ;
+    pokeball:name "Electabuzz" ;
     rdfs:label "Electabuzz" ;
-    testdb:Poketype testdb:Electric .
+    pokeball:Poketype pokeball:Electric .
 
-<http://pokeball.org/id/127> a testdb:Pokemon ;
-    testdb:name "Magmar" ;
+<http://pokeball.org/id/127> a pokeball:Pokemon ;
+    pokeball:name "Magmar" ;
     rdfs:label "Magmar" ;
-    testdb:Poketype testdb:Fire .
+    pokeball:Poketype pokeball:Fire .
 
-<http://pokeball.org/id/128> a testdb:Pokemon ;
-    testdb:name "Pinsir" ;
+<http://pokeball.org/id/128> a pokeball:Pokemon ;
+    pokeball:name "Pinsir" ;
     rdfs:label "Pinsir" ;
-    testdb:Poketype testdb:Bug .
+    pokeball:Poketype pokeball:Bug .
 
-<http://pokeball.org/id/129> a testdb:Pokemon ;
-    testdb:name "Tauros" ;
+<http://pokeball.org/id/129> a pokeball:Pokemon ;
+    pokeball:name "Tauros" ;
     rdfs:label "Tauros" ;
-    testdb:Poketype testdb:Normal .
+    pokeball:Poketype pokeball:Normal .
 
-<http://pokeball.org/id/130> a testdb:Pokemon ;
-    testdb:name "Magikarp" ;
+<http://pokeball.org/id/130> a pokeball:Pokemon ;
+    pokeball:name "Magikarp" ;
     rdfs:label "Magikarp" ;
-    testdb:Poketype testdb:Water ;
-    testdb:evolvesTo <http://pokeball.org/id/131> .
+    pokeball:Poketype pokeball:Water ;
+    pokeball:evolvesTo <http://pokeball.org/id/131> .
 
-<http://pokeball.org/id/131> a testdb:Pokemon ;
-    testdb:name "Gyarados" ;
+<http://pokeball.org/id/131> a pokeball:Pokemon ;
+    pokeball:name "Gyarados" ;
     rdfs:label "Gyarados" ;
-    testdb:Poketype testdb:Water, testdb:Flying .
+    pokeball:Poketype pokeball:Water, pokeball:Flying .
 
-<http://pokeball.org/id/132> a testdb:Pokemon ;
-    testdb:name "Lapras" ;
+<http://pokeball.org/id/132> a pokeball:Pokemon ;
+    pokeball:name "Lapras" ;
     rdfs:label "Lapras" ;
-    testdb:Poketype testdb:Water, testdb:Ice .
+    pokeball:Poketype pokeball:Water, pokeball:Ice .
 
-<http://pokeball.org/id/133> a testdb:Pokemon ;
-    testdb:name "Ditto" ;
+<http://pokeball.org/id/133> a pokeball:Pokemon ;
+    pokeball:name "Ditto" ;
     rdfs:label "Ditto" ;
-    testdb:Poketype testdb:Normal .
+    pokeball:Poketype pokeball:Normal .
 
-<http://pokeball.org/id/134> a testdb:Pokemon ;
-    testdb:name "Eevee" ;
+<http://pokeball.org/id/134> a pokeball:Pokemon ;
+    pokeball:name "Eevee" ;
     rdfs:label "Eevee" ;
-    testdb:Poketype testdb:Normal ;
-    testdb:evolvesTo <http://pokeball.org/id/135>, <http://pokeball.org/id/136>, <http://pokeball.org/id/137>, <http://pokeball.org/id/138> .
+    pokeball:Poketype pokeball:Normal ;
+    pokeball:evolvesTo <http://pokeball.org/id/135>, <http://pokeball.org/id/136>, <http://pokeball.org/id/137>, <http://pokeball.org/id/138> .
 
-<http://pokeball.org/id/135> a testdb:Pokemon ;
-    testdb:name "Vaporeon" ;
+<http://pokeball.org/id/135> a pokeball:Pokemon ;
+    pokeball:name "Vaporeon" ;
     rdfs:label "Vaporeon" ;
-    testdb:Poketype testdb:Water .
+    pokeball:Poketype pokeball:Water .
 
-<http://pokeball.org/id/136> a testdb:Pokemon ;
-    testdb:name "Jolteon" ;
+<http://pokeball.org/id/136> a pokeball:Pokemon ;
+    pokeball:name "Jolteon" ;
     rdfs:label "Jolteon" ;
-    testdb:Poketype testdb:Electric .
+    pokeball:Poketype pokeball:Electric .
 
-<http://pokeball.org/id/137> a testdb:Pokemon ;
-    testdb:name "Flareon" ;
+<http://pokeball.org/id/137> a pokeball:Pokemon ;
+    pokeball:name "Flareon" ;
     rdfs:label "Flareon" ;
-    testdb:Poketype testdb:Fire .
+    pokeball:Poketype pokeball:Fire .
 
-<http://pokeball.org/id/138> a testdb:Pokemon ;
-    testdb:name "Espeon" ;
+<http://pokeball.org/id/138> a pokeball:Pokemon ;
+    pokeball:name "Espeon" ;
     rdfs:label "Espeon" ;
-    testdb:Poketype testdb:Psychic .
+    pokeball:Poketype pokeball:Psychic .
 
-<http://pokeball.org/id/139> a testdb:Pokemon ;
-    testdb:name "Umbreon" ;
+<http://pokeball.org/id/139> a pokeball:Pokemon ;
+    pokeball:name "Umbreon" ;
     rdfs:label "Umbreon" ;
-    testdb:Poketype testdb:Dark .
+    pokeball:Poketype pokeball:Dark .
 
-<http://pokeball.org/id/140> a testdb:Pokemon ;
-    testdb:name "Porygon" ;
+<http://pokeball.org/id/140> a pokeball:Pokemon ;
+    pokeball:name "Porygon" ;
     rdfs:label "Porygon" ;
-    testdb:Poketype testdb:Normal .
+    pokeball:Poketype pokeball:Normal .
 
-<http://pokeball.org/id/141> a testdb:Pokemon ;
-    testdb:name "Omanyte" ;
+<http://pokeball.org/id/141> a pokeball:Pokemon ;
+    pokeball:name "Omanyte" ;
     rdfs:label "Omanyte" ;
-    testdb:Poketype testdb:Rock, testdb:Water ;
-    testdb:evolvesTo <http://pokeball.org/id/142> .
+    pokeball:Poketype pokeball:Rock, pokeball:Water ;
+    pokeball:evolvesTo <http://pokeball.org/id/142> .
 
-<http://pokeball.org/id/142> a testdb:Pokemon ;
-    testdb:name "Omastar" ;
+<http://pokeball.org/id/142> a pokeball:Pokemon ;
+    pokeball:name "Omastar" ;
     rdfs:label "Omastar" ;
-    testdb:Poketype testdb:Rock, testdb:Water .
+    pokeball:Poketype pokeball:Rock, pokeball:Water .
 
-<http://pokeball.org/id/143> a testdb:Pokemon ;
-    testdb:name "Kabuto" ;
+<http://pokeball.org/id/143> a pokeball:Pokemon ;
+    pokeball:name "Kabuto" ;
     rdfs:label "Kabuto" ;
-    testdb:Poketype testdb:Rock, testdb:Water ;
-    testdb:evolvesTo <http://pokeball.org/id/144> .
+    pokeball:Poketype pokeball:Rock, pokeball:Water ;
+    pokeball:evolvesTo <http://pokeball.org/id/144> .
 
-<http://pokeball.org/id/144> a testdb:Pokemon ;
-    testdb:name "Kabutops" ;
+<http://pokeball.org/id/144> a pokeball:Pokemon ;
+    pokeball:name "Kabutops" ;
     rdfs:label "Kabutops" ;
-    testdb:Poketype testdb:Rock, testdb:Water .
+    pokeball:Poketype pokeball:Rock, pokeball:Water .
 
-<http://pokeball.org/id/145> a testdb:Pokemon ;
-    testdb:name "Aerodactyl" ;
+<http://pokeball.org/id/145> a pokeball:Pokemon ;
+    pokeball:name "Aerodactyl" ;
     rdfs:label "Aerodactyl" ;
-    testdb:Poketype testdb:Rock, testdb:Flying .
+    pokeball:Poketype pokeball:Rock, pokeball:Flying .
 
-<http://pokeball.org/id/146> a testdb:Pokemon ;
-    testdb:name "Snorlax" ;
+<http://pokeball.org/id/146> a pokeball:Pokemon ;
+    pokeball:name "Snorlax" ;
     rdfs:label "Snorlax" ;
-    testdb:Poketype testdb:Normal .
+    pokeball:Poketype pokeball:Normal .
 
-<http://pokeball.org/id/147> a testdb:Pokemon ;
-    testdb:name "Articuno" ;
+<http://pokeball.org/id/147> a pokeball:Pokemon ;
+    pokeball:name "Articuno" ;
     rdfs:label "Articuno" ;
-    testdb:Poketype testdb:Ice, testdb:Flying .
+    pokeball:Poketype pokeball:Ice, pokeball:Flying .
 
-<http://pokeball.org/id/148> a testdb:Pokemon ;
-    testdb:name "Zapdos" ;
+<http://pokeball.org/id/148> a pokeball:Pokemon ;
+    pokeball:name "Zapdos" ;
     rdfs:label "Zapdos" ;
-    testdb:Poketype testdb:Electric, testdb:Flying .
+    pokeball:Poketype pokeball:Electric, pokeball:Flying .
 
-<http://pokeball.org/id/149> a testdb:Pokemon ;
-    testdb:name "Moltres" ;
+<http://pokeball.org/id/149> a pokeball:Pokemon ;
+    pokeball:name "Moltres" ;
     rdfs:label "Moltres" ;
-    testdb:Poketype testdb:Fire, testdb:Flying .
+    pokeball:Poketype pokeball:Fire, pokeball:Flying .
 
-<http://pokeball.org/id/150> a testdb:Pokemon ;
-    testdb:name "Dratini" ;
+<http://pokeball.org/id/150> a pokeball:Pokemon ;
+    pokeball:name "Dratini" ;
     rdfs:label "Dratini" ;
-    testdb:Poketype testdb:Dragon ;
-    testdb:evolvesTo <http://pokeball.org/id/151> .
+    pokeball:Poketype pokeball:Dragon ;
+    pokeball:evolvesTo <http://pokeball.org/id/151> .
 
-<http://pokeball.org/id/151> a testdb:Pokemon ;
-    testdb:name "Dragonair" ;
+<http://pokeball.org/id/151> a pokeball:Pokemon ;
+    pokeball:name "Dragonair" ;
     rdfs:label "Dragonair" ;
-    testdb:Poketype testdb:Dragon ;
-    testdb:evolvesTo <http://pokeball.org/id/152> .
+    pokeball:Poketype pokeball:Dragon ;
+    pokeball:evolvesTo <http://pokeball.org/id/152> .
 
-<http://pokeball.org/id/152> a testdb:Pokemon ;
-    testdb:name "Dragonite" ;
+<http://pokeball.org/id/152> a pokeball:Pokemon ;
+    pokeball:name "Dragonite" ;
     rdfs:label "Dragonite" ;
-    testdb:Poketype testdb:Dragon, testdb:Flying .
+    pokeball:Poketype pokeball:Dragon, pokeball:Flying .
 
-<http://pokeball.org/id/153> a testdb:Pokemon ;
-    testdb:name "Mewtwo" ;
+<http://pokeball.org/id/153> a pokeball:Pokemon ;
+    pokeball:name "Mewtwo" ;
     rdfs:label "Mewtwo" ;
-    testdb:Poketype testdb:Psychic .
+    pokeball:Poketype pokeball:Psychic .
 
-<http://pokeball.org/id/154> a testdb:Pokemon ;
-    testdb:name "Mew" ;
+<http://pokeball.org/id/154> a pokeball:Pokemon ;
+    pokeball:name "Mew" ;
     rdfs:label "Mew" ;
-    testdb:Poketype testdb:Psychic .
+    pokeball:Poketype pokeball:Psychic .
