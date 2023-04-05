@@ -1,12 +1,17 @@
 \section{GraphDB}\lable{sec:graphdb}
 This section will cover use of GraphDB, the graph database used in this project. It will also cover the creation of the dataset used in this project.
 
-When choosing which database to use, there were some options we had to consider. We had to decide if we wanted to use a triplestore or a graph database, and what we needed to use the database for etc. There were many popular choices, ~\cite{best_graph_databases} mentions many popular graph databases, and lists some of the pros and cons of each. Such as Neo4j, Stardog, ArangoDB, and GraphDB. We considered using Neo4j, as it was often mentioned in the literature we read, but since it is not a triple store, it is not direclty able to use the SPARQL query language~\cite{neo4j:_a_reasonable_RDF_graph_database}. Instead we would have to use Cypher, Neo4j's graph query language~\cite{cypher_query_language}, or translate a SPARQL query to Cypher.
+When choosing which database to use, there were some options we had to consider. We had to decide if we wanted to use a triplestore or a graph database\todo{Include a small paragraph describing the differences between triplestroe and graph database}, and what we needed to use the database for etc. There were many popular choices, ~\cite{best_graph_databases} mentions many popular graph databases, and lists some of the pros and cons of each, such as Neo4j, Stardog, ArangoDB, and GraphDB. At first Neo4j was considered, as it was often mentioned in the literature we read, but since it is not a triple store, it is not direclty able to use the SPARQL query language~\cite{neo4j:_a_reasonable_RDF_graph_database}. Instead we would have to learn how to use Cypher, Neo4j's graph query language~\cite{cypher_query_language}, or alternativly translate a SPARQL query to Cypher.
 
+Instead we chose to use GraphDB, as it is a triplestore that is compliant with W3C standards, and uses the SPARQL query language. As described by the creators of GraphDB: \cite{graphDB}{GraphDB is an enterprise ready Semantic Graph Database, compliant with W3C Standards. Semantic graph databases (also called RDF triplestores) provide the core infrastructure for solutions where modelling agility, data integration, relationship exploration and cross-enterprise data publishing and consumption are important.}
+Additionally, GraphDB was free for the purposes we needed it for, and it was easy to setup and use, making it a good choice for our project.
 
-We chose to use GraphDB, as it is a triplestore that is compliant with W3C standards, and uses the SPARQL query language. As described by the creators of GraphDB: \cite{graphDB}{GraphDB is an enterprise ready Semantic Graph Database, compliant with W3C Standards. Semantic graph databases (also called RDF triplestores) provide the core infrastructure for solutions where modelling agility, data integration, relationship exploration and cross-enterprise data publishing and consumption are important.}
-Upon choosing a database to work with, we used docker, to setup a local instance of GraphDB, by doing this, we could easily manage our dataset, and use it for testing purposes.
+Upon choosing a database to work with, we used docker, to setup a local instance of GraphDB, by doing this, we could easily manage our dataset, and use it for testing purposes. We simply used the guide provided by GraphDB~\cite{docker_graphDB}, and followed the steps to setup a local instance of GraphDB.
+\todo{Should we add all the steps taken for the setup?}
 
+\subsection{Dataset}\lable{sec:dataset}
+With the database set up and ready for use, we were able to import a dataset. We debated on whether to use a pre-existing dataset, or create our own.
+We decided to create our own dataset, as we wanted to create a small and simple dataset, and additionally we wanted to get a better understanding of how \gls{RDF} worked.
 We then created a dataset, and loaded it into the database. We will cover the creation of the dataset in the next section.
 
 
@@ -14,8 +19,8 @@ We then created a dataset, and loaded it into the database. We will cover the cr
 %What is the difference between a graph database and a triple store?
 %Why we created our own dataset
 
-@online{neo4j:_a_reasonable_RDF_graph_database,
-    author  = {Thorsten Liebig},
-    url     = {https://neo4j.com/blog/neo4j-rdf-graph-database-reasoning-engine/},
-    urldate = {2018-27-02}
+@online{docker_graphdb,
+    author  = {Ontotext},
+    url     = {https://hub.docker.com/r/ontotext/graphdb/},
+    urldate = {2023-04-05},
 }
