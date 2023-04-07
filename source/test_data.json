@@ -1,0 +1,157 @@
+[
+    {
+        "s": "http://www.wikidata.org/entity/Q362",
+        "p": "http://www.w3.org/2000/01/rdf-schema#label",
+        "o": "World War II"
+    },
+    {
+        "s": "http://www.wikidata.org/entity/Q362",
+        "p": "http://www.w3.org/2004/02/skos/core#altLabel",
+        "o": "2nd World War"
+    },
+    {
+        "s": "http://www.wikidata.org/entity/Q362",
+        "p": "http://www.w3.org/2004/02/skos/core#altLabel",
+        "o": "II World War"
+    },
+    {
+        "s": "http://www.wikidata.org/entity/Q362",
+        "p": "http://www.w3.org/2004/02/skos/core#altLabel",
+        "o": "Second World War"
+    },
+    {
+        "s": "http://www.wikidata.org/entity/Q362",
+        "p": "http://www.w3.org/2004/02/skos/core#altLabel",
+        "o": "the Second World War"
+    },
+    {
+        "s": "http://www.wikidata.org/entity/Q362",
+        "p": "http://www.w3.org/2004/02/skos/core#altLabel",
+        "o": "World War 2"
+    },
+    {
+        "s": "http://www.wikidata.org/entity/Q362",
+        "p": "http://www.w3.org/2004/02/skos/core#altLabel",
+        "o": "World War Two"
+    },
+    {
+        "s": "http://www.wikidata.org/entity/Q362",
+        "p": "http://www.w3.org/2004/02/skos/core#altLabel",
+        "o": "WW 2"
+    },
+    {
+        "s": "http://www.wikidata.org/entity/Q362",
+        "p": "http://www.w3.org/2004/02/skos/core#altLabel",
+        "o": "WW II"
+    },
+    {
+        "s": "http://www.wikidata.org/entity/Q362",
+        "p": "http://www.w3.org/2004/02/skos/core#altLabel",
+        "o": "WW2"
+    },
+    {
+        "s": "http://www.wikidata.org/entity/Q362",
+        "p": "http://www.w3.org/2004/02/skos/core#altLabel",
+        "o": "WWII"
+    },
+    {
+        "s": "http://www.wikidata.org/entity/Q362",
+        "p": "http://schema.org/description",
+        "o": "global war, 1939–1945"
+    },
+    {
+        "s": "http://www.wikidata.org/entity/Q107394187",
+        "p": "http://www.w3.org/2000/01/rdf-schema#label",
+        "o": "World War II"
+    },
+    {
+        "s": "http://www.wikidata.org/entity/Q110874375",
+        "p": "http://www.w3.org/2000/01/rdf-schema#label",
+        "o": "World War II"
+    },
+    {
+        "s": "http://www.wikidata.org/entity/Q110874375",
+        "p": "http://schema.org/description",
+        "o": "US magazine"
+    },
+    {
+        "s": "http://www.wikidata.org/entity/Q107394187",
+        "p": "http://schema.org/description",
+        "o": "Wikimedia disambiguation page"
+    },
+    {
+        "s": "http://www.wikidata.org/entity/Q15053456",
+        "p": "http://www.wikidata.org/prop/direct/P1476",
+        "o": "World War II"
+    },
+    {
+        "s": "http://www.wikidata.org/entity/Q15053459",
+        "p": "http://www.w3.org/2000/01/rdf-schema#label",
+        "o": "World War II"
+    },
+    {
+        "s": "http://www.wikidata.org/entity/Q15053456",
+        "p": "http://www.w3.org/2000/01/rdf-schema#label",
+        "o": "World War II"
+    },
+    {
+        "s": "http://www.wikidata.org/entity/Q104869378",
+        "p": "http://www.w3.org/2000/01/rdf-schema#label",
+        "o": "World War II"
+    },
+    {
+        "s": "http://www.wikidata.org/entity/Q15053459",
+        "p": "http://www.wikidata.org/prop/direct/P1680",
+        "o": "The Encyclopedia of Facts and Figures"
+    },
+    {
+        "s": "http://www.wikidata.org/entity/Q15053456",
+        "p": "http://www.wikidata.org/prop/direct/P1680",
+        "o": "The Encyclopedia of Facts and Figures"
+    },
+    {
+        "s": "http://www.wikidata.org/entity/Q15053456",
+        "p": "http://schema.org/description",
+        "o": "book by John Ellis, 1993 edition"
+    },
+    {
+        "s": "http://www.wikidata.org/entity/Q15053459",
+        "p": "http://www.w3.org/2004/02/skos/core#altLabel",
+        "o": "The Military Book Club's World War II"
+    },
+    {
+        "s": "http://www.wikidata.org/entity/Q15053456",
+        "p": "http://www.w3.org/2004/02/skos/core#altLabel",
+        "o": "The Military Book Club's World War II"
+    },
+    {
+        "s": "http://www.wikidata.org/entity/Q15053459",
+        "p": "http://schema.org/description",
+        "o": "1995 edition by the Military Book Club"
+    },
+    {
+        "s": "http://www.wikidata.org/entity/Q15053459",
+        "p": "http://www.w3.org/2004/02/skos/core#altLabel",
+        "o": "mbcwwii"
+    },
+    {
+        "s": "http://www.wikidata.org/entity/Q104869378",
+        "p": "http://schema.org/description",
+        "o": "series of books written by American author Chris Lynch"
+    },
+    {
+        "s": "http://www.wikidata.org/entity/Q105750294",
+        "p": "http://www.wikidata.org/prop/direct/P1476",
+        "o": "World War II"
+    },
+    {
+        "s": "http://www.wikidata.org/entity/Q105750294",
+        "p": "http://www.w3.org/2000/01/rdf-schema#label",
+        "o": "World War II"
+    },
+    {
+        "s": "http://www.wikidata.org/entity/Q105750294",
+        "p": "http://schema.org/description",
+        "o": "scenario in the video game Civilization II"
+    }
+]
