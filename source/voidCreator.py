@@ -9,13 +9,11 @@ def count_elements(lst):
 
 
 # Load the JSON file
-with open(
-    "/home/gustav/projects/P6-good-description-for-graphs/source/query(3).json"
-) as f:
-    data = json.load(f)
 
 
 # Define a function that counts the number of triples in a parsed JSON object
+
+
 def count_triples(parsed_json):
     return len(parsed_json)
 
@@ -31,7 +29,7 @@ def amount_of_unique_dict(parsed_json):
 
 
 def create_unique_occurence_count_dict(parsed_json, name):
-    values = [d[name] for d in data]
+    values = [d[name]["value"] for d in parsed_json]
     return amount_of_unique_dict(values)
 
 
@@ -46,10 +44,11 @@ def create_base_void_description(
     num_triples = amount_of_triples
 
     void = f"""
-    @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-    @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-    @prefix void: <http://rdfs.org/ns/void#> .
+    @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    @prefix void: <http://rdfs.org/ns/void#>
 
+    INSERT DATA{{
     <{dataset_uri}> a void:Dataset ;
         rdfs:label "{title}" ;
         void:description "{description}" ;
@@ -58,22 +57,21 @@ def create_base_void_description(
         void:properties {distinct_properties} ;
         void:distinctSubjects {distinct_subject} ;
         void:distinctObjects {distinct_objects}.
+    }}
     """
     return void
 
 
-subjects_dict = create_unique_occurence_count_dict(data, "s")
-predicate_dict = create_unique_occurence_count_dict(data, "p")
-object_dict = create_unique_occurence_count_dict(data, "o")
-
-
 # Print some counts and the base VOID description
 
-print(
-    create_base_void_description(
-        count_triples(data),
-        len(subjects_dict),
-        len(object_dict),
-        len(predicate_dict),
-    )
-)
+
+def VoidCreator(data):
+    data = data["results"]["bindings"]
+    subjects_dict = create_unique_occurence_count_dict(data, "s")
+    predicate_dict = create_unique_occurence_count_dict(data, "p")
+    object_dict = create_unique_occurence_count_dict(data, "o")
+
+    return create_base_void_description(count_triples(data),
+                                        len(subjects_dict),
+                                        len(object_dict),
+                                        len(predicate_dict))
