@@ -24,8 +24,6 @@ gantt
 ## Setup locally
 This project is written in LaTeX. To prepare your local machine for this project, follow this guide.
 
-Overview
-
 1. Install Visual Studio Code (VSCode) in Windows ([Visual Studio Code](https://code.visualstudio.com "Visual Studio Code website")).
    - Install the Remote Development extension in VSCode.
 2. Install Windows Terminal ([Microsoft Store](https://www.microsoft.com/store/productId/9N0DX20HK701 "Windows Terminal in MS Store")).
