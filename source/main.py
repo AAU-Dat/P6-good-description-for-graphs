@@ -1,37 +1,19 @@
-import json
-from getData import PokemonQuery, InsertQuery
-from voidCreator import VoidCreator
+from lib import *
 
-# Define the endpoint and query
+# The endpoint of the repository
 endpoint = "http://localhost:7200/repositories/Pokemans-rdf-DB"
-# getAllDataQuery = """ PREFIX pokeball: <file:/uploaded/generated/pokeball.org/>
 
-# SELECT *
-# WHERE
-# {
-# ?s ?p ?o.
+# a SPARQL query to get all the triples in the repository
+query = """
+    SELECT * WHERE {
+        ?s ?p ?o .
+    }
+"""
+# Queries the data from the query and stores it in a variable with SelectQuery()
+dataSet = SelectQuery(endpoint, query)
 
-# }
-# LIMIT 5 """
+# Create a void description, using a given title, a short description and the data from the query
+voidInsertQuery = VoidCreator("PokemonDB", "A base void description", dataSet)
 
-testVoid = """
-PREFIX void: <http://rdfs.org/ns/void#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-INSERT DATA{
-    <http://example.com> a void:Dataset ;
-        rdfs:label "Example" ;
-        void:description "This is an example" ;
-        void:uriSpace "http://example.com" ;
-        void:entities 6 ;
-        void:properties 1 ;
-        void:distinctSubjects 3 ;
-        void:distinctObjects 2 .
-    }"""
-
-InsertQuery(endpoint, testVoid)
-
-# allDataJson = PokemonQuery(endpoint, getAllDataQuery)
-# # allData = json.loads(allDataJson)
-
-# voidDescription = VoidCreator(allDataJson)
-# # print(voidDescription)
+# Insert the void description into the repository
+InsertDataQuery(endpoint, voidInsertQuery)
