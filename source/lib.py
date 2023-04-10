@@ -47,10 +47,9 @@ def CreateUniqueOccurenceCountDictionaryionary(parsed_json, name):
 
 
 # create basic VOID description as a string, using input values for the number of triples, distinct subjects, distinct objects, and distinct properties in the dataset
-# For now we are not using the URI space, but we might need it later.
 def CreateBaseVoidDescription(Title, Description, amount_of_triples, distinct_subject, distinct_objects, distinct_properties):
-    dataset_uri = "http://example.com"
-    uri_space = "http://example.com"
+    dataset_uri = "http://example.com"  # TODO: Use the correct URI eventually.
+    uri_space = "http://example.com"  # TODO: Use the correct URI eventually.
 
     voidDescription = f"""
     prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
