@@ -1,7 +1,0 @@
-@prefix void: <http://rdfs.org/ns/void#> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
-
-<http://pokeball.org/void.ttl> a void:DatasetDescription;
-    dcterms:title "A VoID Description of the Pokeball Dataset";
-    dcterms:creator <https://github.com/AAU-Dat/P6-good-description-for-graphs>;
-.
