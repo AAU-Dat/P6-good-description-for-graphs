@@ -1,0 +1,11 @@
+\section{Void Generation}\label{sec:void}
+
+%Describe what we did with the void generation
+%How we did it
+%Why we did it
+%What we could have done differently
+%Describe how this could be useed in practice - with an eye on that this is just theoretical.
+This section will cover our implementation of void generation. The section descrubes how we created a void description based on a dataset, and how we used this to create statistics for the dataset. The section will also cover the thoughts we had about the implementation.
+
+We created a simple python script to generate a void description based on a dataset. This was done to try and create exact values for statistics of a dataset, and to see if it all worked when changing something in the dataset. The script is simple, and is built from two files. the first file, lib.py, contains all the methods needed to create a void description, and to query our dataset from our local instance of GraphDB. The second file, main.py, is where all the methods are put to use and the void description is created. First the endpoint is set, for our case it was "http://localhost:7200/repositories/pokemon-repository", since we ran the instance locally. Then we created a query to get all data from the dataset from an endpoint. With the endpoint and a query, we create a variable that contains the entire dataset from our endpoint. With the dataset, we can run our method that creates a void description. This method takes the dataset as a parameter, a title, and a short description, the method then returns a void description.
+
