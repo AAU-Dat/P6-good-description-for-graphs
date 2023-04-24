@@ -1,0 +1,97 @@
+\section{Methodology}\label{sec:methodology}
+\task{Consider title. Method might be better than Methodology}
+
+% Dynamic generation of VoID descriptions for RDF (VoID metadata)
+
+Where \gls{void} fails is in the case when a new kind of edge is added. In a graph of data, it is trivial to add an edge between two nodes, however in semantic web (or RDF), if this type of edge is the first of its kind, this update represents an update to the ontology of the data which now needs to be reflected in the ontology AND in the \gls{void} description. This is a problem that is not unique to \gls{void}, but is a problem that is present in any system that is based on a static versus dynamic ontology.
+
+\question{Is RDF concerned with generating meaning from structure, or structure from meaning? Reading about the semantic web, it seems that it is concerned with both, and that is not possible.}
+
+This project deals with updating the \gls{void} description of a dataset when the dataset is updated. This problem is similar to graph summarization, where the graph is updated and the summary is updated to reflect the changes in the graph. However, the problem is more complex, as the \gls{rdf} graph is not simply a representation of data, but also meaning.
+
+\subsection{GraphDB}\label{sec:graphdb}
+This section will cover GraphDB, the graph database used in this project. It will also cover the datasets used in this project.
+
+There were many popular choices for databases. ~ \cite{best-graph-databases} mentions many popular graph databases and lists some of the pros and cons of each, such as Neo4j, Stardog, ArangoDB, and GraphDB. At first, Neo4j was considered, as it was often mentioned in the literature we read, but since it is not a triple store, it is not directly able to use the SPARQL query language~\cite{neo4j:-a-reasonable-RDF-graph-database}. Instead, we would have to learn to use Cypher, Neo4j's graph query language~\cite{cypher-query-language}, or translate a SPARQL query to Cypher.
+
+Instead, we chose to use GraphDB, as it uses the SPARQL query language, was free for the purposes we needed, and it was easy to set up and use, making it a good choice for our project.
+
+Upon choosing a database to work with, we used docker to set up a local instance of GraphDB. By doing this, we could easily manage and use our dataset for testing purposes. We used the guide provided by GraphDB~\cite{docker-graphDB} and followed the steps to set up a local instance of GraphDB.
+
+%The first step was to install docker, which was done from their website~\cite{docker-install}. Then we pulled the GraphDB image from docker hub~\cite{docker-graphDB} and started the container using the command "docker run -p 127.0.0.1:7200:7200 --name graphdb-instance-name -t ontotext/graphdb:tag", replacing the name "graphdb-instance-name" with "Pokemon-DB" and the tag to the newest version, which at the time was "10.2.0". After this, we could access the GraphDB instance from our browser by going to "http://localhost:7200/repositories". We could then create a new repository and start using the database. 
+
+%GraphDB has a built-in user interface, which makes it easy to run SPARQL queries and view imported data as a visual representation. We will cover the creation of the dataset in the next section.
+
+\subsubsection{Dataset}\label{sec:dataset}
+%It debated whether to use a pre-existing dataset or create our own. We searched for different options of pre-existing datasets but realised that most were too large or too complex for our purposes. Therefore we decided to create our dataset. We wanted to create a small, simple dataset, and additionally, we wanted to get a better understanding of how \gls{rdf} worked. The dataset was made in a .ttl file, a format that stores \gls{rdf} data. The file was then imported into GraphDB.
+%We based the dataset on Pokemon for no reason other than being easy to understand and relate to. Therefore, we created a dataset with the first 151 Pokemon, where each Pokemon had a name, one or two types, a number, and a relationship to other Pokemon that it evolved to. We felt this was a good representation of the concept of \gls{rdf}.
+
+It was debated whether to use a pre-existing dataset, or to create a simple dataset to use for testing. It was decided to create a simple dataset first, to test different methods of generating a \gls{void} description. This dataset was a small dataset, with arround 150 Pokemon, their types, and evolutions. This dataset was created in a .ttl file, and imported into GraphDB.
+After everything seemed to be working as intended, we found a larger pre-existing dataset, to show a more realistic example of how a \gls{void} description could be generated. This dataset was the "Waterloo SPRAQL Diversity Test Suit (WatDiv) v0.6", the dataset containing 10 million triples. The contents of the dataset is not important for this project, but should be a good example of generating a void description from a larger dataset.
+
+\subsection{Void Generation}\label{sec:void}
+
+%Describe what we did with the void generation
+%How we did it
+%Why we did it
+%What we could have done differently
+%Describe how this could be useed in practice - with an eye on that this is just theoretical.
+This section will cover our implementation of void generation. The section describes how we created a void description based on a dataset, and how we used this to create statistics for the dataset. The section will also cover the thoughts we had about the implementation.
+
+We created a simple python script to generate a void description based on a dataset. This was done to create exact values for statistics of a dataset, and to see if it all worked when changing something in the dataset. The script is simple, and is built from two files. the first file, lib.py, contains all the methods needed to create a void description, and to query our dataset from our local instance of GraphDB. The second file, main.py, is where all the methods are put to use and the void description is created. First the endpoint is set, for our case it was "http://localhost:7200/repositories/pokemon-repository", since we ran the instance locally. Then we created a query to get all data from the dataset from an endpoint. With the endpoint and a query, we create a variable that contains the entire dataset from our endpoint. With the dataset, we can run our method that creates a void description. This method takes the dataset as a parameter, a title, and a short description, the method then returns a void description.
+
+This is how the creation of our \gls{void} description was done. The next section will cover each part of the code, how it works, and why we did it this way.
+
+\subsubsection{Void Generation Methods}\label{sec:voidmethods}
+This section will go into details for each part of the pipeline used to create a void description.
+
+The first method is~\ref{lst:countElements}, this method takes a list as a parameter, and returns the number of elements in the list. This method is used to count the number of triples in the dataset, and is used in the method that creates the void description.
+
+\begin{listing}[htb!]
+    \begin{minted}{python}
+def CountElements(lst):
+    counter = Counter(lst)
+    return dict(counter)
+    \end{minted}
+    \caption{countElements Method}
+    \label{lst:countElements}
+\end{listing}
+
+The next method is~\ref{lst:countTriples}, this method takes a parsed JSON object as a parameter, and returns the number of triples in the dataset. This method is used to count the number of triples in the dataset, and is used in the method that creates the void description.
+
+\begin{listing}[htb!]
+    \begin{minted}{python}
+def CountTriples(parsed_json):
+    return len(parsed_json)
+    \end{minted}
+    \caption{CountTriples Method}
+    \label{lst:countTriples}
+\end{listing}
+
+The method that combines everything and actually creates the \gls{void} description can be seen in~\ref{lst:VoidCreator}. This method takes 3 parameters as input, a title for the description, a short description, and the dataset as a JSON object. From this
+
+\begin{listing}[htb!]
+    \begin{minted}{python}
+def VoidCreator(title, description, data):
+    data = data["results"]["bindings"]
+    subjects_dictionary = CreateUniqueOccurenceCountDictionaryionary(data, "s")
+    predicate_dictionary = CreateUniqueOccurenceCountDictionaryionary(
+        data, "p")
+    object_dictionary = CreateUniqueOccurenceCountDictionaryionary(data, "o")
+    
+    return CreateBaseVoidDescription(title, description, CountTriples(data), len(subjects_dictionary), len(object_dictionary), len(predicate_dictionary))
+    \end{minted}
+    \caption{Void Generation Methods}
+    \label{lst:VoidCreator}
+\end{listing}
+
+
+% \begin{listing}[htb!]
+%     \tiny
+%     \centering
+%     \begin{minted}{python}
+%     \end{minted}
+%     \caption{}
+%     \label{}
+% \end{listing}
+

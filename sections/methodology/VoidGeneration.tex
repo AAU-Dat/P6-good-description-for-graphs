@@ -17,8 +17,6 @@ This section will go into details for each part of the pipeline used to create a
 The first method is~\ref{lst:countElements}, this method takes a list as a parameter, and returns the number of elements in the list. This method is used to count the number of triples in the dataset, and is used in the method that creates the void description.
 
 \begin{listing}[htb!]
-    \tiny
-    \centering
     \begin{minted}{python}
         def CountElements(lst):
             counter = Counter(lst)
@@ -31,8 +29,6 @@ The first method is~\ref{lst:countElements}, this method takes a list as a param
 The next method is~\ref{lst:countTriples}, this method takes a parsed JSON object as a parameter, and returns the number of triples in the dataset. This method is used to count the number of triples in the dataset, and is used in the method that creates the void description.
 
 \begin{listing}[htb!]
-    \tiny
-    \centering
     \begin{minted}{python}
 # Define a function that counts the number of triples in a parsed JSON object
 def CountTriples(parsed_json):
@@ -45,8 +41,6 @@ def CountTriples(parsed_json):
 The method that combines everything and actually creates the \gls{void} description can be seen in~\ref{lst:VoidCreator}. This method takes 3 parameters as input, a title for the description, a short description, and the dataset as a JSON object. From this
 
 \begin{listing}[htb!]
-    \tiny
-    \centering
     \begin{minted}{python}
         # Data is the parsed JSON object from the query
         # VoidCreator takes the parsed JSON object and creates a VOID description from it, that details the number of triples, distinct subjects, distinct objects, and distinct properties in the dataset
