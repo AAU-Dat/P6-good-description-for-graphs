@@ -52,3 +52,7 @@ To reset the database to the default state run the following commands:
 docker compose down -v
 docker compose up --build
 ```
+
+## Download data with git lfs
+To download a data file from dataset write the command `git lfs fetch --<file-name>`
+
