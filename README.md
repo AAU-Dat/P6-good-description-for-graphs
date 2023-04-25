@@ -55,4 +55,4 @@ docker compose up --build
 
 ## Download data with git lfs
 To download a data file from dataset write the command `git lfs fetch --<file-name>`
-
+        ´git lfs fetch --all´ for all files
