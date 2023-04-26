@@ -28,7 +28,7 @@ def GetTimeOfQuery(endpoint, query):
         "dataSet": dataSet,
         "time in ms": (end-start) * 10**3
     }
-    with open("results.json", "w") as outfile:
+    with open("results.json", "a") as outfile:
         json.dump(dictionary, outfile)
     
     #return the data and time in json file
