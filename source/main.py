@@ -1,19 +1,17 @@
 from lib import *
 
-# The endpoint of the repository
-endpoint = "http://localhost:7200/repositories/Pokemans-rdf-DB"
+def main():
+    endpoint = "http://localhost:7200/repositories/one-million-repository"
+    MakeVoidDescription()
+    input_query = getQuery()
+    executing_query = QueryMaker(input_query)
+    print(executing_query)
+    GetTimeOfQuery(endpoint, executing_query)
 
-# a SPARQL query to get all the triples in the repository
-query = """
-    SELECT * WHERE {
-        ?s ?p ?o .
-    }
-"""
-# Queries the data from the query and stores it in a variable with SelectQuery()
-dataSet = SelectQuery(endpoint, query)
+#Move to lib.py later
+def QueryMaker(query):
+    dictionary = create_dict_based_on_query(query)
+    new_query = create_void_select(dictionary)
+    return new_query
 
-# Create a void description, using a given title, a short description and the data from the query
-voidInsertQuery = VoidCreator("PokemonDB", "A base void description", dataSet)
-
-# Insert the void description into the repository
-InsertDataQuery(endpoint, voidInsertQuery)
+main()
