@@ -1,6 +1,6 @@
 import re
 
-# testquery = 'INSERT DATA { <http://example.org/person1> <http://example.org/name> "John Smith". <http://example.org/person1> <http://example.org/age> "35"^^<http://www.w3.org/2001/XMLSchema#integer> . <http://example.org/person2> <http://example.org/name> "Jane Doe" .}'
+testquery = "INSERT DATA { <http://db.uwaterloo.ca/~galuc/wsdbm/City101>    <http://www.geonames.org/ontology#parentCountry>    <http://db.uwaterloo.ca/~galuc/wsdbm/Country2> . <http://db.uwaterloo.ca/~galuc/wsdbm/City102>    <http://www.geonames.org/ontology#parentCountry>    <http://db.uwaterloo.ca/~galuc/wsdbm/Country17> . <http://db.uwaterloo.ca/~galuc/wsdbm/City103>    <http://www.geonames.org/ontology#parentCountry>    <http://db.uwaterloo.ca/~galuc/wsdbm/Country3> . <http://db.uwaterloo.ca/~galuc/wsdbm/City104>    <http://www.geonames.org/ontology#parentCountry>    <http://db.uwaterloo.ca/~galuc/wsdbm/Country1> .}"
 
 
 def create_dict_based_on_query(query):
@@ -14,7 +14,6 @@ def create_dict_based_on_query(query):
 
     # Use the regular expression to find all matches in the input string
     individual_triples = triple_pattern.findall(alltriples)
-    print(individual_triples)
     subject = []
     predicate = []
     object = []
@@ -47,18 +46,21 @@ def create_void_select(dict):
     all_subjects = " ".join(subjects)
     all_predicates = " ".join(predicates)
     all_objects = " ".join(objects)
-    first_of_query = f"{{SELECT ?resource (EXISTS {{ ?resource ?p ?o }} AS ?subject_existing) {{ VALUES ?resource {{ {all_subjects} }} }} }}"
-    second_part_query = f"UNION {{ SELECT ?resource (EXISTS {{ ?s ?resource ?o }} AS ?existing) {{ VALUES ?resource {{ {all_predicates} }} }} }}"
-    third_part_query = f"UNION {{ SELECT ?resource (EXISTS {{ ?s ?p ?resource }} AS ?existing) {{ VALUES ?resource {{ {all_objects} }} }} }}"
-    fourth_part_query = create_fourth_part(dict["triples_individually"])
-    final_query = f"SELECT * WHERE {{ {first_of_query + second_part_query + third_part_query + fourth_part_query} }}"
+    subject_of_query = f"{{SELECT ?resource (EXISTS {{ ?resource ?p ?o }} AS ?subject_existing) {{ VALUES ?resource {{ {all_subjects} }} }} }}"
+    predicate_part_query = f"UNION {{ SELECT ?resource (EXISTS {{ ?s ?resource ?o }} AS ?existing) {{ VALUES ?resource {{ {all_predicates} }} }} }}"
+    object_part_query = f"UNION {{ SELECT ?resource (EXISTS {{ ?s ?p ?resource }} AS ?existing) {{ VALUES ?resource {{ {all_objects} }} }} }}"
+    triple_part_query = create_triple_part_of_query(dict["triples_individually"])
+    final_query = f"SELECT * WHERE {{ {subject_of_query + predicate_part_query + object_part_query + triple_part_query} }}"
     return final_query
 
 
-def create_fourth_part(individual_triples):
+def create_triple_part_of_query(individual_triples):
     string = ""
 
     for i in range(len(individual_triples)):
-        string += " (" + individual_triples[i] + ") \n"
-    final = f"UNION{{ SELECT DISTINCT ?triple ?exists {{ VALUES (?s ?p ?o) {{ {string} }} BIND(CONCAT(str(?s), str(?p) str(?o)) AS ?triple) BIND(EXISTS {{ ?s ?p ?o }} AS ?exists) }} }}"
+        string += " (" + individual_triples[i][:-1] + ") \n"
+    final = f"UNION{{ SELECT DISTINCT ?triple ?exists {{ VALUES (?s ?p ?o) {{ {string} }} BIND(CONCAT(str(?s), str(?p), str(?o)) AS ?triple) BIND(EXISTS {{ ?s ?p ?o }} AS ?exists) }} }}"
     return final
+
+
+print(create_void_select(create_dict_based_on_query(testquery)))
