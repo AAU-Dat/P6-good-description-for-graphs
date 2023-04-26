@@ -30,9 +30,7 @@ def GetTimeOfQuery(endpoint, query):
     }
     with open("results.json", "a") as outfile:
         json.dump(dictionary, outfile)
-    
-    #return the data and time in json file
-    return dictionary
+        outfile.write("\n")
 
 # Creates a post request to the endpoint, and inserts the data from the query
 # Endpoint is the repository URL from GraphDB, with added "/statements" for a POST request - Query is just the SparQL query
