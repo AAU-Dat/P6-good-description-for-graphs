@@ -1,0 +1,19 @@
+\section{Methodology}\label{sec:methodology}
+\task{Consider title. Method might be better than Methodology}
+
+% Dynamic generation of VoID descriptions for RDF (VoID metadata)
+
+Where \gls{void} fails is in the case when a new kind of edge is added. In a graph of data, it is trivial to add an edge between two nodes, however in semantic web (or RDF), if this type of edge is the first of its kind, this update represents an update to the ontology of the data which now needs to be reflected in the ontology AND in the \gls{void} description. This is a problem that is not unique to \gls{void}, but is a problem that is present in any system that is based on a static versus dynamic ontology.
+
+\question{Is RDF concerned with generating meaning from structure, or structure from meaning? Reading about the semantic web, it seems that it is concerned with both, and that is not possible.}
+
+This project deals with updating the \gls{void} description of a dataset when the dataset is updated. This problem is similar to graph summarization, where the graph is updated and the summary is updated to reflect the changes in the graph. However, the problem is more complex, as the \gls{rdf} graph is not simply a representation of data, but also meaning.
+
+\subsection{Approximations in VoID} \label{sec:approximations}
+The VoID documentation~\cite{documentation-void} states that approximate numbers can be provided for the statistics in VoID.
+However, there is no standard way of doing this. Therefore it is up to the user to decide how to do this. For example, the user can manually calculate and insert the approximate number or use a tool~\cite{the-web-of-data}.
+
+The tool can be a program that calculates or uses a sampling method to estimate the number. However, the sampling method is the most common way of doing this; one way of calculating the statistics on an RDF dataset can be seen here~\cite{zneika2016rdf}.
+
+The user can also use the exact number because it is the most precise, and it is not hard to calculate the statistics. That way, the user can be sure that the statistics are correct and can check the statistics with a query on the dataset. Moreover, when a query can easily find the precise number, it is unnecessary to use an approximation because the approximation will not be more precise than the exact number.
+This is also why it was chosen in the project to use the exact numbers instead of approximations in the  VoID description of the dataset in the project. When the dataset is updated, the statistics will be updated as well, and the user can be sure that the statistics are correct and not approximations that may not be correct.
