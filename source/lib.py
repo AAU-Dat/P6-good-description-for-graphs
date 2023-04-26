@@ -1,6 +1,7 @@
 from SPARQLWrapper import SPARQLWrapper, JSON, POST
 from collections import Counter
-
+import time
+import json
 
 # Creates a get request to the endpoint, and returns the data from the query
 # Endpoint is the repository URL from GraphDB - Query is just the SparQL query
@@ -15,6 +16,23 @@ def SelectQuery(endpoint, query):
         print(e)
     return ret
 
+# Creates a get request to the endpoint, and returns the data and time from the query
+def GetTimeOfQuery(endpoint, query):
+    #start time and end time to calculate the time it takes to run the query
+    start = time.time()
+    dataSet = SelectQuery(endpoint, query)
+    end = time.time()
+
+    #create a dictionary with the data from the query and the time it took to run the query into json
+    dictionary = {
+        "dataSet": dataSet,
+        "time in ms": (end-start) * 10**3
+    }
+    with open("results.json", "w") as outfile:
+        json.dump(dictionary, outfile)
+    
+    #return the data and time in json file
+    return dictionary
 
 # Creates a post request to the endpoint, and inserts the data from the query
 # Endpoint is the repository URL from GraphDB, with added "/statements" for a POST request - Query is just the SparQL query
