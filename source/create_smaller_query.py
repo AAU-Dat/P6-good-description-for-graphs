@@ -1,6 +1,8 @@
 import re
 
-testquery = "INSERT DATA { <http://db.uwaterloo.ca/~galuc/wsdbm/City101>    <http://www.geonames.org/ontology#parentCountry>    <http://db.uwaterloo.ca/~galuc/wsdbm/Country2> . <http://db.uwaterloo.ca/~galuc/wsdbm/City102>    <http://www.geonames.org/ontology#parentCountry>    <http://db.uwaterloo.ca/~galuc/wsdbm/Country17> . <http://db.uwaterloo.ca/~galuc/wsdbm/City103>    <http://www.geonames.org/ontology#parentCountry>    <http://db.uwaterloo.ca/~galuc/wsdbm/Country3> . <http://db.uwaterloo.ca/~galuc/wsdbm/City104>    <http://www.geonames.org/ontology#parentCountry>    <http://db.uwaterloo.ca/~galuc/wsdbm/Country1> .}"
+# testquery = "INSERT DATA { <http://db.uwaterloo.ca/~galuc/wsdbm/City101>    <http://www.geonames.org/ontology#parentCountry>    <http://db.uwaterloo.ca/~galuc/wsdbm/Country2> . <http://db.uwaterloo.ca/~galuc/wsdbm/City102>    <http://www.geonames.org/ontology#parentCountry>    <http://db.uwaterloo.ca/~galuc/wsdbm/Country17> . <http://db.uwaterloo.ca/~galuc/wsdbm/City103>    <http://www.geonames.org/ontology#parentCountry>    <http://db.uwaterloo.ca/~galuc/wsdbm/Country3> . <http://db.uwaterloo.ca/~galuc/wsdbm/City104>    <http://www.geonames.org/ontology#parentCountry>    <http://db.uwaterloo.ca/~galuc/wsdbm/Country1> .}"
+
+# takes an query and creates a a dictionary that tracks the triples unique subjects predicates and objects
 
 
 def create_dict_based_on_query(query):
@@ -36,6 +38,8 @@ def create_dict_based_on_query(query):
     }
     return triple_dict
 
+# takes a dictionary keeping track of unique subjects predicates objects and triples from a query and creates a select query that checks if the stuff in the dict exists.
+
 
 def create_void_select(dict):
     subjects = dict["subjects"]
@@ -49,9 +53,12 @@ def create_void_select(dict):
     subject_of_query = f"{{SELECT ?resource (EXISTS {{ ?resource ?p ?o }} AS ?subject_existing) {{ VALUES ?resource {{ {all_subjects} }} }} }}"
     predicate_part_query = f"UNION {{ SELECT ?resource (EXISTS {{ ?s ?resource ?o }} AS ?existing) {{ VALUES ?resource {{ {all_predicates} }} }} }}"
     object_part_query = f"UNION {{ SELECT ?resource (EXISTS {{ ?s ?p ?resource }} AS ?existing) {{ VALUES ?resource {{ {all_objects} }} }} }}"
-    triple_part_query = create_triple_part_of_query(dict["triples_individually"])
+    triple_part_query = create_triple_part_of_query(
+        dict["triples_individually"])
     final_query = f"SELECT * WHERE {{ {subject_of_query + predicate_part_query + object_part_query + triple_part_query} }}"
     return final_query
+
+# creates the triple part of the select query using an array of individual triples
 
 
 def create_triple_part_of_query(individual_triples):
@@ -61,6 +68,3 @@ def create_triple_part_of_query(individual_triples):
         string += " (" + individual_triples[i][:-1] + ") \n"
     final = f"UNION{{ SELECT DISTINCT ?triple ?exists {{ VALUES (?s ?p ?o) {{ {string} }} BIND(CONCAT(str(?s), str(?p), str(?o)) AS ?triple) BIND(EXISTS {{ ?s ?p ?o }} AS ?exists) }} }}"
     return final
-
-
-print(create_void_select(create_dict_based_on_query(testquery)))
