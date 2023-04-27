@@ -56,8 +56,6 @@ docker compose up --build
 ## Download data with git lfs
 This project uses git lfs. To work with large files, follow this guide.
 
-1. Install git lfs in your local project folder in WSL with these commands.
-    - ´curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash´
-    - ´sudo apt-get install git-lfs´
-To download a data file from dataset write the command `git lfs pull --include "one-million.nt" `
-        ´git lfs fetch --all´ for all files
+1. Run `curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash && sudo apt install git-lfs` to install git lfs.
+2. Download a specific data file by running, for example, `git lfs pull --include "one-million.nt"`
+   - `git lfs fetch --all` downloads all files
