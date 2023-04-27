@@ -1,4 +1,4 @@
-\documentclass[a4paper,draftcls,conference]{IEEEtran}
+\documentclass[a4paper,conference]{IEEEtran}
 \IEEEoverridecommandlockouts
 % The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
 %\usepackage{cite}
@@ -8,8 +8,9 @@
 \usepackage{textcomp}
 \usepackage{xcolor}
 \usepackage[newfloat, outputdir=out]{minted}
-\setminted[python]{fontsize=\footnotesize, linenos, breaklines, autogobble}
-\setminted[SparQL]{fontsize=\footnotesize, linenos, breaklines, autogobble}
+\setminted[python]{linenos, autogobble, xleftmargin=0.8em, numbersep=5pt, breaklines, fontsize=\footnotesize, style=pastie}
+\setminted[sparql]{linenos, autogobble, xleftmargin=0.8em, numbersep=5pt, breaklines, fontsize=\footnotesize, style=vs}
+\setminted[turtle]{linenos, autogobble, xleftmargin=0.8em, numbersep=5pt, breaklines, fontsize=\footnotesize, style=friendly}
 \usepackage[backend=biber,
     bibencoding=utf8,
     maxbibnames=20,
