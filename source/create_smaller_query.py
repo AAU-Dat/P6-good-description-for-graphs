@@ -1,6 +1,6 @@
 import re
 
-# testquery = "INSERT DATA { <http://db.uwaterloo.ca/~galuc/wsdbm/City101>    <http://www.geonames.org/ontology#parentCountry>    <http://db.uwaterloo.ca/~galuc/wsdbm/Country2> . <http://db.uwaterloo.ca/~galuc/wsdbm/City102>    <http://www.geonames.org/ontology#parentCountry>    <http://db.uwaterloo.ca/~galuc/wsdbm/Country17> . <http://db.uwaterloo.ca/~galuc/wsdbm/City103>    <http://www.geonames.org/ontology#parentCountry>    <http://db.uwaterloo.ca/~galuc/wsdbm/Country3> . <http://db.uwaterloo.ca/~galuc/wsdbm/City104>    <http://www.geonames.org/ontology#parentCountry>    <http://db.uwaterloo.ca/~galuc/wsdbm/Country1> .}"
+testquery = "INSERT DATA { <http://db.uwaterloo.ca/~galuc/wsdbm/City101>    <http://www.geonames.org/ontology#parentCountry>    <http://db.uwaterloo.ca/~galuc/wsdbm/Country2> . <http://db.uwaterloo.ca/~galuc/wsdbm/City102>    <http://www.geonames.org/ontology#parentCountry>    <http://db.uwaterloo.ca/~galuc/wsdbm/Country17> . <http://db.uwaterloo.ca/~galuc/wsdbm/City103>    <http://www.geonames.org/ontology#parentCountry>    <http://db.uwaterloo.ca/~galuc/wsdbm/Country3> . <http://db.uwaterloo.ca/~galuc/wsdbm/City104>    <http://www.geonames.org/ontology#parentCountry>    <http://db.uwaterloo.ca/~galuc/wsdbm/Country1> .}"
 
 # takes an query and creates a a dictionary that tracks the triples unique subjects predicates and objects
 
@@ -50,7 +50,7 @@ def create_void_select(dict):
     all_subjects = " ".join(subjects)
     all_predicates = " ".join(predicates)
     all_objects = " ".join(objects)
-    subject_of_query = f"{{SELECT ?resource (EXISTS {{ ?resource ?p ?o }} AS ?subject_existing) {{ VALUES ?resource {{ {all_subjects} }} }} }}"
+    subject_of_query = f"{{SELECT ?resource (EXISTS {{ ?resource ?p ?o }} AS ?existing) {{ VALUES ?resource {{ {all_subjects} }} }} }}"
     predicate_part_query = f"UNION {{ SELECT ?resource (EXISTS {{ ?s ?resource ?o }} AS ?existing) {{ VALUES ?resource {{ {all_predicates} }} }} }}"
     object_part_query = f"UNION {{ SELECT ?resource (EXISTS {{ ?s ?p ?resource }} AS ?existing) {{ VALUES ?resource {{ {all_objects} }} }} }}"
     triple_part_query = create_triple_part_of_query(
@@ -66,5 +66,6 @@ def create_triple_part_of_query(individual_triples):
 
     for i in range(len(individual_triples)):
         string += " (" + individual_triples[i][:-1] + ") \n"
-    final = f"UNION{{ SELECT DISTINCT ?triple ?exists {{ VALUES (?s ?p ?o) {{ {string} }} BIND(CONCAT(str(?s), str(?p), str(?o)) AS ?triple) BIND(EXISTS {{ ?s ?p ?o }} AS ?exists) }} }}"
+    final = f"UNION{{ SELECT DISTINCT ?triple ?exists {{ VALUES (?s ?p ?o) {{ {string} }} BIND(CONCAT(str(?s), str(?p), str(?o)) AS ?triple) BIND(EXISTS {{ ?s ?p ?o }} AS ?existing) }} }}"
     return final
+
