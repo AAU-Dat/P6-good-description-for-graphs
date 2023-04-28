@@ -1,20 +1,34 @@
 from lib import *
+import csv
 
-# The endpoint of the repository
-# endpoint = "http://localhost:7200/repositories/Pokemans-rdf-DB"
-endpoint = "http://localhost:7200/repositories/pokemon-repository"
 
-# a SPARQL query to get all the triples in the repository
-query = """
-    SELECT * WHERE {
-        ?s ?p ?o .
-    }
-"""
-# Queries the data from the query and stores it in a variable with SelectQuery()
-dataSet = SelectQuery(endpoint, query)
+def main(name, amount):
+    endpoint = "http://localhost:7200/repositories/one-million-repository"
+    times = []
+    data = [["time in msek", "amount of triples"]]
+    input_querys = generate_query("database/two-million.nt", amount)
+    for i in range(len(input_querys)):
+        executing_query = QueryMaker(input_querys[i])
+        print(i, "\n\n")
+        times.append(GetTimeOfQuery(endpoint, executing_query))
+        data.append([times[i]["time in ms"], 2**i])
 
-# Create a void description, using a given title, a short description and the data from the query
-voidInsertQuery = VoidCreator("PokemonDB", "A base void description", dataSet)
-print(voidInsertQuery)
-# Insert the void description into the repository
-# InsertDataQuery(endpoint, voidInsertQuery)
+    mode = "w"
+
+    # Open the file in write mode with the CSV writer
+    with open(name, mode, newline="") as file:
+        writer = csv.writer(file)
+
+        # Write each row of the 2D array as a separate row in the CSV file
+        for row in data:
+            writer.writerow(row)
+
+
+# Move to lib.py later
+def QueryMaker(query):
+    dictionary = create_dict_based_on_query(query)
+    new_query = create_void_select(dictionary)
+    return new_query
+
+
+main("hello.csv", 2)
