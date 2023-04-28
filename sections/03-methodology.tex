@@ -45,8 +45,13 @@ This section will detail each part of the pipeline used to create a void descrip
 %same, but with void generation
 
 \subsection{Data concerns}\label{sec:concerns}
-This section will cover the data that the experiments are concerned with in regards to updating the void description and also to generating the void description.
+This section will cover the data that the experiments are concerned with in regards to updating the void description and also to generating the void description. When looking at what experiments for the project, we need to consider what data we want to concern us with. To determine this, we need to look at what data is relevant to the project, and what we want to compare between update and generation.
 
+\subsubsection{Size of the database}
+A metric that will be looked at, is the size of the database. Since the size of the database could have an impact on how long it takes to update the void description, and also how long it takes to generate the void description. This is due to the fact that with a larger dataset, there is more data that has to be read and proccessed. For this reason, the size of the dataset, will be an interesting metric to measure, and compare how it affects the process of dynamically updating the \gls{void} description and generating the void description from scratch.
 
-When looking at what experiments for the project, we need to consider what data we want to concern us with. To determine this, we need to look at what data is relevant to the project, and what we want to compare between update and generation.
-One of these data points would be the size of the database. Since the size of the database could have an impact on how long it takes to update the void description, we need to consider this. This is
+\subsubsection{Triples in query}
+When inserting data into the dataset, updating the \gls{void} description, requires to process the query, to know what parts of the current \gls{void} description will be affected, and need to be updated. Due to this, the size of the query, I.E. The number of triples in the query, will be an interesting metric to measure, and compare how it affects the process of dynamically updating the \gls{void} description. The number of triples, should not have an impact on the process of generating the \gls{void} description from scratch, as the entire dataset will be read, and processed. Due to this, it could give some insight in how effective the process of dynamically updating the \gls{void} description is, compared to generating the \gls{void} description from scratch.
+
+\subsubsection{Total running time}
+When measuring different metrics, we also need to consider how we measure them against eachother. For this project, time was one such metric used to compare the different methods.
