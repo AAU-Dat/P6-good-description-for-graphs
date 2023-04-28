@@ -1,14 +1,9 @@
-from create_smaller_query import *
-from generateQuery import *
 from lib import *
 import csv
 
-endpoint = "http://localhost:7200/repositories/one-million-repository"
-
-testquery = "INSERT DATA { <http://db.uwaterloo.ca/~galuc/wsdbm/City101>    <http://www.geonames.org/ontology#parentCountry>    <http://db.uwaterloo.ca/~galuc/wsdbm/Country2> . <http://db.uwaterloo.ca/~galuc/wsdbm/City102>    <http://www.geonames.org/ontology#parentCountry>    <http://db.uwaterloo.ca/~galuc/wsdbm/Country17> . <http://db.uwaterloo.ca/~galuc/wsdbm/City103>    <http://www.geonames.org/ontology#parentCountry>    <http://db.uwaterloo.ca/~galuc/wsdbm/Country3> . <http://db.uwaterloo.ca/~galuc/wsdbm/City104>    <http://www.geonames.org/ontology#parentCountry>    <http://db.uwaterloo.ca/~galuc/wsdbm/Country1> .}"
-
 
 def main(name, amount):
+    endpoint = "http://localhost:7200/repositories/one-million-repository"
     times = []
     data = [["time in msek", "amount of triples"]]
     input_querys = generate_query("database/two-million.nt", amount)
@@ -36,4 +31,4 @@ def QueryMaker(query):
     return new_query
 
 
-main("data.csv", 15)
+main("hello.csv", 2)
