@@ -18,19 +18,19 @@ def SelectQuery(endpoint, query):
         print(e)
     return ret
 
+
 # Creates a get request to the endpoint, and returns the data and time from the query
 def GetTimeOfQuery(endpoint, query):
-    #start time and end time to calculate the time it takes to run the query
+    # start time and end time to calculate the time it takes to run the query
     start = time.time()
     dataSet = SelectQuery(endpoint, query)
     end = time.time()
 
-    #create a dictionary with the data from the query and the time it took to run the query into json
-    dictionary = {
-        "dataSet": dataSet,
-        "time in ms": (end-start) * 10**3
-    }
+    # create a dictionary with the data from the query and the time it took to run the query into json
+    dictionary = {"dataSet": dataSet, "time in ms": (end - start) * 10**3}
     return dictionary
+
+
 # Creates a post request to the endpoint, and inserts the data from the query
 # Endpoint is the repository URL from GraphDB, with added "/statements" for a POST request - Query is just the SparQL query
 def InsertDataQuery(endpoint, query):
@@ -62,7 +62,14 @@ def CreateUniqueOccurenceCountDictionaryionary(parsed_json, name):
 
 
 # create basic VOID description as a string, using input values for the number of triples, distinct subjects, distinct objects, and distinct properties in the dataset
-def CreateBaseVoidDescription(Title, Description, amount_of_triples, distinct_subject, distinct_objects, distinct_properties):
+def CreateBaseVoidDescription(
+    Title,
+    Description,
+    amount_of_triples,
+    distinct_subject,
+    distinct_objects,
+    distinct_properties,
+):
     dataset_uri = "http://example.com"  # TODO: Use the correct URI eventually.
     uri_space = "http://example.com"  # TODO: Use the correct URI eventually.
 
@@ -90,11 +97,14 @@ def CreateBaseVoidDescription(Title, Description, amount_of_triples, distinct_su
 def VoidCreator(title, description, data):
     data = data["results"]["bindings"]
     subjects_dictionary = CreateUniqueOccurenceCountDictionaryionary(data, "s")
-    predicate_dictionary = CreateUniqueOccurenceCountDictionaryionary(
-        data, "p")
+    predicate_dictionary = CreateUniqueOccurenceCountDictionaryionary(data, "p")
     object_dictionary = CreateUniqueOccurenceCountDictionaryionary(data, "o")
 
-    return CreateBaseVoidDescription(title, description, CountTriples(data),
-                                     len(subjects_dictionary),
-                                     len(object_dictionary),
-                                     len(predicate_dictionary))
+    return CreateBaseVoidDescription(
+        title,
+        description,
+        CountTriples(data),
+        len(subjects_dictionary),
+        len(object_dictionary),
+        len(predicate_dictionary),
+    )
