@@ -28,7 +28,7 @@ ENV PATH=${GRAPHDB_INSTALL_DIR}/bin:$PATH
 COPY database ${GRAPHDB_IMPORT}
 RUN importrdf -Dgraphdb.home.data=/opt/graphdb/home/data load -c ${GRAPHDB_IMPORT}/graphdb-repo-config.ttl -m parallel ${GRAPHDB_IMPORT}/pokemon-db.ttl
 
-RUN importrdf -Dgraphdb.home.data=/opt/graphdb/home/data load -c ${GRAPHDB_IMPORT}/graphdb-repo-config-one-million.ttl -m parallel ${GRAPHDB_IMPORT}/one-million.nt -Dgraphdb.page.cache.size=10000
+RUN importrdf -Dgraphdb.home.data=/opt/graphdb/home/data load -c ${GRAPHDB_IMPORT}/graphdb-repo-config-one-million.ttl -m parallel ${GRAPHDB_IMPORT}/one-million.nt 
 
 CMD ["-Dgraphdb.home=/opt/graphdb/home"]
 
