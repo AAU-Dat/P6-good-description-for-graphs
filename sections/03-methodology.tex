@@ -42,16 +42,31 @@ This section will detail each part of the pipeline used to create a void descrip
 %triples in the query
 %total running time
 %cache size
+%Amount of operations made
+%Time of subqueries generated from insert
 %same, but with void generation
 
 \subsection{Data concerns}\label{sec:concerns}
-This section will cover the data that the experiments are concerned with in regards to updating the void description and also to generating the void description. When looking at what experiments for the project, we need to consider what data we want to concern us with. To determine this, we need to look at what data is relevant to the project, and what we want to compare between update and generation.
+This section will cover the data that the experiments are concerned with regarding updating the void description and also generating the void description. When looking at experiments for the project, we must consider what data we want to concern. To determine this, we need to look at what data is relevant to the project and what we want to compare between update and generation.
 
 \subsubsection{Size of the database}
-A metric that will be looked at, is the size of the database. Since the size of the database could have an impact on how long it takes to update the void description, and also how long it takes to generate the void description. This is due to the fact that with a larger dataset, there is more data that has to be read and proccessed. For this reason, the size of the dataset, will be an interesting metric to measure, and compare how it affects the process of dynamically updating the \gls{void} description and generating the void description from scratch.
+A metric that will be looked at is the size of the database. The database size could impact how long it takes to update the void description and how long it takes to generate the void description since, with a larger dataset, more data must be read and processed. For this reason, the size of the dataset will be an interesting metric to measure and compare how it affects the dynamically updating the \gls{void} description and generating the void description from scratch.
 
 \subsubsection{Triples in query}
-When inserting data into the dataset, updating the \gls{void} description, requires to process the query, to know what parts of the current \gls{void} description will be affected, and need to be updated. Due to this, the size of the query, I.E. The number of triples in the query, will be an interesting metric to measure, and compare how it affects the process of dynamically updating the \gls{void} description. The number of triples, should not have an impact on the process of generating the \gls{void} description from scratch, as the entire dataset will be read, and processed. Due to this, it could give some insight in how effective the process of dynamically updating the \gls{void} description is, compared to generating the \gls{void} description from scratch.
+When inserting data into the dataset, updating the \gls{void} description requires processing the query to know what parts of the current \gls{void} description will be affected and need to be updated. Due to this, the size of the query, I.E., The number of triples in the query, will be an interesting metric to measure and compare how it affects the process of dynamically updating the \gls{void} description. However, the number of triples should not impact generating the \gls{void} description from scratch, as the entire dataset will be read and processed. Due to this, it could give some insight into how effective the dynamically updating the \gls{void} description is, compared to generating the \gls{void} description from scratch.
+
+
+\subsubsection{Cache size}
+When measuring the different metrics, we also have to consider what additional elements can impact the results of each measurement. Such a case could be the cache size, as the cache size could impact the time it takes to read and process the dataset. We will examine how the cache size affects the time it takes to update and generate the \gls{void} description. Cache size could be an interesting metric to consider when considering real use cases, as the cache size could be a factor that could be changed to improve the performance. However, it also has a cost of memory usage. Based on the results, a discussion can be made about whether the pros outweigh the cons and to what degree.
+
+
 
 \subsubsection{Total running time}
-When measuring different metrics, we also need to consider how we measure them against eachother. For this project, time was one such metric used to compare the different methods.
+When measuring the different metrics, we must consider how we measure them against each other. For this project, we will mainly look at the different methods' total running time. The total running time will be the time from the start to the end of the process, from when an update to the dataset is made to when the \gls{void} description is updated or generated. Since a script handles the operations, we can measure the time it takes to run the script and get the total running time of the process.
+We can assume that the total time it takes for a \gls{void} description to be generated is static when looking at how the amount of triples in a query affects the run time, as the entire dataset will be read processed every time. However, we can assume that the query size will affect the total running time of updating the \gls{void} description. As a result, this should show a curve where the total running time increases as the size of the query increases. Due to this, we can measure when it is more effective to generate the \gls{void} description from scratch instead of updating the \gls{void} description.
+
+\subsubsection{Time of subqueries generated from insert}
+Additionally to looking at the total running time, it could prove beneficial to measure the time for the subqueries generated. Since there are many ways of generating the subqueries, understanding how each affects the running time would help generate smarter subqueries that could reduce total running time. This metric would only be used for the update method, as the generation method does not use subqueries.
+
+\subsubsection{Total number of operations}
+Time is not the only metric that can be used to compare the different methods. We can also look at the total number of operations when updating the \gls{void} description. The number of operations might prove more challenging to measure. However, it could give insight into how demanding the processes are since time can be based on many factors, such as hardware, database connection, and other machine processes. Therefore, looking at the number of operations made could give a more accurate comparison between the different methods.
