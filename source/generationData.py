@@ -19,6 +19,7 @@ def datageneration(
     i = 1
     j = 1
     while i < maximum_db_size_added:
+        j = 1
         while j < maximum_querysize:
             docker_reset_db()
             initial_insert = generate_insert(i, db_increase_file)
