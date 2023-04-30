@@ -1,6 +1,7 @@
 import json
 import time
 from collections import Counter
+import re
 
 from SPARQLWrapper import JSON, POST, SPARQLWrapper
 
@@ -79,7 +80,10 @@ def generate_query(file_path, num_strings):
     return queries
 
 
-import re
+def generate_insert(size, file):
+    triples = retrieve_triples(file, size)
+    return "INSERT DATA {" + triples + "}"
+
 
 # takes an query and creates a a dictionary that tracks the triples unique subjects predicates and objects
 
@@ -146,7 +150,7 @@ def create_triple_part_of_query(individual_triples):
 
     for i in range(len(individual_triples)):
         string += " (" + individual_triples[i][:-1] + ") \n"
-    final = f"UNION{{ SELECT DISTINCT ?triple ?exists {{ VALUES (?s ?p ?o) {{ {string} }} BIND(CONCAT(str(?s), str(?p), str(?o)) AS ?triple) BIND(EXISTS {{ ?s ?p ?o }} AS ?existing) }} }}"
+    final = f"UNION{{ SELECT DISTINCT ?triple ?existing {{ VALUES (?s ?p ?o) {{ {string} }} BIND(CONCAT(str(?s), str(?p), str(?o)) AS ?triple) BIND(EXISTS {{ ?s ?p ?o }} AS ?existing) }} }}"
     return final
 
 
@@ -214,3 +218,9 @@ def VoidCreator(title, description, data):
         len(object_dictionary),
         len(predicate_dictionary),
     )
+
+
+def QueryMaker(query):
+    dictionary = create_dict_based_on_query(query)
+    new_query = create_void_select(dictionary)
+    return new_query
