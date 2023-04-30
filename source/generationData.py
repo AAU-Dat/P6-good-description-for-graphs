@@ -16,8 +16,8 @@ def datageneration(
     db_size = 1000000
 
     res = []
-    i = 0
-    j = 0
+    i = 1
+    j = 1
     while i < maximum_db_size_added:
         while j < maximum_querysize:
             docker_reset_db()
