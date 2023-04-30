@@ -1,4 +1,4 @@
-\section{results} \label{sec:results}
+\section{results}\label{sec:results}
 The generated VoID description is shown in \autoref{lst:generated-void-description}.
 
 The description is an accurate VoID description, but it needs to be completed. The description lacks required properties, such as the number of classes and distinct predicates. The description also lacks recommended properties, such as the number of subjects and triples per class.
@@ -22,3 +22,22 @@ The description is an accurate VoID description, but it needs to be completed. T
 The description also lacks optional properties, such as the number of triples per predicate and triples per object. As in the dataset used for the example, the number of classes is only one; therefore, it is impossible to calculate the number of triples per class. The number of triples per predicate and triples per object can be calculated. However, it is not possible to calculate the number of distinct predicates and the number of distinct objects.
 
 One of the biggest things in the generated VoID description is the simple description for the dataset, which does not say anything about it, as it says, "A base void description." The description should be more descriptive and contain information about the dataset, such as what the dataset contains and is used for.
+
+\subsection{Uncertainty of measurements}\label{subsec:uncertainty-of-measurements}
+The measurements are done on a local system hosting a Docker container running through \gls{wsl}, exposing a GraphDB endpoint over a local port, which creates three layers of scheduling overhead that can affect the accuracy of the measurements. The first layer is the \gls{wsl} layer, a low overhead virtualization layer that allows running Linux tools on Windows. The second layer is the Docker layer, a virtualization layer that allows running containers on a host system. The third layer is the GraphDB layer, which is a localhost database layer that allows running \gls{sparql} queries on a database through HTTP request.
+
+
+
+\begin{figure}[htb!]
+    \centering
+    \includegraphics[width=0.8\columnwidth]{example-image-a}
+    \caption{The dynamic measurements}
+    \label{fig:results-dynamic}
+\end{figure}
+
+\begin{figure}[htb!]
+    \centering
+    \includegraphics[width=0.8\columnwidth]{example-image-b}
+    \caption{The regeneration measurements}
+    \label{fig:results-regeneration}
+\end{figure}
