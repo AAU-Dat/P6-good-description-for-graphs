@@ -1,4 +1,8 @@
 import json
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+import sklearn.linear_model
 import time
 from collections import Counter
 import re
@@ -217,6 +221,51 @@ def VoidCreator(title, description, data):
         len(subjects_dictionary),
         len(object_dictionary),
         len(predicate_dictionary),
+    )
+
+
+def plot_data(file_path):
+    # TODO Note function. WILL need modifications to handle our actual data.
+    dataframe = pd.read_csv(file_path)
+    axes = plt.axes(projection="3d")
+    axes.scatter(dataframe["dbsize"], dataframe["qsize"], dataframe["time"])
+    axes.set_xlabel("dbsize")
+    axes.set_ylabel("qsize")
+    axes.set_zlabel("time", rotation=90)
+
+    model = sklearn.linear_model.LinearRegression()
+    model.fit(dataframe[["dbsize", "qsize"]], dataframe["time"])
+    predictions = model.predict(dataframe[["dbsize", "qsize"]])
+    print(
+        "Equation: y = {:.2f} + {:.2f}x1 + {:.2f}x2".format(
+            model.intercept_, model.coef_[0], model.coef_[1]
+        )
+    )
+
+    print("MAE: {}".format(np.abs(dataframe["time"] - predictions).mean()))
+    print("RMSE: {}".format(np.sqrt(((dataframe["time"] - predictions) ** 2).mean())))
+
+    coefs = model.coef_
+    intercept = model.intercept_
+    xs = np.tile(np.arange(100000, 500000, 1000), (400, 1))  # placeholder values
+    ys = np.tile(np.arange(10000, 50000, 100), (400, 1)).T  # placeholder values
+    zs = xs * coefs[0] + ys * coefs[1] + intercept
+
+    axes.plot_surface(xs, ys, zs, alpha=0.2)
+    axes.plot_trisurf(
+        dataframe["dbsize"],
+        dataframe["qsize"],
+        dataframe["time"],
+        alpha=0.7,
+        color="green",
+    )
+    axes.plot_trisurf(
+        dataframe["dbsize"], dataframe["qsize"], predictions, alpha=0.7, color="red"
+    )  # predicted values
+
+    dataframe.set_index(["dbsize", "qsize", "time", "qlength"], inplace=True)
+    dataframe.style.to_latex(
+        file_path + ".tex", position_float="centering", position="htb!", hrules=True
     )
 
 
