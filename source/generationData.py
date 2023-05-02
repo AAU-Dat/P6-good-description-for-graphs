@@ -25,8 +25,8 @@ def datageneration(
             initial_insert = generate_insert(i, db_increase_file)
             InsertDataQuery(endpoint, initial_insert)
             data.append(create_data(j, db_size + i, querysize_increase_file, endpoint))
-            i = database_increment_func(i)
             j = querysize_increment_func(j)
+        i = database_increment_func(i)
     return data
 
 
@@ -35,10 +35,10 @@ def create_data(size_of_insert, db_size_before_insert, file_to_generate_from, en
     generation_query = "SELECT (COUNT(*) AS ?totalTriples) (COUNT(DISTINCT ?subject) AS ?numSubjects) (COUNT(DISTINCT ?predicate) AS ?numPredicates) (COUNT(DISTINCT ?object) AS ?numObjects) WHERE { ?subject ?predicate ?object . }"
     insert_q = generate_insert(size_of_insert, file_to_generate_from)
     dynamic_time = GetTimeOfQuery(endpoint, QueryMaker(insert_q))["time in ms"]
-    print("got dynamic time:", dynamic_time)
+    print("got dynamic time:", dynamic_time, "size of insert:", size_of_insert)
     InsertDataQuery(endpoint, insert_q)
     generation_time = GetTimeOfQuery(endpoint, generation_query)["time in ms"]
-    print("got generation time")
+    print("got generation time:", generation_time)
     data.append(dynamic_time)
     data.append(size_of_insert)
     data.append(generation_time)

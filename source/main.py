@@ -7,7 +7,7 @@ def main(name):
     endpoint = "http://localhost:7200/repositories/one-million-repository"
     times = []
     data_labels = [
-        " dynamic time in msek",
+        "dynamic time in msek",
         "amount of triples inserted",
         "generation time in msek",
         "dbsize in triples",
@@ -20,14 +20,15 @@ def main(name):
 
     data = datageneration(
         dbinc,
-        200000,
+        2,
         inc,
-        300000,
+        10000,
         endpoint,
         "database/two-million.nt",
         "database/three-million.nt",
     )
     # Open the file in write mode with the CSV writer
+    print(data)
     with open(name, "w", newline="") as file:
         writer = csv.writer(file)
         writer.writerow(data_labels)
@@ -37,18 +38,13 @@ def main(name):
 
 
 def inc(i):
-    return 2 * i
+    return 1000 + i
 
 
 def dbinc(j):
-    return 2 * j
+    return 100000 + j
 
 
-# Move to lib.py later
-def QueryMaker(query):
-    dictionary = create_dict_based_on_query(query)
-    new_query = create_void_select(dictionary)
-    return new_query
 
 
-main("data.csv")
+main("data3.csv")

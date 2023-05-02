@@ -46,7 +46,7 @@ def InsertDataQuery(endpoint, query):
         sparql.queryAndConvert()
         print("Data inserted")
     except Exception as e:
-        print(e)
+        print(e, "insert failure")
 
 
 # Takes a path to the file and the number of triples to retrieve
