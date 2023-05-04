@@ -154,7 +154,7 @@ def create_triple_part_of_query(individual_triples):
 
     for i in range(len(individual_triples)):
         string += " (" + individual_triples[i][:-1] + ") \n"
-    final = f"UNION{{ SELECT DISTINCT ?triple ?existing {{ VALUES (?s ?p ?o) {{ {string} }} BIND(CONCAT(str(?s), str(?p), str(?o)) AS ?triple) BIND(EXISTS {{ ?s ?p ?o }} AS ?existing) }} }}"
+    final = f"UNION{{ SELECT ?triple ?existing {{ VALUES (?s ?p ?o) {{ {string} }} BIND(CONCAT(str(?s), str(?p), str(?o)) AS ?triple) BIND(EXISTS {{ ?s ?p ?o }} AS ?existing) }} }}"
     return final
 
 
