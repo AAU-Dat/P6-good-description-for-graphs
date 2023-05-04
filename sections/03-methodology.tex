@@ -1,12 +1,21 @@
 \section{Methodology}\label{sec:methodology}
 \task{Consider the title. The method might be better than the methodology}
 
-This section will cover the methodology used in this project, by covering the tools, datasets, and methods used to generate and keep a \gls{void} description updated. The section will also cover the data that the experiments are concerned with regarding updating the void description and also generating the void description.
+This section covers the methodology, tools, and datasets used. In addition, the section also covers the data that the experiments are concerned with, with regards to updating and generating the void descriptions.
 
 \subsection{GraphDB}\label{sec:graphdb}
 GraphDB is hosted in a Docker container, this is done to have a local instance of a database, that can quickly and easily be reset, updated and set up on all machines used for the project. By using the guide provided by GraphDB~\cite{docker-graphDB}, and following the steps given.
 
 When deciding what database to use, there were many popular choices aside from GraphDB, as mentioned in~\cite{best-graph-databases}, that lists different popular databases, in addition to the pros and cons of each. Neo4j was one of the few databases that was considered, as is appeard in much of the literature that was read through in the research phase. However, since it is not a triple store, it is not directly able to use the SPARQL query language~\cite{neo4j:-a-reasonable-RDF-graph-database}. Insted Neo4j uses it's own graph query language, Cypher~\cite{cypher-query-language}. Which would have required an understanding of an entirely new language, or translating a SPARQL query to Cypher. It was deemed more appropriate to use a triple store, that uses SPARQL, such as GraphDB. Additionally, GraphDB was free and simple to use for the purposes of this project.
+
+\subsection{Cache}\label{sec:cache}
+When running the queries on the dataset, it is important that any data from the previous query is not saved in the cache. For this problem, there are different solutions that can be used. One solution is to clear the cache between every query. Another solution is to set the cache size to a small size, so the cache does not save the data from the previous query. These two solutions are the ones that the group looked at, when deciding how to solve the problem. Instead of clearing the cache between every query, the cache will be small enough to hold information other than the one query running on GraphDB.
+
+The cache is the memory that is used to store the data that is used the most. By default, when GraphDB is run on the Java Virtual Machine, it takes 50\% of the heap size~\cite{cache-strategy}.
+Because the size of the default cache was to big, it was found the cache size for this project should be 0. This can be seen in the docker-compose.yml file in the project, with the -Dgraphdb.page.cache.size=0 flag.
+
+GraphDB uses two indexes in the cache to inference and evaluate queries more effetive space wise. The two indexes are predicate-object-subject (POS) and predicate-subject-object (PSO), these are used to store the data in the cache. Both structures convey the same information, but with a different emphasis on the elements involved, as POS emphasis at predicate to object and PSO emphasis predicate to subject.
+The two indexes are used for different purposes. They both benefit on what kind of query is run on the dataset. They are good if a query can be rewritten to subject-predicate (SP) or object-predicate (OP). These two indexes comes on occurences when the quering datasets has a lot of predicates. Or When a query asks for predicate, as if there are a relation between the subject and the object~\cite{graphdb-storage}.
 
 \subsection{Dataset}\label{sec:dataset}
 Two datasets were used for this project. A small dataset, that was created for testing, and a larger pre-existing dataset. The small dataset was a dataset of Pokemon. The dataset contained 150 Pokemon, their types, and evolutions. This dataset was created in a .ttl file and imported into GraphDB. The dataset was created with the intention of getting a graps of how graph dataset worked, and to test querries, where the results were known. The dataset was also used to test generating and updating a \gls{void} description.
