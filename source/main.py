@@ -43,11 +43,5 @@ def inc(i):
 
 def dbinc(j):
     return 10000 + j
-docker_reset_db()
-endp = "http://localhost:7200/repositories/one-million-repository"
-gen = generate_insert(100,"database/two-million.nt" )
-q = QueryMaker(gen)
-print(q)
-dynamic_time = GetTimeOfQuery(endp, q )["time in ms"]
-print(dynamic_time)
+
 main("data4.csv")
