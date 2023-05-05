@@ -18,10 +18,11 @@ def SelectQuery(endpoint, query):
     sparql.setQuery(query)
     try:
         ret = sparql.queryAndConvert()
+        return ret
     except Exception as e:
         print("\n\n\nEROR\n")
         print(e)
-    return ret
+
 
 
 # Creates a get request to the endpoint, and returns the data and time from the query
