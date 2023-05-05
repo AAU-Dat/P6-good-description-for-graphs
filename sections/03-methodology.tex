@@ -29,7 +29,22 @@ There were two methods for creating a \gls{void} description, generate and updat
 
 The first method was to generate a \gls{void} description from scratch, by looking at the entire dataset and generating a \gls{void} description based on the data. This was done by using a naive query, a simple query that counted the number of subjects, predicates, objects, and triples.
 
-The second method was to update the \gls{void} description, by looking at what elements had been added or removed in a given query, and whether or not the elements already existed in the current dataset. Updating would only be concerned with relevant data, and would update the \gls{void} description accordingly. This was done to reduce the time it would take to update a \gls{void} description, by specifying the values to update, instead of looking through the entire dataset every time and generating a new \gls{void} description.
+An example of what the generate \gls{sparql} query could look like can be seen here:
+"SELECT (COUNT(*) AS ?totalTriples) (COUNT(DISTINCT ?subject) AS ?numSubjects) (COUNT(DISTINCT ?predicate) AS ?numPredicates) (COUNT(DISTINCT ?object) AS ?numObjects) WHERE { ?subject ?predicate ?object . }"
+As can be read, the query counts the number of subjects, predicates, objects, and triples in the entire dataset. This query would be run on the dataset, and the results would be used to generate a \gls{void} description.
+
+The second method was to update the \gls{void} description by looking at what elements had been added or removed in a given query and whether or not the elements already existed in the current dataset. Updating would only be concerned with relevant data and would update the \gls{void} description accordingly. This was done to reduce the time it would take to update a \gls{void} description, by specifying the values to update, instead of looking through the entire dataset every time and generating a new \gls{void} description.
+
+An example of what the update \gls{sparql} query could look like can be simplified to four different queries combined using UNION. The first part of the query would look at the subjects: "SELECT ?resource (EXISTS { ?resource ?p ?o } AS ?existing) { VALUES ?resource { \textbf{Example\_of\_subject} } }"
+
+The second part of the query would look for predicates: "SELECT ?resource (EXISTS { ?s ?resource ?o } AS ?existing) { VALUES ?resource { \textbf{Example\_of\_predicate} } }"
+
+The third part of the query would look for objects: "SELECT ?resource (EXISTS { ?s ?p ?resource } AS ?existing) { VALUES ?resource { \textbf{Example\_of\_object} } }"
+
+The fourth and final part of the query that would look for triples: "SELECT ?triple ?existing { VALUES (?s ?p ?o) {  (\textbf{Subject   Predicate   Object} )(\textbf{Subject    Predicate   Object} )} BIND(CONCAT(str(?s), str(?p), str(?o)) AS ?triple) BIND(EXISTS { ?s ?p ?o } AS ?existing) }"
+
+The four queries would be combined using UNION, and the results would be used to update the \gls{void} description. The first three parts of the query search the dataset to see if a given subject, predicate, or object exists, and the fourth part searches for a given triple in the dataset. This is done to create new values for the \gls{void} description or to update existing values.
+
 
 Generating a \gls{void} description was the simplest method, and therefore the one that appeard to be the most widely used method. This project aimed to improve the performance of creating and updating a \gls{void} descriptions. For this reason both methods were implemented, to compare the performance of the two methods, and to see if updating a \gls{void} description was a viable method.
 \subsubsection{Void Generation Methods}\label{sec:voidmethods}
