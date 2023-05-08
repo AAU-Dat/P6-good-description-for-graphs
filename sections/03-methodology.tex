@@ -57,3 +57,18 @@ Additionally to looking at the total running time, it could prove beneficial to 
 
 \subsubsection{Total number of operations}
 Time is not the only metric that can be used to compare the different methods. The total number of operations can also be used as a measureing metric. The number of operations could have proved more challenging to measure, as the method to gather the number of operations was not as straight forward as the total running time. However, it could give insight into how demanding the processes were since time could be based on many factors, such as hardware, database connection, and other machine processes. Therefore, looking at the number of operations made could give a more accurate comparison between the different methods.
+
+
+
+% The shape of the insert query is also important, not just the size. For example, duplicates in the data may increase the size of the actual query, but because it contains duplicates an update may be to VoID based on our update script would be 'smart' and therefore not be slow.
+
+% so far bruger vi triples bare helt ubrugte triples fra vores dataset som ikke allerede er i databasen
+% de vil have en lignende struktur hvilket er et plus
+% de passer også til det data vi har da det egentlig er det samme data
+
+\subsection{Insert Triples}\label{sec:insert-triples}
+When inserting triples into the dataset, the shape of the insert query is important, and not only the size of the query. For example, in the case of an insert query containing duplicates, the size of the query increases, but the amount of change in the \gls{void} description is the same. Therefore, the update script should be able to handle duplicates and not update the \gls{void} description for each duplicate.
+
+
+The data was taken from a larger dataset, that was split into ten smaller datasets. The initial creation of the database to work with, was based on the first of the ten, dataset, and all data that was inserted would be pulled from the other 9 datasets. Because all the data was taken from the same dataset, the data would have a similar structure, which made it easy to work with.
+
