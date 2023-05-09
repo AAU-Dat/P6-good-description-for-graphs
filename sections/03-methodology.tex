@@ -158,8 +158,10 @@ Time is not the only metric that can be used to compare the different methods. T
 % de passer også til det data vi har da det egentlig er det samme data
 
 \subsection{Insert Triples}\label{sec:insert-triples}
-When inserting triples into the dataset, the shape of the insert query is important, and not only the size of the query. For example, in the case of an insert query containing duplicates, the size of the query increases, but the amount of change in the \gls{void} description is the same. Therefore, the update script should be able to handle duplicates and not update the \gls{void} description for each duplicate.
+When inserting triples into the dataset, it is not only the size of the insert, but the shape of the insert query is also important. For example, in the case of an insert query containing duplicates, the size of the query increases, but the amount of change in the \gls{void} description is the same. Therefore, the update script should be able to handle duplicates and not update the \gls{void} description for each duplicate. Altough when the script was made, no duplicate triples were inserted, as all the data that was used in an insert query was taken from an unused dataset.
 
 
 The data was taken from a larger dataset, that was split into ten smaller datasets. The initial creation of the database to work with, was based on the first of the ten, dataset, and all data that was inserted would be pulled from the other 9 datasets. Because all the data was taken from the same dataset, the data would have a similar structure, which made it easy to work with.
+
+
 
