@@ -161,7 +161,3 @@ The number of operations can be more challenging to measure, as this will be fou
 When inserting triples into the dataset, it is not only the size of the insert, but the contents of the insert query are also important. For example, in the case of an insert query containing duplicates, the size of the query increases, but the amount of change in the \gls{void} description is the same. Therefore, the update script should be able to handle duplicates and not update the \gls{void} description for each duplicate. Although, when the script was made, no duplicate triples were inserted, as all the data used in an insert query was taken from an unused dataset. Nevertheless, under all circumstances, the contents of the insert query should be considered when looking at the performance of the update script.
 
 
-The data was taken from a larger dataset split into ten smaller datasets. The initial creation of the database to work with was based on the first of the ten datasets, and all data that was inserted would be pulled from the other nine datasets. Because all the data was taken from the same dataset, the data would have a similar structure, which made it easy to work with.
-
-
-
