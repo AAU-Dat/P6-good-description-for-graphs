@@ -31,6 +31,8 @@ The larger dataset was the "Waterloo SPARQL Diversity Test Suit (WatDiv) v0.6"~\
 
 The results of generating and updating a \gls{void} description from a larger dataset would be more interesting, as the dataset is larger and more complex than the smaller dataset. In addition, the more extensive dataset would give a better idea of how it would perform in a real-world scenario, with two ideas for testing the performance by making both one big update or many more minor updates to the dataset, as these types of changes are used interchangeably in the real world. In future sections, there will be a more in-depth description of what results and metrics were a concern.
 
+The larger dataset (WatDiv) is split into ten smaller datasets. The initial creation of the database to work with is made on the first of the ten splits of WatDiv, and all data that is inserted would be from the other nine splits of the WatDiv dataset. Because all the data is taken from the same dataset, the data has a similar structure, making it easy to work with.
+
 \subsection{Void Generation and Update}\label{sec:void}
 There were two methods for creating a \gls{void} description, generate and update.\task{is there a ref for these}
 
@@ -155,3 +157,11 @@ This metric would only be used for the update method, as the generation method d
 \subsubsection{Total number of operations}
 The total number of operations can also be used as a comparison.
 The number of operations can be more challenging to measure, as this will be found by analysing the code written for the project. The code can be written in many different ways, so the number of operations can vary. Therefore, gathering the number of operations is more complex than the total running time. However, it could give insight into how demanding the processes were since time could be based on many factors, such as hardware, database connection, and other machine processes. Therefore, looking at the number of operations made could give a more accurate comparison between the different methods.
+
+
+\subsection{Insert Triples}\label{sec:insert-triples}
+When inserting triples into the dataset, it is not only the size of the insert, but the contents of the insert query are also important. For example, in the case of an insert query containing duplicates, the size of the query increases, but the amount of change in the \gls{void} description is the same. Therefore, the update script should be able to handle duplicates and not update the \gls{void} description for each duplicate. Although, when the script was made, no duplicate triples were inserted, as all the data used in an insert query was taken from an unused dataset. Nevertheless, under all circumstances, the contents of the insert query should be considered when looking at the performance of the update script.
+
+
+
+
