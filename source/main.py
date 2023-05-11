@@ -1,6 +1,7 @@
-from lib import *
-from generationData import *
 import csv
+
+from generationData import *
+from lib import *
 
 
 def main(name):
@@ -22,7 +23,7 @@ def main(name):
         dbinc,
         1000000,
         inc,
-        10000,
+        3002,
         endpoint,
         "database/two-million.nt",
         "database/three-million.nt",
@@ -44,4 +45,4 @@ def inc(i):
 def dbinc(j):
     return 10000 + j
 
-main("data4.csv")
+main("data5.csv")
