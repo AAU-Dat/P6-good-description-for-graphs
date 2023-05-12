@@ -5,6 +5,7 @@ import pandas as pd
 import sklearn.linear_model
 import time
 from collections import Counter
+import re
 
 from SPARQLWrapper import JSON, POST, SPARQLWrapper
 
@@ -17,10 +18,11 @@ def SelectQuery(endpoint, query):
     sparql.setQuery(query)
     try:
         ret = sparql.queryAndConvert()
+        return ret
     except Exception as e:
         print("\n\n\nEROR\n")
         print(e)
-    return ret
+
 
 
 # Creates a get request to the endpoint, and returns the data and time from the query
@@ -45,7 +47,7 @@ def InsertDataQuery(endpoint, query):
         sparql.queryAndConvert()
         print("Data inserted")
     except Exception as e:
-        print(e)
+        print(e, "insert failure")
 
 
 # Takes a path to the file and the number of triples to retrieve
@@ -83,7 +85,10 @@ def generate_query(file_path, num_strings):
     return queries
 
 
-import re
+def generate_insert(size, file):
+    triples = retrieve_triples(file, size)
+    return "INSERT DATA {" + triples + "}"
+
 
 # takes an query and creates a a dictionary that tracks the triples unique subjects predicates and objects
 
@@ -150,7 +155,7 @@ def create_triple_part_of_query(individual_triples):
 
     for i in range(len(individual_triples)):
         string += " (" + individual_triples[i][:-1] + ") \n"
-    final = f"UNION{{ SELECT DISTINCT ?triple ?exists {{ VALUES (?s ?p ?o) {{ {string} }} BIND(CONCAT(str(?s), str(?p), str(?o)) AS ?triple) BIND(EXISTS {{ ?s ?p ?o }} AS ?existing) }} }}"
+    final = f"UNION{{ SELECT ?triple ?existing {{ VALUES (?s ?p ?o) {{ {string} }} BIND(CONCAT(str(?s), str(?p), str(?o)) AS ?triple) BIND(EXISTS {{ ?s ?p ?o }} AS ?existing) }} }}"
     return final
 
 
@@ -263,3 +268,9 @@ def plot_data(file_path):
     dataframe.style.to_latex(
         file_path + ".tex", position_float="centering", position="htb!", hrules=True
     )
+
+
+def QueryMaker(query):
+    dictionary = create_dict_based_on_query(query)
+    new_query = create_void_select(dictionary)
+    return new_query
