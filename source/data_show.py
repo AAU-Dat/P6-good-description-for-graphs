@@ -20,7 +20,7 @@ def create_generation_data(
         "generation time in msek",
         "dbsize in triples",
     ]
-    dyn_labels = ["insert size", "insert time in msek", "dbsize in triples",]
+    dyn_labels = ["insert time in msek","insert size", "dbsize in triples",]
 
     docker_reset_db()
     # Define the number of lines to send at a time
@@ -28,25 +28,30 @@ def create_generation_data(
     times_size_db = []
     dyn_times_db = []
     db_size = 1000000
-
+    
     # Open the file for reading
     try:
+        count = 0
+        lines = []
         with open(db_increase_file, "r") as f:
             # Read the first chunk of lines
-            lines = f.readlines(chunk_size)
-            
-            # Loop through the file and send chunks of lines to the endpoint
-            while lines:
-                # Join the lines into a string
-                data = "".join(lines)
-                query = "INSERT DATA {" + data + "}"
-                create_datapoint(db_size, endpoint)
-                dyn_times_db += create_dyn_datapoints(db_size, endpoint, lines)
+            for line in f:
+                if count == 10000:
+                    data = "".join(lines)
+                    query = "INSERT DATA {" + data + "}"
+                    create_datapoint(db_size, endpoint)
+                    dyn_times_db += create_dyn_datapoints(db_size, endpoint, lines)
 
-                InsertDataQuery(endpoint, query)
-                times_size_db.append(create_datapoint(db_size, endpoint))
-                db_size += 10000
-                print(db_size)
+                    InsertDataQuery(endpoint, query)
+                    times_size_db.append(create_datapoint(db_size, endpoint))
+                    db_size += len(lines)
+                    print(db_size)
+                    lines = f.readlines(chunk_size)
+                    count = 0
+                    lines = []
+                else:
+                    lines.append(line)
+                    count += 1
                 if db_size > 10000000:
                     break
     except Exception as err:
@@ -69,19 +74,22 @@ def create_generation_data(
 
 
 def create_dyn_datapoints(db_size, endpoint, insert_data):
-    data = []
     temp = []
-    for i in range(1, 5001, 1000):
+    data = []
+    for i in range(1, 5002, 1000):
         ofsett = slice(0,i)
-        insert_q = "INSERT DATA {" + "".join(insert_data[ofsett]) + "}"
+        slice_of_data = insert_data[ofsett]
+        insert_q = "INSERT DATA {" + "".join(slice_of_data) + "}"
 
         dynamic_query = QueryMaker(insert_q)
         dynamic_time = GetTimeOfQuery(endpoint,dynamic_query)["time in ms"]
-        print(dynamic_time)
+        print(dynamic_time, "length of insert", len(slice_of_data))
         temp.append(dynamic_time)
         temp.append(i)
         temp.append(db_size)
         data.append(temp)
+        temp = []
+    
     return data
     
 
