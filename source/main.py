@@ -1,6 +1,7 @@
-from lib import *
-from generationData import *
 import csv
+
+from generationData import *
+from lib import *
 
 
 def main(name):
