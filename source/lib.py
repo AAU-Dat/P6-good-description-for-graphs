@@ -2,6 +2,7 @@ import json
 import re
 import time
 from collections import Counter
+import re
 
 import matplotlib.pyplot as plt
 import numpy as np

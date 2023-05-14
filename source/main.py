@@ -23,7 +23,7 @@ def main(name):
         dbinc,
         1000000,
         inc,
-        3002,
+        10000,
         endpoint,
         "database/two-million.nt",
         "database/three-million.nt",
@@ -45,4 +45,4 @@ def inc(i):
 def dbinc(j):
     return 10000 + j
 
-main("data5.csv")
+main("data4.csv")
