@@ -5,22 +5,33 @@ from lib import *
 
 
 def crate_new_file():
-
-    files = ["database/eight-million.nt", "database/five-million.nt", "database/four-million.nt", "database/nine-million.nt", "database/seven-million.nt", "database/six-million.nt",  "database/ten-million.nt", "database/three-million.nt",  "database/one-million.nt"  ]
-    with open('database/new_size_9mil', 'w') as outfile:
+    files = [
+        "database/eight-million.nt",
+        "database/five-million.nt",
+        "database/four-million.nt",
+        "database/nine-million.nt",
+        "database/seven-million.nt",
+        "database/six-million.nt",
+        "database/ten-million.nt",
+        "database/three-million.nt",
+        "database/one-million.nt",
+    ]
+    with open("database/new_size_9mil", "w") as outfile:
         for file_path in files:
             with open(file_path) as infile:
                 outfile.write(infile.read())
 
-def create_generation_data(
-    endpoint,
-    db_increase_file, name
-):
+
+def create_generation_data(endpoint, db_increase_file, genName, dynName):
     data_labels = [
         "generation time in msek",
         "dbsize in triples",
     ]
-    dyn_labels = ["insert time in msek","insert size", "dbsize in triples",]
+    dyn_labels = [
+        "insert time in msek",
+        "insert size",
+        "dbsize in triples",
+    ]
 
     docker_reset_db()
     # Define the number of lines to send at a time
@@ -28,7 +39,7 @@ def create_generation_data(
     times_size_db = []
     dyn_times_db = []
     db_size = 1000000
-    
+
     # Open the file for reading
     try:
         count = 0
@@ -39,7 +50,6 @@ def create_generation_data(
                 if count == 10000:
                     data = "".join(lines)
                     query = "INSERT DATA {" + data + "}"
-                    create_datapoint(db_size, endpoint)
                     dyn_times_db += create_dyn_datapoints(db_size, endpoint, lines)
 
                     InsertDataQuery(endpoint, query)
@@ -55,15 +65,15 @@ def create_generation_data(
                 if db_size > 10000000:
                     break
     except Exception as err:
-        print(err)   
-        
-    with open(name, "w", newline="") as file:
+        print(err)
+
+    with open(genName, "w", newline="") as file:
         writer = csv.writer(file)
         writer.writerow(data_labels)
         # Write each row of the 2D array as a separate row in the CSV file
         for row in times_size_db:
             writer.writerow(row)
-    with open("dyntime.csv", "w", newline="") as file:
+    with open(dynName, "w", newline="") as file:
         writer = csv.writer(file)
         writer.writerow(dyn_labels)
         # Write each row of the 2D array as a separate row in the CSV file
@@ -71,39 +81,41 @@ def create_generation_data(
             writer.writerow(row)
 
 
-
-
 def create_dyn_datapoints(db_size, endpoint, insert_data):
     temp = []
     data = []
-    for i in range(1, 5002, 1000):
-        ofsett = slice(0,i)
+    for i in range(1, 8002, 1000):
+        ofsett = slice(0, i)
         slice_of_data = insert_data[ofsett]
         insert_q = "INSERT DATA {" + "".join(slice_of_data) + "}"
 
         dynamic_query = QueryMaker(insert_q)
-        dynamic_time = GetTimeOfQuery(endpoint,dynamic_query)["time in ms"]
+        dynamic_time = GetTimeOfQuery(endpoint, dynamic_query)["time in ms"]
         print(dynamic_time, "length of insert", len(slice_of_data))
         temp.append(dynamic_time)
         temp.append(i)
         temp.append(db_size)
         data.append(temp)
         temp = []
-    
-    return data
-    
 
+    return data
 
 
 def create_datapoint(db_size, endpoint):
-
     data = []
     generation_query = "SELECT (COUNT(*) AS ?totalTriples) (COUNT(DISTINCT ?subject) AS ?numSubjects) (COUNT(DISTINCT ?predicate) AS ?numPredicates) (COUNT(DISTINCT ?object) AS ?numObjects) WHERE { ?subject ?predicate ?object . }"
     generation_time = GetTimeOfQuery(endpoint, generation_query)["time in ms"]
-    print("init gen",  generation_time)
+    print("init gen", generation_time)
     data.append(generation_time)
     data.append(db_size)
-    
+
     return data
 
-create_generation_data("http://localhost:7200/repositories/one-million-repository", 'database/new_size_9mil', "generation_data.csv" )
+
+for i in range(2, 11):
+    create_generation_data(
+        "http://localhost:7200/repositories/one-million-repository",
+        "database/new_size_9mil",
+        "LarsGenerationData" + str(i) + ".csv",
+        "LarsDynamicData" + str(i) + ".csv",
+    )
