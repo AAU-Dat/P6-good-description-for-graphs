@@ -1,1 +1,10 @@
 \section{Discussion}\label{sec:discussion}
+The experiment outcomes revealed that the dynamic update method demonstrated an average increase in execution time of approximately 0.15 milliseconds per inserted triple, while the generation method showed an average increase of approximately 0.00048 milliseconds per triple already present in the database.
+
+Given the presence of considerable noise in the results, evaluating its potential impact on the validity of the acquired data and the overall outcomes of the experiment becomes relevant.
+
+One prominent factor contributing to the observed noise is the utilization of GraphDB. The involvement of network latency and other related factors intrinsic to the GraphDB configuration and communication via HTTP can introduce variations in the execution times. Hence, the observed noise can be partially attributed to these external factors.
+
+The experiment was conducted through ten independent runs to address the influence of noise and enhance the reliability of the findings. In addition, by conducting multiple repetitions under similar conditions, it was possible to assess the consistency of the measurements and identify any potential outliers or irregular variations caused by the presence of noise. Consequently, we argue that this replication process significantly mitigated the potential outliers in the results. This leads to a discussion on the suitability of GraphDB as the chosen database for the experiment.
+
+Despite its simple usage and good documentation, we have realized that GraphDB may not have been the most optimal choice due to various factors. For instance, network latency associated with the communication between the experiment setup and the GraphDB instance can introduce fluctuations in the execution times, thereby impacting the overall performance measurements.
