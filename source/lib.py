@@ -1,12 +1,13 @@
 import json
-import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
-import sklearn.linear_model
+import re
 import time
 from collections import Counter
 import re
 
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import sklearn.linear_model
 from SPARQLWrapper import JSON, POST, SPARQLWrapper
 
 
@@ -94,7 +95,7 @@ def generate_insert(size, file):
 
 
 def create_dict_based_on_query(query):
-    m = re.search(r"\{.*\}", query)
+    m = re.search(r"\{(.|\n)*\}", query)
     alltriples = m.group(0)[1:-1]
 
     triple_pattern = re.compile(
@@ -227,24 +228,28 @@ def VoidCreator(title, description, data):
 
 def plot_data(file_path):
     # TODO Note function. WILL need modifications to handle our actual data.
+    #dynamic time in msek,amount of triples inserted,generation time in msek,dbsize in triples
+    dbsize = "dbsize in triples"
+    qsize = "amount of triples inserted"
+    time = "dynamic time in msek"
     dataframe = pd.read_csv(file_path)
     axes = plt.axes(projection="3d")
-    axes.scatter(dataframe["dbsize"], dataframe["qsize"], dataframe["time"])
-    axes.set_xlabel("dbsize")
-    axes.set_ylabel("qsize")
-    axes.set_zlabel("time", rotation=90)
+    axes.scatter(dataframe[dbsize], dataframe[qsize], dataframe[time])
+    axes.set_xlabel(dbsize)
+    axes.set_ylabel(qsize)
+    axes.set_zlabel(time, rotation=90)
 
     model = sklearn.linear_model.LinearRegression()
-    model.fit(dataframe[["dbsize", "qsize"]], dataframe["time"])
-    predictions = model.predict(dataframe[["dbsize", "qsize"]])
+    model.fit(dataframe[[dbsize, qsize]], dataframe[time])
+    predictions = model.predict(dataframe[[dbsize, qsize]])
     print(
         "Equation: y = {:.2f} + {:.2f}x1 + {:.2f}x2".format(
             model.intercept_, model.coef_[0], model.coef_[1]
         )
     )
 
-    print("MAE: {}".format(np.abs(dataframe["time"] - predictions).mean()))
-    print("RMSE: {}".format(np.sqrt(((dataframe["time"] - predictions) ** 2).mean())))
+    print("MAE: {}".format(np.abs(dataframe[time] - predictions).mean()))
+    print("RMSE: {}".format(np.sqrt(((dataframe[time] - predictions) ** 2).mean())))
 
     coefs = model.coef_
     intercept = model.intercept_
@@ -254,17 +259,17 @@ def plot_data(file_path):
 
     axes.plot_surface(xs, ys, zs, alpha=0.2)
     axes.plot_trisurf(
-        dataframe["dbsize"],
-        dataframe["qsize"],
-        dataframe["time"],
+        dataframe[dbsize],
+        dataframe[qsize],
+        dataframe[time],
         alpha=0.7,
         color="green",
     )
     axes.plot_trisurf(
-        dataframe["dbsize"], dataframe["qsize"], predictions, alpha=0.7, color="red"
+        dataframe[dbsize], dataframe[qsize], predictions, alpha=0.7, color="red"
     )  # predicted values
 
-    dataframe.set_index(["dbsize", "qsize", "time", "qlength"], inplace=True)
+    dataframe.set_index([dbsize, qsize, time, "generation time in msek"], inplace=True)
     dataframe.style.to_latex(
         file_path + ".tex", position_float="centering", position="htb!", hrules=True
     )

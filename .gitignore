@@ -284,3 +284,6 @@ __pycache__
 
 #mnist_data
 mnist_data
+
+#Database files
+*.nt
