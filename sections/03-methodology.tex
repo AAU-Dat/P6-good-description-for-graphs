@@ -1,12 +1,10 @@
 \section{Methodology}\label{sec:methodology}
-\task{Consider the title. The method might be better than the methodology}
-
 This section covers the methodology, tools, and datasets used. In addition, the section also covers the data that the experiments are concerned with, with regards to updating and generating the \gls{void} descriptions.
 
 \subsection{GraphDB}\label{sec:graphdb}
 GraphDB is an \gls{rdf} triple store used to store and query \gls{rdf} data. Ontotext develops GraphDB, which is a commercial product, but there is a free version available that is used for this project. GraphDB is a Java application that can be run on a Java Virtual Machine. GraphDB is a triple store that uses \gls{sparql} to query the data stored in the database~\cite{graphdb-product}.
 
-GraphDB is hosted in a Docker container; this is done to have a local instance of a database that can quickly and easily be reset, updated and set up on all machines used for the project using the guide provided by GraphDB and following the steps given\task{describe the machines provided(hardware, configuration of the docker containers, configuration of the graphDB instances)}.
+GraphDB is hosted in a Docker container; this is done to have a local instance of a database that can quickly and easily be reset, updated and set up on all machines used for the project using the guide provided by GraphDB and following the steps given. \task{describe the machines provided(hardware, configuration of the docker containers, configuration of the graphDB instances)}
 
 When deciding what database to use, there were many popular choices aside from GraphDB, as mentioned in~\cite{best-graph-databases} which lists different popular databases, in addition to the pros and cons of each. Neo4j was one of the few databases considered, as it appeared in much of the literature in the research phase. However, since it is not a triple store, it cannot directly use \gls{sparql}~\cite{neo4j:-a-reasonable-RDF-graph-database}. Instead, Neo4j uses its graph query language, Cypher~\cite{cypher-query-language}, which would have required understanding an entirely new language or translating a \gls{sparql} query to Cypher. Instead, it was deemed more appropriate to use a triple store that uses \gls{sparql}, such as GraphDB. Additionally, GraphDB was accessible and straightforward to use for this project.
 

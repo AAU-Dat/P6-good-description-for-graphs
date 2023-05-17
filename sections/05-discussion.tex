@@ -1,10 +1,44 @@
 \section{Discussion}\label{sec:discussion}
-The experiment outcomes revealed that the dynamic update method demonstrated an average increase in execution time of approximately 0.15 milliseconds per inserted triple, while the generation method showed an average increase of approximately 0.00048 milliseconds per triple already present in the database.
+The results show that the dynamic update or the regeneration method is more beneficial depending on the query size and the database size.
 
+From \autoref{fig:comparison-generation-vs-update}, it can be seen that as the size of a database increases, the time it takes to generate a VOID description increases at a linear rate, whereas updating the VOID description is barely affected by the size of the database. Instead, updating the VOID description is affected by the size of the query it uses.
+
+This indicates that a decision should be made for what method to use on a case-by-case basis. An example of this could be with a database containing 2 million triples, and a query of 6000 triples, \autoref{fig:comparison-generation-vs-update} shows that updating the VOID description is faster. However, the regeneration method is faster if the query size is increased to 8000 or more triples.
+
+\subsection{Noisy Results}\label{subsec:noisy-results}
 Given the presence of considerable noise in the results, evaluating its potential impact on the validity of the acquired data and the overall outcomes of the experiment becomes relevant.
 
-One prominent factor contributing to the observed noise is the utilization of GraphDB. The involvement of network latency and other related factors intrinsic to the GraphDB configuration and communication via HTTP can introduce variations in the execution times. Hence, the observed noise can be partially attributed to these external factors.
+Each experiment was run ten times to ensure the validity of the results. However, it was clear that many factors had a noticeable impact on the results, such as what machine the experiments were run on, whether or not the machine was used for any other purpose and the internet connection. These factors caused noise in the results. Due to this, the results gathered could be more reliable, and the validity of the results could be improved.
 
-The experiment was conducted through ten independent runs to address the influence of noise and enhance the reliability of the findings. In addition, by conducting multiple repetitions under similar conditions, it was possible to assess the consistency of the measurements and identify any potential outliers or irregular variations caused by the presence of noise. Consequently, we argue that this replication process significantly mitigated the potential outliers in the results. This leads to a discussion on the suitability of GraphDB as the chosen database for the experiment.
+Running the experiment additional times would have mitigated the impact of the noise and helped give a clearer picture of the actual outliers. We could also have ensured the experiments were only run on the machine while the machine was not in use, as this is a factor that we suspect had a significant impact on the results.
 
-Despite its simple usage and good documentation, we have realized that GraphDB may not have been the most optimal choice due to various factors. For instance, network latency associated with the communication between the experiment setup and the GraphDB instance can introduce fluctuations in the execution times, thereby impacting the overall performance measurements.
+Another database could have proven beneficial for the results, as GraphDB caused measurement issues. For example, when working with the database, it was impossible to get internal measurements of the times it took to query the database and create a VOID description. Due to this, all measurements were taken externally on local machines, which introduced the previously mentioned issues.
+
+Had a different database been used that provided a method to get internal measurements, the results could have been more accurate, as localhost overhead could have been avoided. However, this is not entirely a negative, as the current results show how the methods could perform for an end user, as the same issues could impact them.
+
+\subsection{Dynamic Dip}\label{subsec:dynamic-dip}
+An interesting observation in the dynamic update was a significant decrease in the time it took to update the VOID description when the database size reached a certain point. The decrease did not seem to correlate with the number of triples inserted. However, by looking through the data that was inserted, it was found that the size of it was noticeably smaller than the previous data.
+
+This could indicate that the shape of the data significantly impacts the time it takes to update the VOID description, but it is not entirely clear exactly what parts of the data are the leading cause for this. For example, the number of characters, the type of data, or something entirely different causes a decrease in the time it takes to update the VOID description. This is an interesting topic to research in the future by looking at how the shape of the data impacts the time it takes to update the VOID description.
+
+
+% The experiment outcomes revealed that the dynamic update method demonstrated an average increase in execution time of approximately 0.15 milliseconds per inserted triple, while the generation method showed an average increase of approximately 0.00048 milliseconds per triple already present in the database.
+
+
+%Notes
+%Kan det give mening og opdatere frem for altid og generere på ny? - Vi har observeret en ratio
+
+%Kan vi stole på vores resultater/Er vores resultater valide
+%Vi har kørt progremmet 10 gange, men vi har opserveret forskellige ting som havde indflydelse - PC kraft og internet stabilitet/hastiged
+%Vi kunne have kørt det flere gange for at give et bedre billede af hvad der var outliers
+%Vi kunne have kun kørt når pc'en ikke var i brug, for at fjerne støj
+%Vi kunne have brugt en anden DB - Vi kunne ikke måle internt hvilket kunne have givet et bedre billede af resultaterne, da der ville ikke være et local host overhead. - Mere relevant data
+%Vores målinger kan dog give et godt billede for hvordan det ville være for en reel slutbruger
+%Vi opserverede at størrelsen af data (antal karakterer) havde en stor indflydesle på update, men ikke en oberserverbar indflydelse på regeneration
+%Dippet er spændene så snak meget om det
+
+
+%Vi kunne have talt antallet af operationer hvis det var muligt/Vi kunne finde ud af det
+
+%Futureworks
+%Vi kan ikke lige nu se præcis hvorfor dykket sker, men kunne være relevant og kigge på
