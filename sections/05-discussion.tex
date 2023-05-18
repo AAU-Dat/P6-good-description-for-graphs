@@ -1,9 +1,13 @@
 \section{Discussion}\label{sec:discussion}
 The results show that the dynamic update or the regeneration method is more beneficial depending on the query size and the database size.
 
-From \autoref{fig:comparison-generation-vs-update}, it can be seen that as the size of a database increases, the time it takes to generate a VOID description increases at a linear rate, whereas updating the VOID description is barely affected by the size of the database. Instead, updating the VOID description is affected by the size of the query it uses.
+From \autoref{fig:comparison-generation-vs-update}, it can be seen that as the size of a database increases, the time it takes to generate a \gls{void} description increases at a linear rate, whereas updating the \gls{void} description is barely affected by the size of the database. Instead, updating the \gls{void} description is affected by the size of the query it uses.
 
-This indicates that a decision should be made for what method to use on a case-by-case basis. An example of this could be with a database containing 2 million triples, and a query of 6000 triples, \autoref{fig:comparison-generation-vs-update} shows that updating the VOID description is faster. However, the regeneration method is faster if the query size is increased to 8000 or more triples.
+To find the best method, one should look at the size of the query and the size of the database and then come up with an estimate of how much the database will change after the query has been executed. The dynamic update method is faster if a user finds the estimate to change the database size significant with a little query. However, if the user finds the estimate of the change to the database to be significant, with a large query, the generation method is faster. If the user finds the estimate to change the size of the database to be small with a little query, the dynamic update method is faster. However, if the user finds the estimate to change the size of the database to be minor, with a large query, the generation method is faster.
+
+\autoref{fig:comparison-generation-vs-update} shows that the dynamic update method is faster than the generation method when the query size is 6000 triples or more. However, when the query size is less than 6000 triples, the generation method is faster. This indicates that the dynamic update method is more beneficial when the query size is large, and the generation method is more beneficial when the query size is small.
+
+This indicates that a decision should be made for what method to use on a case-by-case basis. An example of this could be with a database containing 2 million triples, and a query of 6000 triples, \autoref{fig:comparison-generation-vs-update} shows that updating the \gls{void} description is faster. However, the regeneration method is faster if the query size is increased to 8000 or more triples.
 
 \subsection{Noisy Results}\label{subsec:noisy-results}
 Given the presence of considerable noise in the results, evaluating its potential impact on the validity of the acquired data and the overall outcomes of the experiment becomes relevant.
@@ -12,14 +16,14 @@ Each experiment was run ten times to ensure the validity of the results. However
 
 Running the experiment additional times would have mitigated the impact of the noise and helped give a clearer picture of the actual outliers. We could also have ensured the experiments were only run on the machine while the machine was not in use, as this is a factor that we suspect had a significant impact on the results.
 
-Another database could have proven beneficial for the results, as GraphDB caused measurement issues. For example, when working with the database, it was impossible to get internal measurements of the times it took to query the database and create a VOID description. Due to this, all measurements were taken externally on local machines, which introduced the previously mentioned issues.
+Another database could have proven beneficial for the results, as GraphDB caused measurement issues. For example, when working with the database, it was impossible to get internal measurements of the times it took to query the database and create a \gls{void} description. Due to this, all measurements were taken externally on local machines, which introduced the previously mentioned issues.
 
-Had a different database been used that provided a method to get internal measurements, the results could have been more accurate, as localhost overhead could have been avoided. However, this is not entirely a negative, as the current results show how the methods could perform for an end user, as the same issues could impact them.
+Had a different database been used that provided a method to get internal measurements, the results could have been more accurate, as localhost overhead could have been avoided. However, this is not entirely a negative, as the current results show how the methods could perform for an end user, as the same issues could impact the end user.
 
 \subsection{Dynamic Dip}\label{subsec:dynamic-dip}
-An interesting observation in the dynamic update was a significant decrease in the time it took to update the VOID description when the database size reached a certain point. The decrease did not seem to correlate with the number of triples inserted. However, by looking through the data that was inserted, it was found that the size of it was noticeably smaller than the previous data.
+An interesting observation in the dynamic update, see \autoref{fig:update-querysize-good}, was a significant decrease in the time it took to update the \gls{void} description when the database size was right before 10 million tripels. The decrease did not seem to correlate with the number of triples inserted. However, by looking through the data that was inserted, it was found that the size of it was noticeably smaller than the previous data.
 
-This could indicate that the shape of the data significantly impacts the time it takes to update the VOID description, but it is not entirely clear exactly what parts of the data are the leading cause for this. For example, the number of characters, the type of data, or something entirely different causes a decrease in the time it takes to update the VOID description. This is an interesting topic to research in the future by looking at how the shape of the data impacts the time it takes to update the VOID description.
+This could indicate that the shape of the \gls{rdf} data significantly impacts the time it takes to update the \gls{void} description, but it is not entirely clear exactly what parts of the data are the leading cause for this. For example, the number of characters, or something entirely different causes a decrease in the time it takes to update the \gls{void} description. This is an interesting topic to research in the future by looking at how the shape of the \gls{rdf} data impacts the time it takes to update the \gls{void} description.
 
 
 % The experiment outcomes revealed that the dynamic update method demonstrated an average increase in execution time of approximately 0.15 milliseconds per inserted triple, while the generation method showed an average increase of approximately 0.00048 milliseconds per triple already present in the database.
@@ -42,3 +46,12 @@ This could indicate that the shape of the data significantly impacts the time it
 
 %Futureworks
 %Vi kan ikke lige nu se præcis hvorfor dykket sker, men kunne være relevant og kigge på
+
+
+%When deciding what method to use, one should look at the size of the database after the query has been executed, and then compare it to the size of the query and the size of the database before the query was executed. If the size of the database after the query has been executed is larger than the size of the query, the dynamic update method is faster. However, if the size of the database after the query has been executed is smaller than the size of the query, the generation method is faster. By looking at the size of the database after the query has been executed, one can determine what method is faster.
+
+%That way if the database is large, and the query is small, with no change in the database size after the query has been executed, the dynamic method is faster.
+
+%the dynamic method is faster. But if the database is large, and the query is large, the generation method is faster. If a database is small, and the query is small, the dynamic method is faster. But if the database is small, and the query is large, the generation method is faster. All of this is dependent on the size of the database after the query has been executed. If the database size has not changed, the dynamic method would be faster.
+
+%However, if the database size has changed, the generation method would be faster. If the user has a large database, and the query is large, and knows the database size will change, the generation method is faster. But if the user has a large database, and the query is large, and does not know if the database size will change, the dynamic method is faster. If the user has a large database, and the query is small, and knows the database size will change, the dynamic method is faster. But if the user has a large database, and the query is small, and does not know if the database size will change, the dynamic method is faster, as now the query is small.
