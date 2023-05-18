@@ -18,18 +18,11 @@ class Void_description:
 
     def print(self):
         print(self.triple_count, "\n", self.unique_subjects_count)
-    
 
-    def CreateBaseVoidDescription(
-        self,
-        Title,
-        dataset_uri
-            ):
-
+    def CreateBaseVoidDescription(self, Title, dataset_uri):
         distinct_objects = self.unique_objects_count
         distinct_subject = self.unique_subjects_count
-        distinct_properties = self.unique_predicates
-
+        distinct_properties = self.unique_predicates_count
 
         voidDescription = f"""
         prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -105,8 +98,16 @@ def create_void_test(endpoint, db_increase_file):
     except Exception as err:
         print(err)
     with open("void_description_result", "w") as file:
-        file.write(dyn_void_description.CreateBaseVoidDescription("dyn_void_description", "test.com"))
-        file.write(gen_void_description.CreateBaseVoidDescription("gen_void_description", "test2.com"))
+        file.write(
+            dyn_void_description.CreateBaseVoidDescription(
+                "dyn_void_description", "test.com"
+            )
+        )
+        file.write(
+            gen_void_description.CreateBaseVoidDescription(
+                "gen_void_description", "test2.com"
+            )
+        )
 
 
 def update_void_gen(response, void_descript):

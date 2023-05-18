@@ -1,0 +1,29 @@
+
+        prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        prefix void: <http://rdfs.org/ns/void#>
+
+        INSERT DATA{
+        <test.com> a void:Dataset ;
+            rdfs:label "dyn_void_description" ;
+            void:uriSpace "test.com" ;
+            void:triples 2116220 ;
+            void:entities 663603 ;
+            void:properties 43 ;
+            void:distinctSubjects 279339 ;
+            void:distinctObjects 384221 .
+        }
+        prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        prefix void: <http://rdfs.org/ns/void#>
+
+        INSERT DATA{
+        <test2.com> a void:Dataset ;
+            rdfs:label "gen_void_description" ;
+            void:uriSpace "test2.com" ;
+            void:triples 2116220 ;
+            void:entities 663603 ;
+            void:properties 43 ;
+            void:distinctSubjects 279339 ;
+            void:distinctObjects 384221 .
+        }
