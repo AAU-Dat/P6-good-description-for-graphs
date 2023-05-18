@@ -29,7 +29,6 @@ class Void_description:
         prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
         prefix void: <http://rdfs.org/ns/void#>
 
-        INSERT DATA{{
         <{dataset_uri}> a void:Dataset ;
             rdfs:label "{Title}" ;
             void:uriSpace "{dataset_uri}" ;
@@ -38,7 +37,7 @@ class Void_description:
             void:properties {distinct_properties} ;
             void:distinctSubjects {distinct_subject} ;
             void:distinctObjects {distinct_objects} .
-        }}"""
+        """
         return voidDescription
 
     def compare_void(self, void_description):
@@ -93,7 +92,7 @@ def create_void_test(endpoint, db_increase_file):
                 else:
                     lines.append(line)
                     count += 1
-                if db_size > 2000000:
+                if db_size > 10000000:
                     break
     except Exception as err:
         print(err)
