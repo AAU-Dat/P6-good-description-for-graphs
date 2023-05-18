@@ -18,9 +18,37 @@ class Void_description:
 
     def print(self):
         print(self.triple_count, "\n", self.unique_subjects_count)
+    
+
+    def CreateBaseVoidDescription(
+        self,
+        Title,
+        dataset_uri
+            ):
+
+        distinct_objects = self.unique_objects_count
+        distinct_subject = self.unique_subjects_count
+        distinct_properties = self.unique_predicates
+
+
+        voidDescription = f"""
+        prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        prefix void: <http://rdfs.org/ns/void#>
+
+        INSERT DATA{{
+        <{dataset_uri}> a void:Dataset ;
+            rdfs:label "{Title}" ;
+            void:uriSpace "{dataset_uri}" ;
+            void:triples {self.triple_count} ;
+            void:entities {distinct_objects + distinct_properties + distinct_subject} ;
+            void:properties {distinct_properties} ;
+            void:distinctSubjects {distinct_subject} ;
+            void:distinctObjects {distinct_objects} .
+        }}"""
+        return voidDescription
 
     def compare_void(self, void_description):
-        print(self.triple_count, "self triple", void_description.triple_count)
         if (
             self.triple_count == void_description.triple_count
             and self.unique_subjects_count == void_description.unique_subjects_count
@@ -68,7 +96,7 @@ def create_void_test(endpoint, db_increase_file):
                     lines = f.readlines(chunk_size)
                     count = 0
                     lines = []
-                    print(gen_void_description.compare_void(dyn_void_description))
+                    assert gen_void_description.compare_void(dyn_void_description)
                 else:
                     lines.append(line)
                     count += 1
@@ -76,6 +104,9 @@ def create_void_test(endpoint, db_increase_file):
                     break
     except Exception as err:
         print(err)
+    with open("void_description_result", "w") as file:
+        file.write(dyn_void_description.CreateBaseVoidDescription("dyn_void_description", "test.com"))
+        file.write(gen_void_description.CreateBaseVoidDescription("gen_void_description", "test2.com"))
 
 
 def update_void_gen(response, void_descript):
