@@ -25,6 +25,19 @@ An interesting observation in the dynamic update, see \autoref{fig:update-querys
 
 This could indicate that the shape of the \gls{rdf} data significantly impacts the time it takes to update the \gls{void} description, but it is not entirely clear exactly what parts of the data are the leading cause for this. For example, the number of characters, or something entirely different causes a decrease in the time it takes to update the \gls{void} description. This is an interesting topic to research in the future by looking at how the shape of the \gls{rdf} data impacts the time it takes to update the \gls{void} description.
 
+\subsection{Use case}\label{subsec:use-case}
+There are a few different use cases where the dynamic update method could be beneficial. Such a case could be when a user has a database with a large amount of data that, over time, grows, and the owner wishes to keep a \gls{void} description for it. Over time the \gls{void} description will become outdated unless the owner manually monitors the database and updates the \gls{void} report when needed. However, this is a tedious task, and the owner might forget to update the \gls{void} description over time.
+
+Instead, the owner could set up an update method, ensuring that the \gls{void} description is always current. Automatically updating the \gls{void} description would be beneficial for the owner, as it would save them time and effort. But also, it would be helpful for the database users, as they could be guaranteed that the \gls{void} description is up to date.
+
+As mentioned in \autoref{sec:results}, a dynamic update or a regeneration method is more beneficial depending on factors such as the size of the database and the size of the updates the database could predict it would get. With a small database, the owner may prefer the regeneration method, as it is faster.
+
+%When could this be used
+%When is it relevant to use this
+%When is it not relevant to use this
+%What is the best method to use
+
+
 
 % The experiment outcomes revealed that the dynamic update method demonstrated an average increase in execution time of approximately 0.15 milliseconds per inserted triple, while the generation method showed an average increase of approximately 0.00048 milliseconds per triple already present in the database.
 
