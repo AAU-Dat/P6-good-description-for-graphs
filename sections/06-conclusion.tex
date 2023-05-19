@@ -1,1 +1,8 @@
 \section{Conclusion}\label{sec:conclusion}
+We have investigated the effects of generating and updating a \gls{void} description and noticed a ratio. This ratio is based on what a database contains and what is attempted to be inserted into it, for example, with a relatively large database compared to a query to be inserted. Our results indicate that updating the \gls{void} description is an appropriate approach. Processing such a query and only updating the \gls{void} description based on the relevant changes is more efficient than generating a \gls{void} description from scratch. However, when the database is relatively small when compared to a query that is to be inserted, our results indicate that the opposite is true, showing that it is more efficient to generate a \gls{void} description.
+
+Our results do not directly answer some edge cases, such as when the database and query have a similar size or when the query is relatively large compared to the database. However, these cases are worth investigating further, as they may provide more insight.
+Our results show a general trend but are all based on the assumption that only new data is attempted to be inserted into the database.
+
+We can conclude that it is possible and, at certain times, beneficial to use a dynamic update method to update the \gls{void} description of an \gls{rdf} dataset. However, depending on the factors measured, there are times when it is better suited to generate a \gls{void} description. Therefore, it is essential to consider the trade-off between the computational cost of updating the \gls{void} description and the benefits of having an updated \gls{void} description.
+
