@@ -93,6 +93,143 @@ In comparison, the database size barely affects the nine update measurements for
     \label{fig:comparison-generation-vs-update}
 \end{figure*}
 
+\subsection{Accuracy of generated VOID descriptions}
+
+The last experiment tests the dynamic and generation methods for generating accurate \gls{void} descriptions for an  \gls{rdf} database. Ensuring that both methods effectively produce the same \gls{void} descriptions is crucial, as this is a critical benchmark for their reliability and accuracy. The premise is that the generation method always creates the correct \gls{void} description. By filling the database with inserts of size 10,000 triple, applying both methods and checking if they create the same \gls{void} description, we can assess the ability to generate correct \gls{void} descriptions. Verifying the consistency of the dynamic method is essential for establishing its effectiveness.
+
+
+The experiment started by initializing the \gls{void}\_description objects one for the dynamic method (dyn\_void\_description) and one for the generation method (gen\_void\_description). These objects were used for the storage and comparison of the \gls{void} descriptions of the  \gls{rdf} database, including the triple count, unique subjects count, unique predicates count, and unique objects count.
+
+The code that does this can be seen \autoref{fig:VOID-gen-test}.
+\begin{listing}[!ht]
+    \begin{minted}[frame=single]{python}
+        def create\_void\_test(endpoint, db\_increase\_file):
+            docker\_reset\_db()
+            dyn\_void\_description = Void\_description(0, 0, 0, 0)
+            gen\_void\_description = Void\_description(0, 0, 0, 0)
+            generation\_query = """SELECT (COUNT(*) AS ?totalTriples) 
+            (COUNT(DISTINCT ?subject) AS ?numSubjects)
+            (COUNT(DISTINCT ?predicate) AS ?numPredicates)
+            (COUNT(DISTINCT ?object) AS ?numObjects) 
+            WHERE { ?subject ?predicate ?object . }"""
+            initial\_data\_state = GetTimeOfQuery(endpoint, generation\_query)
+            update\_void\_gen(initial\_data\_state["dataSet"], gen\_void\_description)
+            update\_void\_gen(initial\_data\_state["dataSet"], dyn\_void\_description)
+            chunk\_size = 10000
+            db\_size = 1000000
+            try:
+                count = 0
+                lines = []
+                with open(db\_increase\_file, "r") as f:
+                    for line in f:
+                        if count == 10000:
+                            data = "".join(lines)
+                            query = "INSERT DATA {" + data + "}"
+                            query\_dict = create\_dict\_based\_on\_query(query)
+                            dynamic\_query = create\_void\_select(query\_dict)
+                            dyn = GetTimeOfQuery(endpoint, dynamic\_query)
+                            InsertDataQuery(endpoint, query)
+                            gen = GetTimeOfQuery(endpoint, generation\_query)
+                            update\_void\_gen(gen["dataSet"], gen\_void\_description)
+                            update\_void\_dyn(dyn["dataSet"], query\_dict, dyn\_void\_description)
+                            db\_size += len(lines)
+                            print(db\_size)
+                            count = 0
+                            lines = []
+                            assert gen\_void\_description.compare\_void(dyn\_void\_description)
+                        else:
+                            lines.append(line)
+                            count += 1
+                        if db\_size > 10000000:
+                            break
+            except Exception as err:
+                print(err)
+    \end{minted}
+    \caption{Code snippet for VOID gen test}
+    \label{fig:VOID-gen-test}
+\end{listing}
+
+
+\begin{itemize}
+    \item The initial state of the database was determined by executing a generation query (generation\_query) using the GetTimeOfQuery function.
+    
+    \item The \gls{void} descriptions for both methods were updated based on the initial state using the update\_void\_gen function. This means their base values are set based on the initial state of the database.
+    
+    \item The experiment proceeded by reading the file containing the database inserts (db\_increase\_file) in chunks of 10,000 lines. For each chunk:
+    
+    \begin{itemize}
+        \item The lines were processed to create an insert query.
+        
+        \item The insert query was executed using the InsertDataQuery function.
+        
+        \item The execution times and the response from the database for both the generation method query and the dynamic method query were measured using the GetTimeOfQuery function.
+        
+        \item The \gls{void} descriptions were updated accordingly using the update\_void\_gen and update\_void\_dyn functions.
+        
+        \item The database size was tracked by incrementing it based on the number of lines processed.
+        
+        \item The \gls{void} descriptions generated by both methods were compared using the compare\_void method of the \gls{void}\_description class to ensure consistency.
+        
+        \item If the database size exceeded a threshold of 10,000,000, the experiment was terminated.
+    \end{itemize}
+    
+    \item If the script concludes, the \gls{void}s must have been identical due to the assert used.
+\end{itemize}
+
+
+
+The experiment was successfully conducted, and the script ran to completion, demonstrating the functionality of both the generation and dynamic methods in creating statistics for the  \gls{rdf} database. The experiment aimed to compare the \gls{void} descriptions generated by these methods and ensure their consistency.
+
+
+During the execution of the script, the database inserts were processed in chunks of 10,000 lines. As the experiment progressed, the database size increased, eventually reaching 10000000. At this point, both the generation method and the dynamic method had generated \gls{void} descriptions that captured the statistics of the  \gls{rdf} database.
+
+
+To illustrate the \gls{void} descriptions generated by both methods at the database size of 8,500,000 triples, \autoref*{fig:VOID-description-result} shows a comparison of these descriptions. The figure provides insights into whether the descriptions are identical at a given point; here, we see they are identical.
+
+
+\begin{listing}[!ht]
+    \begin{minted}[frame=single]{sparql}
+        prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        prefix void: <http://rdfs.org/ns/void#>
+        
+        <test.com> a void:Dataset ;
+            rdfs:label "dynamic\_void\_description" ;
+            void:uriSpace "test.com" ;
+            void:triples 8566226 ;
+            void:entities 1000965 ;
+            void:properties 46 ;
+            void:distinctSubjects 354526 ;
+            void:distinctObjects 646393 .
+        
+        
+        prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        prefix void: <http://rdfs.org/ns/void#>
+        
+        <test2.com> a void:Dataset ;
+            rdfs:label "gen\_void\_description" ;
+            void:uriSpace "test2.com" ;
+            void:triples 8566232 ;
+            void:entities 1000971 ;
+            void:properties 46 ;
+            void:distinctSubjects 354529 ;
+            void:distinctObjects 646396 .
+    \end{minted}
+    \caption{voiddescriptions for both dynamic and generation at database size 8.5 mil}
+    \label{fig:VOID-description-result}
+\end{listing}
+Overall, the experiment yielded successful results, with the script running to completion and showcasing the effectiveness of both the generation and dynamic methods in creating statistics for the  \gls{rdf} database. 
+
+
+
+
+
+
+
+
+
+
 % \begin{figure}[htb!]
 %     \centering
 %     \includegraphics[width=0.8\columnwidth]{figures/dynamic-time-for-all-good.png}
