@@ -37,7 +37,7 @@ There were two methods for creating a \gls{void} description, generate and updat
 The first method was to generate a \gls{void} description from scratch, by looking at the entire dataset and generating a \gls{void} description based on the data. This was done by using a naive query, a simple query that counted the number of subjects, predicates, objects, and triples.
 
 An example of what the generate \gls{sparql} query could look like can be seen in \autoref{lst:naive-query}.
-\begin{listing}[!ht]
+\begin{listing}[htb!]
     \begin{minted}{sparql}          
         SELECT
             (COUNT(*) AS ?totalTriples)
@@ -57,7 +57,7 @@ The second method was to update the \gls{void} description by looking at a query
 
 An example of what the update \gls{sparql} query could look like can be simplified to four different subqueries. The first part of the query would look at the subjects, this can be seen in \autoref{lst:subject-update-query}.
 
-\begin{listing}[!ht]
+\begin{listing}[htb!]
     \begin{minted}{sparql}          
         SELECT ?resource
             (EXISTS { ?resource ?p ?o } AS ?existing) {
@@ -68,7 +68,7 @@ An example of what the update \gls{sparql} query could look like can be simplifi
 \end{listing}
 
 The second part of the query that looks for predicates, can be seen in \autoref{lst:predicate-update-query}.
-\begin{listing}[!ht]
+\begin{listing}[htb!]
     \begin{minted}{sparql}          
         SELECT ?resource 
         (EXISTS { ?s ?resource ?o } AS ?existing) { 
@@ -82,7 +82,7 @@ The second part of the query that looks for predicates, can be seen in \autoref{
 
 The third part of the query that looks for objects, can be seen in \autoref{lst:object-update-query}.
 
-\begin{listing}[!ht]
+\begin{listing}[htb!]
     \begin{minted}{sparql}          
         SELECT ?resource 
         (EXISTS { ?s ?p ?resource } AS ?existing) { 
@@ -95,7 +95,7 @@ The third part of the query that looks for objects, can be seen in \autoref{lst:
 
 The fourth and final part of the query that looks for triples, can be seen in \autoref{lst:triples-update-query}.
 
-\begin{listing}[!ht]
+\begin{listing}[htb!]
     \begin{minted}{sparql}          
         SELECT ?triple ?existing { 
             VALUES (?s ?p ?o) {  
@@ -112,7 +112,7 @@ The fourth and final part of the query that looks for triples, can be seen in \a
 
 \autoref{lst:usecase-example} shows how it would look in an actual usecase with one triple, by using UNION for each subquery. The query would have to be run for every triple that is being inserted or deleted, and the results would be used to update the \gls{void} description.
 
-\begin{listing}[!ht]
+\begin{listing}[htb!]
     \begin{minted}{sparql}          
         SELECT * WHERE { 
         {SELECT ?resource (EXISTS { ?resource ?p ?o } AS ?existing) { VALUES ?resource { <http://db.uwaterloo.ca/~galuc/wsdbm/User12633> } } }UNION 
@@ -129,8 +129,47 @@ The fourth and final part of the query that looks for triples, can be seen in \a
 
 
 Generating a \gls{void} description was the most straightforward method and, therefore, the one that appeared to be the most widely used method. However, this project aimed to improve the performance of creating and updating \gls{void} descriptions. For this reason, both methods were implemented to compare the performance of the two methods and to see if updating a \gls{void} description was viable.\question{Gabriella: Can you provide a reference for this method, are there references for the second method?}
-\subsubsection{Void Generation Methods}\label{sec:voidmethods}
+\subsection{Void Generation Methods}\label{sec:voidmethods}
 \task{Add only the most important parts of our implementation and the rest in the appendix.}
+When creating a VOID description, it is relevant to describe the code used. The code was written in Python, as this research was to be used as more of a proof of concept, rather than actual use. Therefore the practical aspects of language used, was not a major concern, instead the focus was on ease of use. Only the most relevant parts of the code will be discussed, and the rest can be found in the APPENDIX.
+
+\begin{listing}[htb!]
+    \begin{minted}{python}
+def create_generation_data(endpoint, db_increase_file, genName, dynName):
+    docker_reset_db()
+    chunk_size = 10000
+    times_size_db = []
+    dyn_times_db = []
+    db_size = 1000000
+
+    count = 0
+    lines = []
+    with open(db_increase_file, "r") as f:
+        for line in f:
+            if count == 10000:
+                data = "".join(lines)
+                query = "INSERT DATA {" + data + "}"
+                dyn_times_db += create_dyn_datapoints(db_size, endpoint, lines)
+
+                InsertDataQuery(endpoint, query)
+                times_size_db. append(create_datapoint(db_size, endpoint))
+                db_size += len(lines)
+                print(db_size)
+                lines = f.readlines(chunk_size)
+                count = 0
+                lines = []
+            else:
+                lines.append(line)
+                count += 1
+            if db_size > 10000000:
+                break
+    \end{minted}
+    \caption{Python code for generating a VOID description}
+    \label{lst:create_generation_data}
+\end{listing}
+
+REF 1, shows the main method used to create VOID descriptions, for both the generation and update method. The method uses the endpoint, which is the database that is being used, the db\_increase\_file, which is the file that contains the data that is being inserted into the database, genName and dynName which are used as file names for both methods.
+
 
 
 \subsection{Data concerns}\label{sec:concerns}\task{new title for this subsection}
