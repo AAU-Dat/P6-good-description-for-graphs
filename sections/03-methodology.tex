@@ -130,7 +130,6 @@ The fourth and final part of the query that looks for triples, can be seen in \a
 
 Generating a \gls{void} description was the most straightforward method and, therefore, the one that appeared to be the most widely used method. However, this project aimed to improve the performance of creating and updating \gls{void} descriptions. For this reason, both methods were implemented to compare the performance of the two methods and to see if updating a \gls{void} description was viable.\question{Gabriella: Can you provide a reference for this method, are there references for the second method?}
 \subsection{Void Generation Methods}\label{sec:voidmethods}
-\task{Add only the most important parts of our implementation and the rest in the appendix.}
 When creating a VOID description, it is relevant to describe the code used. The code was written in Python, as this research was to be used as more of a proof of concept, rather than actual use. Therefore the practical aspects of language used, was not a major concern, instead the focus was on ease of use. Only the most relevant parts of the code will be discussed, and the rest can be found in the APPENDIX.
 
 \begin{listing}[htb!]
@@ -168,7 +167,116 @@ def create_generation_data(endpoint, db_increase_file, genName, dynName):
     \label{lst:create_generation_data}
 \end{listing}
 
-REF 1, shows the main method used to create VOID descriptions, for both the generation and update method. The method uses the endpoint, which is the database that is being used, the db\_increase\_file, which is the file that contains the data that is being inserted into the database, genName and dynName which are used as file names for both methods.
+REF 1, shows the main function used to create VOID descriptions, for both the generation and update method. The method uses the endpoint, which is the database that is being used, the db\_increase\_file, which is the file that contains the data that is being inserted into the database, where each line in the file is a triple, genName and dynName which are used as file names for both methods.
+The line 1, shows the use of docker\_reset\_db(), which is used to ensure that a new database is created, and the old one is deleted. This is done to ensure that the database is empty before the data is inserted. Then a few variables are initiated in the lines 2-9. The file with the data is then opened in line 10, and each line in the file, is appended to an array, until we reach a chunk of 10.000. This chunk size is used, since this is the limit GRAPHDB sets for a query. When a chunk of 10.000 is made, a query is created that can insert the chunk. On line 15, the times for the dynamic update is added to an array. This function will be explained in detail in the future. On line 17, the insert query is executed. Line 18, appends the times for the generation method to an array. The count is then reset, and the variable 'lines' which is data that is to be inserted, is also reset. This is done until the database size is 10.000.000, or the file is empty.
+
+\begin{listing}[htb!]
+    \begin{minted}{python}
+    def create_dyn_datapoints(db_size, endpoint, insert_data):
+        temp = []
+        data = []
+        for i in range(1, 8002, 1000):
+            ofsett = slice(0, i)
+            slice_of_data = insert_data[ofsett]
+            insert_q = "INSERT DATA {" + "".join(slice_of_data) + "}"
+
+            dynamic_query = QueryMaker(insert_q)
+            dynamic_time = GetTimeOfQuery(endpoint, dynamic_query)["time in ms"]
+            print(dynamic_time, "length of insert", len(slice_of_data))
+            temp.append(dynamic_time)
+            temp.append(i)
+            temp.append(db_size)
+            data.append(temp)
+            temp = []
+    return data
+    \end{minted}
+    \caption{Python code for dynamically updating a VOID description}
+    \label{lst:create_dyn_datapoints}
+\end{listing}
+
+REF 2, shows the function that creates the
+
+% The last experiment tests the dynamic and generation methods for generating accurate \gls{void} descriptions for an  \gls{rdf} database. Ensuring that both methods effectively produce the same \gls{void} descriptions is crucial, as this is a critical benchmark for their reliability and accuracy. The premise is that the generation method always creates the correct \gls{void} description. By filling the database with inserts of size 10,000 triple, applying both methods and checking if they create the same \gls{void} description, we can assess the ability to generate correct \gls{void} descriptions. Verifying the consistency of the dynamic method is essential for establishing its effectiveness.
+
+
+% The experiment started by initializing the \gls{void}\_description objects one for the dynamic method (dyn\_void\_description) and one for the generation method (gen\_void\_description). These objects were used for the storage and comparison of the \gls{void} descriptions of the  \gls{rdf} database, including the triple count, unique subjects count, unique predicates count, and unique objects count.
+
+% The code that does this can be seen \autoref{fig:VOID-gen-test}.
+% \begin{listing*}[hbt!]
+%     \begin{minted}{python}
+%             docker_reset_db()
+%             dyn_void_description = Void_description(0, 0, 0, 0)
+%             gen_void_description = Void_description(0, 0, 0, 0)
+%             generation_query = """SELECT (COUNT(*) AS ?totalTriples) 
+%             (COUNT(DISTINCT ?subject) AS ?numSubjects)
+%             (COUNT(DISTINCT ?predicate) AS ?numPredicates)
+%             (COUNT(DISTINCT ?object) AS ?numObjects) 
+%             WHERE { ?subject ?predicate ?object . }"""
+%             initial_data_state = GetTimeOfQuery(endpoint, generation_query)
+%             update_void_gen(initial_data_state["dataSet"], gen_void_description)
+%             update_void_gen(initial_data_state["dataSet"], dyn_void_description)
+%             chunk_size = 10000
+%             db_size = 1000000
+%             try:
+%                 count = 0
+%                 lines = []
+%                 with open(db_increase_file, "r") as f:
+%                     for line in f:
+%                         if count == 10000:
+%                             data = "".join(lines)
+%                             query = "INSERT DATA {" + data + "}"
+%                             query_dict = create_dict_based_on_query(query)
+%                             dynamic_query = create_void_select(query_dict)
+%                             dyn = GetTimeOfQuery(endpoint, dynamic_query)
+%                             InsertDataQuery(endpoint, query)
+%                             gen = GetTimeOfQuery(endpoint, generation_query)
+%                             update_void_gen(gen["dataSet"], gen_void_description)
+%                             update_void_dyn(dyn["dataSet"], query_dict, dyn_void_description)
+%                             db_size += len(lines)
+%                             print(db_size)
+%                             count = 0
+%                             lines = []
+%                             assert gen_void_description == dyn_void_description
+%                         else:
+%                             lines.append(line)
+%                             count += 1
+%                         if db_size > 10000000:
+%                             break
+%             except Exception as err:
+%                 print(err)
+%     \end{minted}
+%     \caption{Code snippet for VOID gen test}
+%     \label{fig:VOID-gen-test}
+% \end{listing*}
+
+
+% \begin{itemize}
+%     \item The initial state of the database was determined by executing a generation query (generation\_query) using the GetTimeOfQuery function.
+
+%     \item The \gls{void} descriptions for both methods were updated based on the initial state using the update\_void\_gen function. This means their base values are set based on the initial state of the database.
+
+%     \item The experiment proceeded by reading the file containing the database inserts (db\_increase\_file) in chunks of 10,000 lines. For each chunk:
+
+%           \begin{itemize}
+%               \item The lines were processed to create an insert query.
+
+%               \item The insert query was executed using the InsertDataQuery function.
+
+%               \item The execution times and the response from the database for both the generation method query and the dynamic method query were measured using the GetTimeOfQuery function.
+
+%               \item The \gls{void} descriptions were updated accordingly using the update\_void\_gen and update\_void\_dyn functions.
+
+%               \item The database size was tracked by incrementing it based on the number of lines processed.
+
+%               \item The \gls{void} descriptions generated by both methods were compared using the compare\_void method of the \gls{void}\_description class to ensure consistency.
+
+%               \item If the database size exceeded a threshold of 10,000,000, the experiment was terminated.
+%           \end{itemize}
+
+%     \item If the script concludes, the \gls{void}s must have been identical due to the assert used.
+% \end{itemize}
+
+
 
 
 
