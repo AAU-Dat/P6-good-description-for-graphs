@@ -37,7 +37,7 @@ There were two methods for creating a \gls{void} description, generate and updat
 The first method was to generate a \gls{void} description from scratch, by looking at the entire dataset and generating a \gls{void} description based on the data. This was done by using a naive query, a simple query that counted the number of subjects, predicates, objects, and triples.
 
 An example of what the generate \gls{sparql} query could look like can be seen in \autoref{lst:naive-query}.
-\begin{listing}[!ht]
+\begin{listing}[htb!]
     \begin{minted}{sparql}          
         SELECT
             (COUNT(*) AS ?totalTriples)
@@ -57,7 +57,7 @@ The second method was to update the \gls{void} description by looking at a query
 
 An example of what the update \gls{sparql} query could look like can be simplified to four different subqueries. The first part of the query would look at the subjects, this can be seen in \autoref{lst:subject-update-query}.
 
-\begin{listing}[!ht]
+\begin{listing}[htb!]
     \begin{minted}{sparql}          
         SELECT ?resource
             (EXISTS { ?resource ?p ?o } AS ?existing) {
@@ -68,7 +68,7 @@ An example of what the update \gls{sparql} query could look like can be simplifi
 \end{listing}
 
 The second part of the query that looks for predicates, can be seen in \autoref{lst:predicate-update-query}.
-\begin{listing}[!ht]
+\begin{listing}[htb!]
     \begin{minted}{sparql}          
         SELECT ?resource 
         (EXISTS { ?s ?resource ?o } AS ?existing) { 
@@ -82,7 +82,7 @@ The second part of the query that looks for predicates, can be seen in \autoref{
 
 The third part of the query that looks for objects, can be seen in \autoref{lst:object-update-query}.
 
-\begin{listing}[!ht]
+\begin{listing}[htb!]
     \begin{minted}{sparql}          
         SELECT ?resource 
         (EXISTS { ?s ?p ?resource } AS ?existing) { 
@@ -95,7 +95,7 @@ The third part of the query that looks for objects, can be seen in \autoref{lst:
 
 The fourth and final part of the query that looks for triples, can be seen in \autoref{lst:triples-update-query}.
 
-\begin{listing}[!ht]
+\begin{listing}[htb!]
     \begin{minted}{sparql}          
         SELECT ?triple ?existing { 
             VALUES (?s ?p ?o) {  
@@ -112,7 +112,7 @@ The fourth and final part of the query that looks for triples, can be seen in \a
 
 \autoref{lst:usecase-example} shows how it would look in an actual usecase with one triple, by using UNION for each subquery. The query would have to be run for every triple that is being inserted or deleted, and the results would be used to update the \gls{void} description.
 
-\begin{listing}[!ht]
+\begin{listing}[htb!]
     \begin{minted}{sparql}          
         SELECT * WHERE { 
         {SELECT ?resource (EXISTS { ?resource ?p ?o } AS ?existing) { VALUES ?resource { <http://db.uwaterloo.ca/~galuc/wsdbm/User12633> } } }UNION 
@@ -129,9 +129,43 @@ The fourth and final part of the query that looks for triples, can be seen in \a
 
 
 Generating a \gls{void} description was the most straightforward method and, therefore, the one that appeared to be the most widely used method. However, this project aimed to improve the performance of creating and updating \gls{void} descriptions. For this reason, both methods were implemented to compare the performance of the two methods and to see if updating a \gls{void} description was viable.\question{Gabriella: Can you provide a reference for this method, are there references for the second method?}
-\subsubsection{Void Generation Methods}\label{sec:voidmethods}
-\task{Add only the most important parts of our implementation and the rest in the appendix.}
+\subsection{Update \gls{void} query}\label{sec:update-void-query}
+By only updating relevant parts of the VOID description, it is assumed that keeping a VOID description updated will be improved, as the VOID description will not have to be recreated every time a database is modified.
 
+Based on an insert query, a new query is created. The new query checks what parts of the insert query already exist in the database. This ensures that only the relevant parts of the VOID description will be updated.
+
+\begin{listing}[htb!]
+    \begin{minted}{python}
+def create_void_select(dict):
+    subjects = dict["subjects"]
+    predicates = dict["predicates"]
+    objects = dict["objects"]
+    all_triples = dict["triples_together"]
+
+    all_subjects = " ".join(subjects)
+    all_predicates = " ".join(predicates)
+    all_objects = " ".join(objects)
+    subject_of_query = f"{{SELECT ?resource (EXISTS 
+        {{ ?resource ?p ?o }} AS ?existing) 
+        {{ VALUES ?resource {{ {all_subjects} }} }} }}"
+    predicate_part_query = f"UNION {{ SELECT ?resource (EXISTS 
+        {{ ?s ?resource ?o }} AS ?existing)
+        {{ VALUES ?resource {{ {all_predicates} }} }} }}"
+    object_part_query = f"UNION {{ SELECT ?resource (EXISTS
+        {{ ?s ?p ?resource }} AS ?existing) 
+        {{ VALUES ?resource {{ {all_objects} }} }} }}"
+    triple_part_query = create_triple_part_of_query(
+        dict["triples_individually"])
+    final_query = f"SELECT * WHERE {{ {subject_of_query + predicate_part_query + object_part_query + triple_part_query} }}"
+    return final_query
+    \end{minted}
+    \caption{Python code that creates the \gls{void} select query}
+    \label{lst:create_void_select}
+\end{listing}
+
+The function \autoref{lst:create_void_select} takes a dictionary as input; the dictionary is created from a query to be inserted into the database, and analyzed to contain all subjects, predicates, objects, and triples. Next, new strings are made from the objects, which are select queries that check whether an object exists. Each string is then combined to create a full select query.
+
+The returned string is a query that creates a table of what parts do or do not exist in the database. From this table, the number of objects that do not exist is counted, and the value for each part in the VOID description is updated accordingly.
 
 \subsection{Data concerns}\label{sec:concerns}\task{new title for this subsection}
 To better understand the results later in the project from the experiments, consideration of what data is relevant must be considered. Therefore it must be determined clearly and precisely what data is relevant to the project and what data is not before the experiments are conducted. In addition, the data must give a clear insight into the comparison between updating and generating the \gls{void} description.
