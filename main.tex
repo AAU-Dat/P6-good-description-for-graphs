@@ -1,6 +1,11 @@
 \input{setup/preamble.tex}
 \input{setup/macros.tex}
 \begin{document}
+
+\begin{titlepage}
+    \includepdf[pages=-, noautoscale]{out/summary}
+\end{titlepage}
+
 \input{setup/title.tex}
 \input{sections/00-abstract.tex}
 
@@ -12,6 +17,7 @@
 \input{sections/04-results.tex}
 \input{sections/05-discussion.tex}
 \input{sections/06-conclusion.tex}
+\input{sections/07-future-works.tex}
 
 \renewcommand{\IEEEiedlistdecl}{\IEEEsetlabelwidth{SONET}}
 \printglossaries
