@@ -1,4 +1,4 @@
-generation time in msek,dbsize in triples
+generation_time,dbsize
 596.9150066375732,1000000
 568.0618286132812,1010000
 564.6936893463135,1020000

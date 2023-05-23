@@ -1,4 +1,4 @@
-insert time in msek,insert size,dbsize in triples
+dynamic_time,query_size,dbsize
 6664.982080459595,1,1000000
 420.1376438140869,1001,1000000
 476.1373996734619,2001,1000000
