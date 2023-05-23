@@ -4,32 +4,25 @@ This section covers the methodology, tools, and datasets used. In addition, the 
 \subsection{GraphDB}\label{sec:graphdb}
 GraphDB is an \gls{rdf} triple store used to store and query \gls{rdf} data. Ontotext develops GraphDB, which is a commercial product, but there is a free version available that is used for this project. GraphDB is a Java application that can be run on a Java Virtual Machine. GraphDB is a triple store that uses \gls{sparql} to query the data stored in the database~\cite{graphdb-product}.
 
-GraphDB is hosted in a Docker container; this is done to have a local instance of a database that can quickly and easily be reset, updated and set up on all machines used for the project using the guide provided by GraphDB and following the steps given. \task{describe the machines provided(hardware, configuration of the docker containers, configuration of the graphDB instances)}
+GraphDB is hosted in a Docker container; this is done to have a local instance of a database that can quickly and easily be reset, updated and set up on all machines used for the project using the guide provided by GraphDB and following the steps given. The characteristics of the machine used to generate the results are seen in \autoref{tab:pc-specs}.
 
 When deciding what database to use, there were many popular choices aside from GraphDB, as mentioned in~\cite{best-graph-databases} which lists different popular databases, in addition to the pros and cons of each. Neo4j was one of the few databases considered, as it appeared in much of the literature in the research phase. However, since it is not a triple store, it cannot directly use \gls{sparql}~\cite{neo4j:-a-reasonable-RDF-graph-database}. Instead, Neo4j uses its graph query language, Cypher~\cite{cypher-query-language}, which would have required understanding an entirely new language or translating a \gls{sparql} query to Cypher. Instead, it was deemed more appropriate to use a triple store that uses \gls{sparql}, such as GraphDB. Additionally, GraphDB was accessible and straightforward to use for this project.
 
 \subsection{Cache}\label{sec:cache}
-When running the queries on the dataset, any data from the previous query must not be saved in the cache. There are two main reasons for this:
-\textbf{Data accuracy}: If the data from the previous query is no longer up-to-date or relevant, it could lead to inaccurate or misleading results if used again later. Not saving this data in the cache can ensure that the results of future queries are based on the most current and relevant data.
-
-\textbf{Performance}: Depending on the size and complexity of the data, saving it in the cache could slow down the performance of the system or application. Not saving this data can improve the speed and efficiency of future queries.
+When running the queries on the dataset, any data from the previous query must not be saved in the cache, as this could impact the results of the following queries, and create poor measurements.
 
 For this problem, different solutions can be used. One solution is to clear the cache between every query. Another solution is to set the cache size too small so the cache does not save the data from the previous query. These two solutions are the ones that the group looked at when deciding how to solve the problem. Instead of clearing the cache between every query, the cache will be small enough to hold information other than the one query running on GraphDB because clearing the cache between every query will take much time, and the group wanted to have the fastest solution possible.
 
 The cache is the memory that is used to store the data that is used the most. By default, when GraphDB is run on the Java Virtual Machine, it takes 50\% of the heap size~\cite{cache-strategy}.
-Because the default cache size was too big, it was found that the cache size for this project should be 0. This can be seen in the docker-compose.yml file in the project, with the -Dgraphdb.page.cache.size=0 flag.
+Because the default cache size was too big, it was found that the cache size for this project should be 0. This can be seen in \autoref{lst:graphdb-docker-settings} file in the project, with the -Dgraphdb.page.cache.size=0 flag.
 
-%GraphDB uses two indexes in the cache to inference and evaluate queries more effetive space wise. The two indexes are predicate-object-subject (POS) and predicate-subject-object (PSO), these are used to store the data in the cache. Both structures convey the same information, but with a different emphasis on the elements involved, as POS emphasis at predicate to object and PSO emphasis predicate to subject.
-%The two indexes are used for different purposes. They both benefit on what kind of query is run on the dataset. They are good if a query can be rewritten to subject-predicate (SP) or object-predicate (OP). These two indexes comes on occurences when the quering datasets has a lot of predicates. Or When a query asks for predicate, as if there are a relation between the subject and the object~\cite{graphdb-storage}.
 
 \subsection{Dataset}\label{sec:dataset}
-Two datasets were used for this project—a small dataset created for testing and a larger pre-existing dataset. The small dataset was a dataset of Pokemon. The dataset contained 150 Pokemon, their types, and evolutions. This dataset was created in a .ttl file and imported into GraphDB. The dataset was created to get a graph of how the graph database worked and to test queries where the results were known. The dataset was also used to test generating and updating a \gls{void} description.
-
-The larger dataset was the "Waterloo SPARQL Diversity Test Suit (WatDiv) v0.6"~\cite{WatDiv}, containing 10 million triples. The dataset's contents were not crucial for this project, but they would be an excellent example of generating a \gls{void} description from a larger dataset. Therefore, when a working prototype was created from the smaller Pokemon dataset, the larger dataset was used to test the different methods of generating a \gls{void} description.
+The dataset used was the \gls{watdiv}~\cite{WatDiv} v0.6, containing 10 million triples. The dataset's contents were not crucial for this project, but they would be an excellent example of generating a \gls{void} description from a larger dataset.
 
 The results of generating and updating a \gls{void} description from a larger dataset would be more interesting, as the dataset is larger and more complex than the smaller dataset. In addition, the more extensive dataset would give a better idea of how it would perform in a real-world scenario, with two ideas for testing the performance by making both one big update or many more minor updates to the dataset, as these types of changes are used interchangeably in the real world. In future sections, there will be a more in-depth description of what results and metrics were a concern.
 
-The larger dataset (WatDiv) is split into ten smaller datasets. The initial creation of the database to work with is made on the first of the ten splits of WatDiv, and all data that is inserted would be from the other nine splits of the WatDiv dataset. Because all the data is taken from the same dataset, the data has a similar structure, making it easy to work with.
+The larger dataset is split into ten smaller datasets. The initial creation of the database to work with is made on the first of the ten splits of \gls{watdiv}, and all data that is inserted would be from the other nine splits of the \gls{watdiv} dataset. Because all the data is taken from the same dataset, the data has a similar structure, making it easy to work with.
 
 \subsection{Void Generation and Update}\label{sec:void}
 There were two methods for creating a \gls{void} description, generate and update.\task{is there a ref for these}
@@ -37,6 +30,8 @@ There were two methods for creating a \gls{void} description, generate and updat
 The first method was to generate a \gls{void} description from scratch, by looking at the entire dataset and generating a \gls{void} description based on the data. This was done by using a naive query, a simple query that counted the number of subjects, predicates, objects, and triples.
 
 An example of what the generate \gls{sparql} query could look like can be seen in \autoref{lst:naive-query}.
+
+
 \begin{listing}[htb!]
     \begin{minted}{sparql}          
         SELECT
@@ -53,7 +48,7 @@ An example of what the generate \gls{sparql} query could look like can be seen i
 As can be read, the query counts the number of subjects, predicates, objects, and triples in the entire dataset. This query would be run on the dataset, and the results would be used to generate a \gls{void} description.
 
 
-The second method was to update the \gls{void} description by looking at a query to see what updates are being made; this takes a query and finds out what is being inserted or deleted; this is then broken into more minor queries for the sake of seeing if it exists in the database, and update the \gls{void} description on what the queries return. This way, there will not be a need to look at the whole database and update the \gls{void} description, as this method finds out what is being updated and can update the \gls{void} description accordingly.
+The second method was to update the \gls{void} description by looking at an insert query to see what updates are being made; this takes a query and finds out what is being inserted; this is then broken into more minor queries for the sake of seeing if it exists in the database, and update the \gls{void} description on what the queries return. This way, there will not be a need to look at the whole database and update the \gls{void} description, as this method finds out what is being updated and can update the \gls{void} description accordingly.
 
 An example of what the update \gls{sparql} query could look like can be simplified to four different subqueries. The first part of the query would look at the subjects, this can be seen in \autoref{lst:subject-update-query}.
 
@@ -117,10 +112,9 @@ The fourth and final part of the query that looks for triples, can be seen in \a
         SELECT * WHERE { 
         {SELECT ?resource (EXISTS { ?resource ?p ?o } AS ?existing) { VALUES ?resource { <http://db.uwaterloo.ca/~galuc/wsdbm/User12633> } } }UNION 
         { SELECT ?resource (EXISTS { ?s ?resource ?o } AS ?existing) { VALUES ?resource { <http://db.uwaterloo.ca/~galuc/wsdbm/follows> } } }UNION 
-        { SELECT ?resource (EXISTS { ?s ?p ?resource } AS ?existing) { VALUES ?resource { <http://db.uwaterloo.ca/~galuc/wsdbm/User39065> <http://db.uwaterloo.ca/~galuc/wsdbm/User40909> } } }
+        { SELECT ?resource (EXISTS { ?s ?p ?resource } AS ?existing) { VALUES ?resource { <http://db.uwaterloo.ca/~galuc/wsdbm/User39065> } } }
         UNION{ SELECT ?triple ?existing { VALUES (?s ?p ?o) {  (<http://db.uwaterloo.ca/~galuc/wsdbm/User12633>   <http://db.uwaterloo.ca/~galuc/wsdbm/follows>   <http://db.uwaterloo.ca/~galuc/wsdbm/User39065> )
-
-        (<http://db.uwaterloo.ca/~galuc/wsdbm/User12633>       <http://db.uwaterloo.ca/~galuc/wsdbm/follows>   <http://db.uwaterloo.ca/~galuc/wsdbm/User40909> ) 
+ 
         } BIND(CONCAT(str(?s), str(?p), str(?o)) AS ?triple) BIND(EXISTS { ?s ?p ?o } AS ?existing) } } } 
     \end{minted}
     \caption{Full SPARQL query for checking the update of two triples}
@@ -129,10 +123,12 @@ The fourth and final part of the query that looks for triples, can be seen in \a
 
 
 Generating a \gls{void} description was the most straightforward method and, therefore, the one that appeared to be the most widely used method. However, this project aimed to improve the performance of creating and updating \gls{void} descriptions. For this reason, both methods were implemented to compare the performance of the two methods and to see if updating a \gls{void} description was viable.\question{Gabriella: Can you provide a reference for this method, are there references for the second method?}
-\subsection{Update \gls{void} query}\label{sec:update-void-query}
-By only updating relevant parts of the VOID description, it is assumed that keeping a VOID description updated will be improved, as the VOID description will not have to be recreated every time a database is modified.
 
-Based on an insert query, a new query is created. The new query checks what parts of the insert query already exist in the database. This ensures that only the relevant parts of the VOID description will be updated.
+\subsection{Update \gls{void} query}\label{sec:update-void-query}
+By only updating relevant parts of the \gls{void} description, it is assumed that keeping a \gls{void} description updated will be improved, as the \gls{void} description will not have to be recreated every time a database is modified.
+
+Based on an insert query, a new query is created. The new query checks what parts of the insert query already exist in the database. This ensures that only the relevant parts of the \gls{void} description will be updated.
+
 
 \begin{listing}[htb!]
     \begin{minted}{python}
@@ -163,32 +159,29 @@ def create_void_select(dict):
     \label{lst:create_void_select}
 \end{listing}
 
+
 The function \autoref{lst:create_void_select} takes a dictionary as input; the dictionary is created from a query to be inserted into the database, and analyzed to contain all subjects, predicates, objects, and triples. Next, new strings are made from the objects, which are select queries that check whether an object exists. Each string is then combined to create a full select query.
 
-The returned string is a query that creates a table of what parts do or do not exist in the database. From this table, the number of objects that do not exist is counted, and the value for each part in the VOID description is updated accordingly.
+The returned string is a query that creates a table of what parts do or do not exist in the database. From this table, the number of objects that do not exist is counted, and the value for each part in the \gls{void} description is updated accordingly.
 
 \subsection{Data concerns}\label{sec:concerns}\task{new title for this subsection}
-To better understand the results later in the project from the experiments, consideration of what data is relevant must be considered. Therefore it must be determined clearly and precisely what data is relevant to the project and what data is not before the experiments are conducted. In addition, the data must give a clear insight into the comparison between updating and generating the \gls{void} description.
+To better understand the results later in the project from the experiments, consideration of what data collection is relevant must be considered. Therefore it must be determined clearly and precisely what data is relevant to the project and what data is not before the experiments are conducted. In addition, the data must give a clear insight into the comparison between updating and generating the \gls{void} description.
 
 \subsubsection{Size of the database}
-A metric that will be looked at is the database size; the number of \gls{rdf} triples will measure the size of the database. The database size could impact how long it takes to update the \gls{void} description and how long it takes to generate the \gls{void} description since, with a larger dataset, more data must be read and processed. For this reason, the size of the dataset will be an interesting metric to measure and compare how it affects the dynamically updating the \gls{void} description and generating the \gls{void} description from scratch.
+A metric that will be looked at is the database size; the number of \gls{rdf} triples will measure the size of the database. The database size could impact how long it takes to update the \gls{void} description and how long it takes to generate the \gls{void} description since, with a larger dataset, more data must be read and processed. For this reason, the size of the dataset will be an important factor to control and compare how it affects the dynamically updating the \gls{void} description and generating the \gls{void} description from scratch.
 
 \subsubsection{Triples in query}\task{write about what happens, when the update is a delete}\task{What about updates that do not provide the list of triples, but provide a graph pattern in a WHERE clause?}
-When inserting data into the dataset, updating the \gls{void} description requires processing the query to know what parts of the current \gls{void} description will be affected and need to be updated. Due to this, the size of the query, I.E., The number of triples in the query, will be an interesting metric to measure and compare how it affects the dynamic updating of the \gls{void} description. However, the number of triples should not impact generating the \gls{void} description from scratch, as the entire dataset will be read and processed. This could give some insight into how effective dynamically updating the \gls{void} description is, compared to generating the \gls{void} description from scratch.
 
-%\subsubsection{Cache size}
-%When measuring the different metrics, additional elements that could impact each measurement's results have to be considered. Such a case could be the cache size, as the cache size could impact the time it takes to read and process the dataset. Therefore it will be examined how the cache size affects the time it takes to update and generate the \gls{void} description. Cache size could be an interesting metric to consider when considering real usecases, as the cache size could be a factor that could be changed to improve the performance. However, it also has a cost of memory usage. Based on the results, a discussion can be made about whether the pros outweigh the cons and to what degree.
+When inserting data, updating the \gls{void} description requires processing the query to know what parts of the current \gls{void} description will be affected and need to be updated. Due to this, the size of the query, that is the number of triples in the query, will be an interesting factor to control and compare how it affects the dynamic updating of the \gls{void} description. However, the number of triples should not impact generating the \gls{void} description from scratch, outside of being added to the total of the entire dataset, as the entire dataset will be read and processed. This could give some insight into how effective dynamically updating the \gls{void} description is, compared to generating the \gls{void} description from scratch.
 
 \subsubsection{Total running time}
-When looking at the different metrics, it was essential to consider how they would be measured. For this project, total running time is used. The total running time is from the start to the end of the process, from when an update to the dataset is made to when the \gls{void} description is updated or generated. This does not include the time to make the first \gls{void} description, as it should be made when the database is created. The query size, as in the number of triples changed, is assumed to have the most effect on the total running time when updating the \gls{void} description. This is because the query size affects the number of triples that must be processed and read. Based on these assumptions, the total running time is used to measure when it is more effective to search for the updates in the database before implementing them into the database and updating the \gls{void} description rather than making a new \gls{void} description every update made to a database.
+It was essential to consider how time would be measured. For this project, total running time is used. The total running time is from the start to the end of the process, from when an update to the dataset is made to when the \gls{void} description is updated or generated. This does not include the time to make the first \gls{void} description, as it should be made when the database is created.
 
-\subsubsection{Time of generated subqueries}
-Additionally, measuring the running time for the generated subqueries is beneficial when optimising the total running time. Therefore, for the sake of finding the most effective way to write a subquery, the running time of the subqueries is measured for the sake of performance.
-This metric would only be used for the update method, as the generation method does not use subqueries.
+The query size, as in the number of triples changed, is assumed to have the most effect on the total running time when updating the \gls{void} description. This is because the query size affects the number of triples that must be processed and read. Based on these assumptions, the total running time is used to measure when it is more effective to search for the updates in the database before implementing them into the database and updating the \gls{void} description rather than making a new \gls{void} description after every update made to a database.
 
 \subsubsection{Total number of operations}
 The total number of operations can also be used as a comparison.
-The number of operations can be more challenging to measure, as this will be found by analysing the code written for the project. The code can be written in many different ways, so the number of operations can vary. Therefore, gathering the number of operations is more complex than the total running time. However, it could give insight into how demanding the processes were since time could be based on many factors, such as hardware, database connection, and other machine processes. Therefore, looking at the number of operations made could give a more accurate comparison between the different methods.
+The number of operations can be more challenging to measure, as this will be found by analysing the code written for the project. The code can be written in many different ways, so the number of operations can vary. Therefore, gathering the number of operations is more complex than the total running time. However, it could give insight into how demanding the processes were since time could be based on many factors, such as hardware, database connection, and other machine processes. Looking at the number of operations made could give a more accurate comparison between the different methods, but because GraphDB does not give access to internals, we cannot measure this.
 
 
 \subsection{Insert Triples}\label{sec:insert-triples}

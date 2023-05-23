@@ -1,0 +1,16 @@
+\section{Docker}\label{sec:docker}
+\autoref{lst:graphdb-docker-settings} shows the settings used for GraphDB in the Docker Compose file.
+
+\begin{listing}[htb!]
+    \begin{minted}{yaml}
+        -Xmx6g
+        -Xms6g 
+        -Dgraphdb.connector.maxHttpHeaderSize=65536000 
+        -Dgraphdb.page.cache.size=0 
+        -Dgraphdb.connector.maxPostSize=6553600000 
+        -Ddefaut.min.distinct.threshold=10485760000000 
+        -Dgraphdb.connector.asyncTimeout=6000000"        
+    \end{minted}
+    \caption{Settings used for GraphDB in the Docker Compose file.}
+    \label{lst:graphdb-docker-settings}
+\end{listing}
