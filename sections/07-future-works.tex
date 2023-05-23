@@ -7,4 +7,6 @@ For example, suppose an insert query is run twice. In that case, it should not b
 
 The scope of this paper is relatively limited, exploring only a small subset of \gls{void} properties and only one type of query. Further research could explore other types of queries, such as delete and update queries or more advanced insert queries, as well as other \gls{void} properties. In addition, class- and property partitions look particularly interesting, as these could be used to effectivize linkset queries.
 
+Also, exploring different variations of the query used in the update method is worth looking into. It may be that there is a more efficient query structure to generate based on the insert query, and determining the most efficient query structure is worth exploring.
+
 It has not been mentioned as a parameter for the experiment, but the database implementation might be a relevant factor. Aside from not having access to the internals of the database, the implementation of GraphDB may also be a factor in the execution time of the queries. Therefore, performing the same experiments on different database implementations, for example, Virtuoso, Blazegraph, or Apache Jena, may yield different results.

@@ -10,7 +10,6 @@
 \input{sections/00-abstract.tex}
 
 % Input sections below this comment
-\input{sections/summary.tex}
 \input{sections/01-introduction.tex}
 \input{sections/02-related-works.tex}
 \input{sections/03-methodology}
@@ -18,12 +17,17 @@
 \input{sections/05-discussion.tex}
 \input{sections/06-conclusion.tex}
 \input{sections/07-future-works.tex}
+\input{sections/08-acknowledgements.tex}
 
 \renewcommand{\IEEEiedlistdecl}{\IEEEsetlabelwidth{SONET}}
 \printglossaries
 \renewcommand{\IEEEiedlistdecl}{\relax}
 
 \printbibliography[heading=bibintoc]\label{bib:mybiblio}
+
+\appendix
+\input{sections/appendix/docker}
+\input{sections/appendix/pc-specs}
 
 
 \end{document}
