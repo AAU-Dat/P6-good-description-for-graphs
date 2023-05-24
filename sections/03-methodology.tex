@@ -25,7 +25,7 @@ The results of generating and updating a \gls{void} description from a larger da
 The larger dataset is split into ten smaller datasets. The initial creation of the database to work with is made on the first of the ten splits of \gls{watdiv}, and all data that is inserted would be from the other nine splits of the \gls{watdiv} dataset. Because all the data is taken from the same dataset, the data has a similar structure, making it easy to work with.
 
 The database started with 1,000,000 triples, as the experiments were intended to resemble a practical scenario, where a database was already created and in use.
-\subsection{Void Generation and Update}\label{sec:void}
+\subsection{\gls{void} Generation and Update}\label{sec:void}
 Two methods were used for creating a \gls{void} description in this paper; generate and update.
 
 The first method was to generate a \gls{void} description from scratch, by looking at the entire dataset and generating a \gls{void} description based on the data. This was done by using a naive query, a simple query that counted the number of subjects, predicates, objects, and triples.
@@ -124,7 +124,7 @@ The fourth and final part of the query that looks for triples, can be seen in \a
 
 Generating a \gls{void} description was the most straightforward method and, therefore, the one that appeared to be the most widely used method~\cite{optimize-SPARQL-queries, aether-tool}. However, this project aimed to improve the performance of creating and updating \gls{void} descriptions. For this reason, both methods were implemented to compare the performance of the two methods and to see if updating a \gls{void} description was viable.
 
-\subsection{Update \gls{void} query}\label{sec:update-void-query}
+\subsection{Update \gls{void} Query}\label{sec:update-void-query}
 By only updating relevant parts of the \gls{void} description, it is assumed that keeping a \gls{void} description updated will be improved, as the \gls{void} description will not have to be recreated every time a database is modified.
 
 Based on an insert query, a new query is created. The new query checks what parts of the insert query already exist in the database. This ensures that only the relevant parts of the \gls{void} description will be updated.
@@ -162,22 +162,22 @@ The function create\_void\_select, see \autoref{lst:create_void_select} takes a 
 
 The returned string is a query that creates a table of what parts do or do not exist in the database. From this table, the number of entities that do not exist is counted, and the value for each part in the \gls{void} description is updated accordingly. By using a \gls{sparql} count on each value, it is possible to avoid getting a huge table. This is not done because the table makes it possible to handle situations where an entity is both an object and a subject. It also makes possible extensions like updates to property partitioning, another thing that could be in a void description.
 
-\subsection{Data considerations}\label{sec:concerns}
+\subsection{Data Considerations}\label{sec:concerns}
 To better understand the results later in the project from the experiments, consideration of what data collection is relevant must be considered. Therefore it must be determined clearly and precisely what data is relevant to the project and what data is not before the experiments are conducted. In addition, the data must give a clear insight into the comparison between updating and generating the \gls{void} description.
 
-\subsubsection{Size of the database}
+\subsubsection{Size of the Database}
 A metric that will be looked at is the database size; the number of \gls{rdf} triples will measure the size of the database. The database size could impact how long it takes to update the \gls{void} description and how long it takes to generate the \gls{void} description since, with a larger dataset, more data must be read and processed. For this reason, the size of the dataset will be an important factor to control and compare how it affects the dynamically updating the \gls{void} description and generating the \gls{void} description from scratch.
 
-\subsubsection{Triples in query}
+\subsubsection{Triples in Query}
 
 When inserting data, updating the \gls{void} description requires processing the query to know what parts of the current \gls{void} description will be affected and need to be updated. Due to this, the size of the query, that is the number of triples in the query, will be an interesting factor to control and compare how it affects the dynamic updating of the \gls{void} description. However, the number of triples should not impact generating the \gls{void} description from scratch, outside of being added to the total of the entire dataset, as the entire dataset will be read and processed. This could give some insight into how effective dynamically updating the \gls{void} description is, compared to generating the \gls{void} description from scratch.
 
-\subsubsection{Total running time}
+\subsubsection{Total Running Time}
 It was essential to consider how time would be measured. For this project, total running time is used. The total running time is from the start to the end of the process, from when an update to the dataset is made to when the \gls{void} description is updated or generated. This does not include the time to make the first \gls{void} description, as it should be made when the database is created.
 
 The query size, as in the number of triples changed, is assumed to have the most effect on the total running time when updating the \gls{void} description. This is because the query size affects the number of triples that must be processed and read. Based on these assumptions, the total running time is used to measure when it is more effective to search for the updates in the database before implementing them into the database and updating the \gls{void} description rather than making a new \gls{void} description after every update made to a database.
 
-\subsubsection{Total number of operations}
+\subsubsection{Total Number of Operations}
 The total number of operations can also be used as a comparison.
 The number of operations can be more challenging to measure, as this will be found by analysing the code written for the project. The code can be written in many different ways, so the number of operations can vary. Therefore, gathering the number of operations is more complex than the total running time. However, it could give insight into how demanding the processes were since time could be based on many factors, such as hardware, database connection, and other machine processes. Looking at the number of operations made could give a more accurate comparison between the different methods, but because GraphDB does not give access to internals, we cannot measure this.
 

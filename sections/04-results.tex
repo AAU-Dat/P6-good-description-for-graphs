@@ -1,5 +1,5 @@
-\section{results}\label{sec:results}
-\subsection{Generation results}\label{subsec:generation-results}
+\section{Results}\label{sec:results}
+\subsection{Generation Results}\label{subsec:generation-results}
 The results were made by measuring the generation time for a \gls{void} description for different database sizes. The database started at 1 million triples and was incremented by 10,000 triples up to 10,000,000. A \gls{void} description was generated for each increment for the database, and the time it took to generate it was measured in ms by the "time" library in Python. This was done ten times to ensure the results would be reliable. From this, a graph could be made, and a linear regression could be made to show the trend of the generation time. This helps to show how much the time to generate a \gls{void} description increases as the database size increases.
 
 A graph of the standard deviation of the results can be seen in \autoref{fig:generate-dbsize-all}, which shows the size of the database along the x-axis and the generation time in ms on the y-axis. Each point in the graph has a span, the standard deviation of the results. From the graph, it is clear that there is a trend that the data follows. As the database size increases, so does the time it takes to generate a \gls{void} description; the time increases linearly with the database size.
@@ -7,7 +7,7 @@ A graph of the standard deviation of the results can be seen in \autoref{fig:gen
 \begin{figure}[htb!]
     \centering
     \includegraphics[width=0.8\columnwidth]{figures/generation-results-graph.png}
-    \caption{2D graph showing the standard number of tripels impact of database size on the time it takes to generate a \gls{void} description. Containing all the data.}
+    \caption{Graph showing the standard number of tripels impact of database size on the time it takes to generate a \gls{void} description. Containing all the data.}
     \label{fig:generate-dbsize-all}
 \end{figure}
 
@@ -16,7 +16,7 @@ Though there is a strange trend when the database reaches the size above 8,000,0
 \begin{figure}[htb!]
     \centering
     \includegraphics[width=0.8\columnwidth]{figures/generation-results-graph-all.png}
-    \caption{2D graph showing each runs impact of database size on the time it takes to generate a \gls{void} description. Containing all the data.}
+    \caption{Graph showing each runs impact of database size on the time it takes to generate a \gls{void} description. Containing all the data.}
     \label{fig:generate-dbsize-10-runs-all}
 \end{figure}
 
@@ -25,13 +25,13 @@ Certain outliers deviate significantly from others. This is most likely because 
 \begin{figure}[htb!]
     \centering
     \includegraphics[width=0.8\columnwidth]{figures/generation-results-graph-all-good.png}
-    \caption{2D graph showing each runs impact of database size on the time it takes to generate a \gls{void} description. Containing only the good data.}
+    \caption{Graph showing each runs impact of database size on the time it takes to generate a \gls{void} description. Containing only the good data.}
     \label{fig:generate-dbsize-10-runs-good}
 \end{figure}
 
 From this, we can gather that the time it takes to generate a \gls{void} description for a database linearly increases as the database size increases. This is expected because the script only processes the triples in the database, and the more triples there are, the more triples the script has to process. This means that the time it takes to generate a \gls{void} description is directly proportional to the number of triples in the database.
 
-\subsection{Update results}\label{subsec:update-results}
+\subsection{Update Results}\label{subsec:update-results}
 The results for updating the \gls{void} description contained three parameters: time, query size, and database size. The query size was measured when updating the \gls{void} description but not when generating it because query size did not affect generation, as the generation is purely based on what is in the database.
 
 The results were made by measuring the time it took to update the \gls{void} description for database and query sizes. As in \autoref{subsec:generation-results}, the database started at 1 million triples and incremented by 10,000 triples up to 10,000,000. The difference is that query size is simulated by creating a query of one triple and incrementing it by 1,000 up to 8,001, whereafter, the database size is incremented by 10,000.
@@ -47,31 +47,31 @@ As with \autoref{subsec:generation-results}, the computer used during the measur
 \begin{figure}[htb!]
     \centering
     \includegraphics[width=0.8\columnwidth]{figures/dynamic-time-query-size-all.png}
-    \caption{2D graph showing the impact of query size and database size on the time it takes to update a \gls{void} description, containing all the data.}
+    \caption{Graph showing the impact of query size and database size on the time it takes to update a \gls{void} description, containing all the data.}
     \label{fig:update-querysize-all}
 \end{figure}
 
 \begin{figure}[htb!]
     \centering
     \includegraphics[width=0.8\columnwidth]{figures/dynamic-time-query-size-good.png}
-    \caption{2D graph showing the impact of query size and database size on the time it takes to update a \gls{void} description, containing only the good data.}
+    \caption{Graph showing the impact of query size and database size on the time it takes to update a \gls{void} description, containing only the good data.}
     \label{fig:update-querysize-good}
 \end{figure}
 
 
-The 2D-graph in \autoref{fig:update-querysize-good} shows the impact of query size and database size on the time it takes to update a \gls{void} description. From this graph, it is clear to see that there is a trend that the data follows.
+The graph in \autoref{fig:update-querysize-good} shows the impact of query size and database size on the time it takes to update a \gls{void} description. From this graph, it is clear to see that there is a trend that the data follows.
 
 The query size significantly impacts the time it takes to update the \gls{void} description, and the database size bearly impacts the time it takes to update the \gls{void} description. This is because as the amount of new data inserted into the database increases, so does the time to update the \gls{void} description because the script has to process more data. However, all the data inserted is new, meaning it is currently unknown if updating existing data will significantly impact the time it takes to update the \gls{void} description.
 
 This could be tested in the future, but it will likely not significantly impact the time it takes to update the \gls{void} description. This is because the script does not have to process the data already in the database; therefore, it will not impact the time it takes to update the \gls{void} description. However, if this is the case, it has yet to be discovered, and it could be tested in the future.
 
-A 2D graph clearly displayed the impact of database size and query size. In \autoref{fig:update-querysize-good}, we can see that the database size has a minor effect on the time to update, but the query size is the main factor in the time it takes to update the \gls{void} description.
+The graph clearly displayed the impact of database size and query size. In \autoref{fig:update-querysize-good}, we can see that the database size has a minor effect on the time to update, but the query size is the main factor in the time it takes to update the \gls{void} description.
 
 There is an unexpected trend in the graph, where the time it takes to update the \gls{void} description suddenly decreases when the database is almost 10,000,000 triples. The decrease in time to update the \gls{void} description did not appear to be directly related to the number of triples inserted. However, upon examining the inserted data, which can be seen in \autoref{lst:inserted-data-start} and \autoref{lst:inserted-data-end}, it was observed the density of the data was significantly lower than the previous data, as there were many more triples with literal objects than at the start.
 
 \begin{listing}
     \begin{minted}{turtle}
-        http://db.uwaterloo.ca/~galuc/wsdbm/User67000    http://db.uwaterloo.ca/~galuc/wsdbm/friendOf    http://db.uwaterloo.ca/~galuc/wsdbm/User90005 .
+http://db.uwaterloo.ca/~galuc/wsdbm/User67000    http://db.uwaterloo.ca/~galuc/wsdbm/friendOf    http://db.uwaterloo.ca/~galuc/wsdbm/User90005 .
 http://db.uwaterloo.ca/~galuc/wsdbm/User67000    http://db.uwaterloo.ca/~galuc/wsdbm/friendOf    http://db.uwaterloo.ca/~galuc/wsdbm/User91840 .
 http://db.uwaterloo.ca/~galuc/wsdbm/User67000    http://db.uwaterloo.ca/~galuc/wsdbm/friendOf    http://db.uwaterloo.ca/~galuc/wsdbm/User93344 .
 http://db.uwaterloo.ca/~galuc/wsdbm/User67000    http://db.uwaterloo.ca/~galuc/wsdbm/friendOf    http://db.uwaterloo.ca/~galuc/wsdbm/User9477 .
@@ -99,8 +99,8 @@ This suggests that the data structure significantly affects the time required fo
 From these findings, we can gather that the time it takes to update a \gls{void} description is heavily impacted by the size of the query (the number of characters in the query) that is being inserted and not so much the size of the database.
 
 
-\subsection{Update and generation comparison}\label{subsec:update-generation-comparison}
-\autoref{fig:comparison-generation-vs-update} shows a 2D graph of the impact of database size on the time it takes to generate a \gls{void} description and the time it takes to update a \gls{void} description. Since generating a \gls{void} description is greatly affected by the size of the database, the time it takes to generate a \gls{void} description increases significantly faster than the time it takes to update a \gls{void} description.
+\subsection{Update and Generation Comparison}\label{subsec:update-generation-comparison}
+\autoref{fig:comparison-generation-vs-update} shows a graph of the impact of database size on the time it takes to generate a \gls{void} description and the time it takes to update a \gls{void} description. Since generating a \gls{void} description is greatly affected by the size of the database, the time it takes to generate a \gls{void} description increases significantly faster than the time it takes to update a \gls{void} description.
 
 In comparison, the database size barely affects the nine update measurements for each query size. From this, it can be gathered that the larger the database is, the more it makes sense to update the \gls{void} description instead of generating it from scratch, but with a smaller database, it makes more sense to generate the \gls{void} description from scratch.
 
@@ -112,7 +112,7 @@ In comparison, the database size barely affects the nine update measurements for
 \end{figure*}
 
 
-\subsection{Accuracy of generated VOID descriptions}\label{subsec:accuracy-of-generated-void-descriptions}
+\subsection{Accuracy of Generated \gls{void} Descriptions}\label{subsec:accuracy-of-generated-void-descriptions}
 The last experiment tests the dynamic and generation methods for generating accurate \gls{void} descriptions for an  \gls{rdf} database. Ensuring that both methods effectively produce the same \gls{void} descriptions is crucial, as this is a critical benchmark for their reliability and accuracy.
 
 By filling the database with inserts of size 10,000 triple, applying both methods and checking if they create the same \gls{void} description, we can assess the ability to generate accurate \gls{void} descriptions. Verifying the consistency of the dynamic method is essential for establishing its effectiveness.
