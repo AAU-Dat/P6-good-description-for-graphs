@@ -158,7 +158,7 @@ def create_void_select(dict):
     \label{lst:create_void_select}
 \end{listing}
 
-The function create_void_select, see \autoref{lst:create_void_select} takes a dictionary as input; the dictionary is created from a query to be inserted into the database and analyzed to contain all subjects, predicates, objects, and triples. Next, new strings are made from the dictionary, which are select queries that check whether the subjects, predicates, objects, or triples exist. Finally, each string (here, each string either handles subjects, predicates, objects or triples) is combined to create a full select query.
+The function create\_void\_select, see \autoref{lst:create_void_select} takes a dictionary as input; the dictionary is created from a query to be inserted into the database and analyzed to contain all subjects, predicates, objects, and triples. Next, new strings are made from the dictionary, which are select queries that check whether the subjects, predicates, objects, or triples exist. Finally, each string (here, each string either handles subjects, predicates, objects or triples) is combined to create a full select query.
 
 The returned string is a query that creates a table of what parts do or do not exist in the database. From this table, the number of entities that do not exist is counted, and the value for each part in the \gls{void} description is updated accordingly. By using a \gls{sparql} count on each value, it is possible to avoid getting a huge table. This is not done because the table makes it possible to handle situations where an entity is both an object and a subject. It also makes possible extensions like updates to property partitioning, another thing that could be in a void description.
 
