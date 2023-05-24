@@ -122,14 +122,12 @@ The fourth and final part of the query that looks for triples, can be seen in \a
     \label{lst:usecase-example}
 \end{listing}
 
-
-Generating a \gls{void} description was the most straightforward method and, therefore, the one that appeared to be the most widely used method. However, this project aimed to improve the performance of creating and updating \gls{void} descriptions. For this reason, both methods were implemented to compare the performance of the two methods and to see if updating a \gls{void} description was viable.\question{Gabriella: Can you provide a reference for this method, are there references for the second method?}
+Generating a \gls{void} description was the most straightforward method and, therefore, the one that appeared to be the most widely used method~\cite{optimize-SPARQL-queries, aether-tool}. However, this project aimed to improve the performance of creating and updating \gls{void} descriptions. For this reason, both methods were implemented to compare the performance of the two methods and to see if updating a \gls{void} description was viable.
 
 \subsection{Update \gls{void} query}\label{sec:update-void-query}
 By only updating relevant parts of the \gls{void} description, it is assumed that keeping a \gls{void} description updated will be improved, as the \gls{void} description will not have to be recreated every time a database is modified.
 
 Based on an insert query, a new query is created. The new query checks what parts of the insert query already exist in the database. This ensures that only the relevant parts of the \gls{void} description will be updated.
-
 
 \begin{listing}[htb!]
     \begin{minted}{python}
@@ -160,18 +158,17 @@ def create_void_select(dict):
     \label{lst:create_void_select}
 \end{listing}
 
+The function create_void_select, see \autoref{lst:create_void_select} takes a dictionary as input; the dictionary is created from a query to be inserted into the database and analyzed to contain all subjects, predicates, objects, and triples. Next, new strings are made from the dictionary, which are select queries that check whether the subjects, predicates, objects, or triples exist. Finally, each string (here, each string either handles subjects, predicates, objects or triples) is combined to create a full select query.
 
-The function \autoref{lst:create_void_select} takes a dictionary as input; the dictionary is created from a query to be inserted into the database, and analyzed to contain all subjects, predicates, objects, and triples. Next, new strings are made from the objects, which are select queries that check whether an object exists. Each string is then combined to create a full select query.
+The returned string is a query that creates a table of what parts do or do not exist in the database. From this table, the number of entities that do not exist is counted, and the value for each part in the \gls{void} description is updated accordingly. By using a \gls{sparql} count on each value, it is possible to avoid getting a huge table. This is not done because the table makes it possible to handle situations where an entity is both an object and a subject. It also makes possible extensions like updates to property partitioning, another thing that could be in a void description.
 
-The returned string is a query that creates a table of what parts do or do not exist in the database. From this table, the number of objects that do not exist is counted, and the value for each part in the \gls{void} description is updated accordingly.
-
-\subsection{Data concerns}\label{sec:concerns}\task{new title for this subsection}
+\subsection{Data considerations}\label{sec:concerns}
 To better understand the results later in the project from the experiments, consideration of what data collection is relevant must be considered. Therefore it must be determined clearly and precisely what data is relevant to the project and what data is not before the experiments are conducted. In addition, the data must give a clear insight into the comparison between updating and generating the \gls{void} description.
 
 \subsubsection{Size of the database}
 A metric that will be looked at is the database size; the number of \gls{rdf} triples will measure the size of the database. The database size could impact how long it takes to update the \gls{void} description and how long it takes to generate the \gls{void} description since, with a larger dataset, more data must be read and processed. For this reason, the size of the dataset will be an important factor to control and compare how it affects the dynamically updating the \gls{void} description and generating the \gls{void} description from scratch.
 
-\subsubsection{Triples in query}\task{write about what happens, when the update is a delete}\task{What about updates that do not provide the list of triples, but provide a graph pattern in a WHERE clause?}
+\subsubsection{Triples in query}
 
 When inserting data, updating the \gls{void} description requires processing the query to know what parts of the current \gls{void} description will be affected and need to be updated. Due to this, the size of the query, that is the number of triples in the query, will be an interesting factor to control and compare how it affects the dynamic updating of the \gls{void} description. However, the number of triples should not impact generating the \gls{void} description from scratch, outside of being added to the total of the entire dataset, as the entire dataset will be read and processed. This could give some insight into how effective dynamically updating the \gls{void} description is, compared to generating the \gls{void} description from scratch.
 
