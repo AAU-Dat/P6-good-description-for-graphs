@@ -3,6 +3,9 @@ Research into a framework/language for describing RDF endpoints to enable effect
 
 ## Project Plan
 ```mermaid
+---
+displayMode: compact
+---
 gantt
     title Bachelor Project Timeline
     dateFormat  YYYY-MM-DD
